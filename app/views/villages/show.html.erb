@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Commune:</strong>
+  <%= @village.commune %>
+</p>
+
+<p>
+  <strong>Salle:</strong>
+  <%= @village.salle %>
+</p>
+
+<%= link_to 'Edit', edit_village_path(@village) %> |
+<%= link_to 'Back', villages_path %>

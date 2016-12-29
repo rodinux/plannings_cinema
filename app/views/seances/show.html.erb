@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Projection:</strong>
+  <%= @seance.projection %>
+</p>
+
+<p>
+  <strong>Caisse:</strong>
+  <%= @seance.caisse %>
+</p>
+
+<p>
+  <strong>Horaire:</strong>
+  <%= @seance.horaire %>
+</p>
+
+<%= link_to 'Edit', edit_seance_path(@seance) %> |
+<%= link_to 'Back', seances_path %>

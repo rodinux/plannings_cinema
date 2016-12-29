@@ -1,0 +1,93 @@
+class SeancesController < ApplicationController
+  belongs_to :film, :inverse_of => :seances
+  belongs_to :village, :inverse_of => :seances
+
+  before_action :set_locale
+  def set_locale
+    I18n.locale = :fr
+  end
+  
+  def self.lieuxtest
+    lieuxtest = Hash[
+      "lamastre" => Seance.order(horaire: :asc).map{ |seance|
+       seance if seance.village.commune.upcase == "LAMASTRE" },
+      "vernoux"  => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase == "VERNOUX" },
+      "chalencon" => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase == "CHALENCON" },
+      "itinerance" => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase != "LAMASTRE" &&
+              seance.village.commune.upcase != "VERNOUX" && seance.village.commune.upcase != "CHALENCON" },
+        "tous les lieux" => Seance.all.order(horaire: :asc).map{|seance| seance }
+      ]
+  end
+
+  before_action :set_seance, only: [:show, :edit, :update, :destroy]
+  # GET /seances
+  # GET /seances.json
+  def index
+    @seances = Seance.all
+  end
+
+  # GET /seances/1
+  # GET /seances/1.json
+  def show
+  end
+
+  # GET /seances/new
+  def new
+    @seance = Seance.new
+  end
+
+  # GET /seances/1/edit
+  def edit
+  end
+
+  # POST /seances
+  # POST /seances.json
+  def create
+    @seance = Seance.new(seance_params)
+
+    respond_to do |format|
+      if @seance.save
+        format.html { redirect_to @seance, notice: 'Seance was successfully created.' }
+        format.json { render :show, status: :created, location: @seance }
+      else
+        format.html { render :new }
+        format.json { render json: @seance.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /seances/1
+  # PATCH/PUT /seances/1.json
+  def update
+    respond_to do |format|
+      if @seance.update(seance_params)
+        format.html { redirect_to @seance, notice: 'Seance was successfully updated.' }
+        format.json { render :show, status: :ok, location: @seance }
+      else
+        format.html { render :edit }
+        format.json { render json: @seance.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /seances/1
+  # DELETE /seances/1.json
+  def destroy
+    @seance.destroy
+    respond_to do |format|
+      format.html { redirect_to seances_url, notice: 'Seance was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_seance
+      @seance = Seance.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def seance_params
+      params.require(:seance).permit(:projection, :caisse, :horaire)
+    end
+end

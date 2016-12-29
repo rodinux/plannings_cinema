@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  projection: MyString
+  caisse: MyString
+  horaire: 2016-12-29 14:30:11
+
+two:
+  projection: MyString
+  caisse: MyString
+  horaire: 2016-12-29 14:30:11

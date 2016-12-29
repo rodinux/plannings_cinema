@@ -1,0 +1,46 @@
+  <% lieu = params[:lieu] %>
+
+  <center><h1 class="text-center"><strong>Calendrier des Projections</strong></h1></center>
+</div>
+  <h2 class="text-center"><strong><%= lieu.upcase %></strong></h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="well controls">
+        <%= link_to calendrier_path(:lieu => params[:lieu], date: @date - 1.weeks), class: "btn btn-default" do %>
+          <div class="glyphicon glyphicon-backward"><p>Semaine précédente</p></div>
+        <% end %>
+         <%= "#{l @date, format: :middle}, #{@date.strftime("semaine N°%W")}" %>
+        <%= link_to calendrier_path(:lieu => params[:lieu], date: @date + 1.weeks), class: "btn btn-default" do %>
+          <div class="glyphicon glyphicon-forward"><p>Semaine suivante</p></div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+  <div class="table-row">
+    <div class="col-md-12">
+      <%= calendar @date do |date| %>
+        <p><center><%= date.day %></center></p>
+        <ul class="list-unstyled calendrier">
+          <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+            <% if seance.horaire.midnight == date.midnight %>
+                <li>
+
+                     <p><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
+                     <p><span class='glyphicon glyphicon-film'></span> <%= seance.film.titrefilm %></p>
+                     <p><span class='glyphicon glyphicon-home'></span> <strong><%= seance.village.commune.upcase %></strong></p>
+                     <% if seance.village.salle %>
+                     <p><em><%= seance.village.salle %></em></p>
+            <% end %>
+              <br>
+          <% end %>
+              </ul>
+      <% end %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

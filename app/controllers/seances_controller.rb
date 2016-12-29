@@ -6,19 +6,8 @@ class SeancesController < ApplicationController
   def set_locale
     I18n.locale = :fr
   end
-  
-  def self.lieuxtest
-    lieuxtest = Hash[
-      "lamastre" => Seance.order(horaire: :asc).map{ |seance|
-       seance if seance.village.commune.upcase == "LAMASTRE" },
-      "vernoux"  => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase == "VERNOUX" },
-      "chalencon" => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase == "CHALENCON" },
-      "itinerance" => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase != "LAMASTRE" &&
-              seance.village.commune.upcase != "VERNOUX" && seance.village.commune.upcase != "CHALENCON" },
-        "tous les lieux" => Seance.all.order(horaire: :asc).map{|seance| seance }
-      ]
-  end
 
+  
   before_action :set_seance, only: [:show, :edit, :update, :destroy]
   # GET /seances
   # GET /seances.json

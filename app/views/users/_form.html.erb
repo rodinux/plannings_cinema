@@ -1,0 +1,56 @@
+<h1><span class="glyphicon glyphicon-warning-sign"></span> AVIS: </h1>
+<p><strong>Aux curieux:</strong> Cette inscription ne sert qu'aux bénévoles d'Ecran Village, elle ne vous apportera rien d'autre. Si vous n'en faites pas partie, s'il vous plaît, revenez à l'accueil.</p>
+<p><strong>Pour les bénévoles:</strong> Une fois inscrits, veuillez m'en avertir par mail pour que je vous autorise à accéder à l'édition des plannings.</p>
+<br>
+<%= form_for(user) do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <center>
+     <div class="field">
+       <%= f.label :prenom, :value => 'Prénom (court, sera utilisé lors des inscriptions pour les séances)' %><br>
+       <%= f.text_field :prenom, :maxlength => 35, autofocus: true %>
+     </div>
+     <div class="field">
+       <%= f.label :nom, :value => 'Nom de famille (facultatif)' %><br>
+       <%= f.text_field :nom, :maxlength => 35 %>
+     </div>
+     <div class="field">
+       <%= f.label :telephone, :value => 'Téléphone (facultatif)' %><br>
+       <%= f.text_field :telephone, :maxlength => 35 %>
+     </div>
+     <div class="field">
+       <%= f.label :email,'Adresse mail (indispensaple, vous servira pour se connecter)' %><br>
+       <%= f.email_field :email, :maxlength => 40, autofocus: true %>
+     </div>
+
+     <p><strong>Important !</strong> si vous êtes en train de modifier votre utilisateur, vous devez retaper votre mot de passe et sa confirmation !</p>
+
+    <div class="field">
+       <%= f.label :password, :value => 'Mot de passe (minimum 5 caractères, à bien retenir, vous servira pour se connecter)' %><br />
+       <%= f.password_field :password, :maxlength => 30, autofocus: true %>
+    </div>
+    <div class="field">
+       <%= f.label :password_confirmation, :value => 'confirmation du mot de passe' %><br />
+       <%= f.password_field :password_confirmation, autofocus: true %>
+    </div>
+
+    <div class="field">
+     <%= f.label :role, :value => 'Permissions' %><br>
+     <%= f.select :role, User::ROLES %>
+    </div>
+
+   <div class="actions">
+     <input type="submit" class="btn btn-lg btn-warning" value="Valider" />
+   </div>
+ <% end %>
+ </center>

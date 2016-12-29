@@ -5,5 +5,7 @@ class ApplicationController < ActionController::Base
 	  I18n.locale = :fr
 	end
 
+	before_action :require_login
+
   protect_from_forgery with: :exception
 end

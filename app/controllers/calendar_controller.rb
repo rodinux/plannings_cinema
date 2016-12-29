@@ -5,6 +5,8 @@ class CalendarController < ApplicationController
     I18n.locale = :fr
   end
 
+  skip_before_action :require_login
+
   def calendrier
   	  @seances = Seance.all
   	  @films = Film.all

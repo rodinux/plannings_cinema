@@ -1,19 +1,34 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Projection:</strong>
-  <%= @seance.projection %>
-</p>
-
-<p>
-  <strong>Caisse:</strong>
-  <%= @seance.caisse %>
-</p>
-
-<p>
-  <strong>Horaire:</strong>
-  <%= @seance.horaire %>
-</p>
-
-<%= link_to 'Edit', edit_seance_path(@seance) %> |
-<%= link_to 'Back', seances_path %>
+<div class="container">
+ <center>
+    <h1><span class="glyphicon glyphicon-film"></span> <strong>Film : </strong><%= @seance.film.titrefilm %> <%= @seance.version %></h1>
+    <h3><strong><span class="glyphicon glyphicon-time"></span> Date : </strong><%= l @seance.horaire, format: :very_long %></h3>
+    <h2><span class="glyphicon glyphicon-home"></span> <strong>Lieu : </strong><%= @seance.village.commune.upcase %></h2>
+    <% if @seance.extras != "" %>
+    <h2><span class="glyphicon glyphicon-info-sign"></span> </strong><%= @seance.extras %></h2>
+    <% end %>
+    <% if @seance.annulee != "" %>
+    <h2><span class="glyphicon glyphicon-warning-sign"></span> </strong><%= @seance.annulee %></h2>
+    <% end %>
+    <h3><strong><span class="glyphicon glyphicon-facetime-video"></span> Projection : </strong><%= @seance.projection.capitalize %></h3>
+    <h3><strong><span class="glyphicon glyphicon-briefcase"></span> Caisse : </strong><%= @seance.caisse.capitalize %></h3>
+    <h3><strong>Commentaire : </strong></h3>
+    <%=simple_format h @seance.commentaire %>
+  <div class="actions">
+    <%= link_to 'Modifier', edit_seance_path(@seance), :class => "btn btn-danger" %>
+    <%= link_to 'Films', films_path, :class => "btn btn-primary" %>
+  </div>
+  <div class="actions">
+    <% if @seance.village.salle.downcase == "vernoux" || @seance.village.salle.downcase == "lamastre" || @seance.village.salle.downcase == "chalencon"%>
+    <%= link_to 'Séances', seances_path(:lieu => @seance.village.salle.downcase), :class => "btn btn-success active" %> de <strong><%= @seance.village.salle.upcase %></strong>
+    <%= link_to 'Séances à compléter', a_completer_path(:lieu => @seance.village.salle.downcase), :class => "btn btn-warning active" %> pour <strong><%= @seance.village.salle.upcase %></strong>
+    </div>
+    <% else %>
+     <%= link_to 'Séances à compléter', a_completer_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %> pour <strong>Tous les lieux</strong>
+  <% end %>
+  <div class="actions">
+    <%= link_to 'Séances', seances_path(:lieu => "tous les lieux"), :class => "btn btn-success active" %> de <strong>Tous les lieux</strong>
+    <%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %>
+  </div>
+  </center>
+</div>
+<br>

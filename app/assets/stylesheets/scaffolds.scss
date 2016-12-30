@@ -1,19 +1,27 @@
 body {
   background-color: #fff;
-  color: #333;
+  color: #1B0404;
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 1.5em;
   line-height: 18px;
-  margin: 33px;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 1em;
   line-height: 18px;
-  margin: 33px;
+  overflow: visible;
+  -o-text-overflow: ellipsis; /* pour Opera 9 */
+  text-overflow: ellipsis;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
 }
-
+ol, ul {
+  padding: 10%;
+}
 pre {
   background-color: #eee;
   padding: 10px;
@@ -21,26 +29,12 @@ pre {
 }
 
 a {
-  color: #000;
-
-  &:visited {
-    color: #666;
-  }
+  color: #c1272d;
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #449d44;
+    text-decoration: none;
   }
-}
-
-th {
-  padding-bottom: 5px;
-}
-
-td {
-  padding-bottom: 7px;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 div {
@@ -50,6 +44,8 @@ div {
 }
 
 #notice {
+  font-size: 1.2em;
+  padding: 2px 5px;
   color: green;
 }
 
@@ -73,17 +69,13 @@ div {
     padding: 5px 5px 5px 15px;
     font-size: 12px;
     margin: -7px;
-    margin-bottom: 0;
+    margin-bottom: 0px;
     background-color: #c00;
     color: #fff;
   }
 
   ul li {
-    font-size: 12px;
+    font-size: 1.2em;
     list-style: square;
   }
-}
-
-label {
-  display: block;
 }

@@ -1,0 +1,129 @@
+<meta charset='utf-8' />
+<p>Du Mercredi <%= "#{l @date.at_beginning_of_week + 2.day, format: :middle}, #{@date.strftime("semaine N°%W")}" %> au Mardi <%= "#{l @date.at_beginning_of_week + 29.day, format: :middle}, #{(@date + 4.week).strftime("semaine N°%W")}" %></p>
+<% lieu = params[:lieu] %>
+<center><h3>Calendrier des séances pour <strong><%= lieu.upcase %></strong></h3></center>
+<center><h2><%= lieu.upcase %></h2></center>
+<div class="row">
+  <div class="col-md-12">
+   <%= calendar @date do |date| %>
+     <p><center><%= date.day %></center></p>
+      <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+        <% if seance.horaire.midnight == date.midnight %>
+          <ul class="list-unstyled">
+            <% if seance.annulee != "Annulée" %>
+              <li>
+                 <p><strong><%= seance.horaire.strftime("%Hh%M") %></strong><br>
+                 <strong><%= seance.village.commune.upcase %></strong><br>
+                 <% if seance.village.salle %>
+                 <em><%= seance.village.salle %></em><br>
+                 <% end %>
+                 <%= seance.film.titrefilm %><br>
+                 <% if seance.version.present? %>
+                 <%= seance.version %><br>
+                 <% end %>
+                 <% if seance.extras.present? %>
+                 <%= seance.extras %><br>
+                 <% end %>
+            <% else %>
+                <p></p>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= calendar @date + 1.weeks do |date| %>
+     <p><center><%= date.day %></center></p>
+      <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+        <% if seance.horaire.midnight == date.midnight %>
+          <ul class="list-unstyled">
+            <% if seance.annulee != "Annulée" %>
+              <li>
+                  <p><strong><%= seance.horaire.strftime("%Hh%M") %></strong><br>
+                 <strong><%= seance.village.commune.upcase %></strong><br>
+                 <% if seance.village.salle %>
+                 <em><%= seance.village.salle %></em><br>
+                 <% end %>
+                 <%= seance.film.titrefilm %><br>
+                 <% if seance.version.present? %>
+                 <%= seance.version %><br>
+                 <% end %>
+                 <% if seance.extras.present? %>
+                 <%= seance.extras %><br>
+                 <% end %>
+            <% else %>
+                <p></p>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= calendar @date + 2.weeks do |date| %>
+     <p><center><%= date.day %></center></p>
+      <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+        <% if seance.horaire.midnight == date.midnight %>
+          <ul class="list-unstyled">
+            <% if seance.annulee != "Annulée" %>
+              <li>
+                 <p><strong><%= seance.horaire.strftime("%Hh%M") %></strong><br>
+                 <strong><%= seance.village.commune.upcase %></strong><br>
+                 <% if seance.village.salle %>
+                 <em><%= seance.village.salle %></em><br>
+                 <% end %>
+                 <%= seance.film.titrefilm %><br>
+                 <% if seance.version.present? %>
+                 <%= seance.version %><br>
+                 <% end %>
+                 <% if seance.extras.present? %>
+                 <%= seance.extras %><br>
+                 <% end %>
+            <% else %>
+                <p></p>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= calendar @date + 3.weeks do |date| %>
+     <p><center><%= date.day %></center></p>
+      <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+        <% if seance.horaire.midnight == date.midnight %>
+          <ul class="list-unstyled">
+            <% if seance.annulee != "Annulée" %>
+              <li>
+                  <p><strong><%= seance.horaire.strftime("%Hh%M") %></strong><br>
+                 <strong><%= seance.village.commune.upcase %></strong><br>
+                 <% if seance.village.salle %>
+                 <em><%= seance.village.salle %></em><br>
+                 <% end %>
+                 <%= seance.film.titrefilm %><br>
+                 <% if seance.version.present? %>
+                 <%= seance.version %><br>
+                 <% end %>
+                 <% if seance.extras.present? %>
+                 <%= seance.extras %><br>
+                 <% end %>
+            <% else %>
+                <p></p>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+.nav .connexion {
+	margin-left: 10px;
+}
+
+.navbar>a.btn:hover, navbar>a.btn:focus, navbar>a:focus {
+	color: #449d44;
+}
+
+.logo {
+	position: relative;
+	float: right;
+	margin-right: 15px;
+}
+
+.image-logo{
+  width: 100%;
+   -webkit-transition: 2s ease-in-out;
+    -moz-transition: 2s ease-in-out;
+     -o-transition: 2s ease-in-out;
+  transition: 3s ease-in-out;
+  perspective: 800px;
+  perspective-origin: 50% 100px;
+}
+
+.image-logo:hover{
+    transform:rotateY(60deg);
+}
+
+.cine {
+  background-image: url(cine.jpg);
+  background-repeat: repeat-x;
+  width: 100%;
+  height: 241px;
+}
+.cine-mouv {
+ -webkit-animation: bannermove 40s linear infinite;
+    -moz-animation: bannermove 40s linear infinite;
+     -ms-animation: bannermove 40s linear infinite;
+      -o-animation: bannermove 40s linear infinite;
+         animation: bannermove 40s linear infinite;
+}
+
+@keyframes "bannermove" {
+ 0% {
+    margin-left: 0%;
+ }
+ 100% {
+    margin-left: -1000%;
+ }
+}
+
+@-moz-keyframes bannermove {
+ 0% {
+   margin-left: 0%;
+ }
+ 100% {
+   margin-left: -1000%;
+ }
+}
+
+@-webkit-keyframes "bannermove" {
+ 0% {
+   margin-left: 0%;
+ }
+ 100% {
+   margin-left: -1000%;
+ }
+}
+
+@-ms-keyframes "bannermove" {
+ 0% {
+   margin-left: 0%;
+ }
+ 100% {
+   margin-left: -1000%;
+ }
+}
+
+@-o-keyframes "bannermove" {
+0% {
+   margin-left: 0%;
+ }
+ 100% {
+   margin-left: -1000%;
+ }
+}
+
+.cine h1{
+  padding-top: 90px;
+  text-align: center;
+}
+
+.cine-titre {
+  text-align: center;
+  margin-left: 80%;
+}
+

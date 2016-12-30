@@ -1,10 +1,10 @@
-<%= form_for(seance) do |f| %>
-  <% if seance.errors.any? %>
+<%= form_for(@seance) do |f| %>
+  <% if @seance.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(seance.errors.count, "error") %> prohibited this seance from being saved:</h2>
+      <h2><%= pluralize(@seance.errors.count, "error") %> prohibited this seance from being saved:</h2>
 
       <ul>
-      <% seance.errors.full_messages.each do |message| %>
+      <% @seance.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,21 +12,84 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :projection %>
-    <%= f.text_field :projection %>
+    <% if can? :manage, Seance %>
+        <span class="glyphicon glyphicon-film"></span> <%= f.label :film_id, :value => 'Film' %><br>
+        <%=  select("seance", "film_id", Film.all.order(created_at: :desc).collect {|film| [ film.titrefilm, film.id ] }) %>
+    <% else %>
+      <h3><span class="glyphicon glyphicon-film"></span> <%= raw @seance.film.titrefilm.upcase %></h3>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :caisse %>
-    <%= f.text_field :caisse %>
+      <% versions = ["VOST", "VF", "VOST/2D", "VOST/3D", "VF/2D", "VF/3D", "2D", "3D"] %>
+      <% if can? :manage, Seance %>
+        <span class="glyphicon glyphicon-info-sign"></span> <%= f.label :version, :value => 'Version' %><br>
+        <%= f.select :version, versions, include_blank: true %>
+      <% else %>
+      <h3><%= @seance.version %></h3>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :horaire %>
-    <%= f.datetime_select :horaire %>
+      <% if can? :manage, Seance %>
+        <span class="glyphicon glyphicon-time"></span> <%= f.label :horaire, :value => 'Date et horaire' %><br>
+        <%= f.datetime_select :horaire %>
+      <% else %>
+      <h3><span class="glyphicon glyphicon-time"></span> <%= l @seance.horaire, format: :very_long %></h3>
+      <% end %>
   </div>
+
+  <div class="field">
+        <% if can? :manage, Seance %>
+          <span class="glyphicon glyphicon-home"></span> <%= f.label :village_id, :value => 'Lieu' %><br>
+          <%= f.select :village_id, Village.all.collect {|village| [ village.commune + " " + village.salle, village.id ] } %>
+        <% else %>
+          <h3><span class="glyphicon glyphicon-home"></span> <%= @seance.village.commune.upcase %> <%= @seance.village.salle %></h3>
+        <% end %>
+    </div>
+
+    <div class="field">
+        <% extras = ["Séance scolaire","Ciné-Débat", "Ciné-Goûter", "Annulée"] %>
+        <% if can? :manage, Seance %>
+          <span class="glyphicon glyphicon-info-sign"></span> <%= f.label :extras, :value => 'extras' %><br>
+          <%= f.select :extras, extras, include_blank: true %>
+        <% else %>
+          <h3><span class="glyphicon glyphicon-info-sign"></span> <%= @seance.extras %></h3>
+        <% end %>
+    </div>
+
+    <div class="field">
+            <% annulation = ["Annulée"] %>
+            <% if can? :manage, Seance %>
+              <span class="glyphicon glyphicon-warning-sign"></span> <%= f.label :annulee, :value => 'Annulation' %><br>
+              <%= f.select :annulee, annulation, include_blank: true %>
+            <% else %>
+              <h3><span class="glyphicon glyphicon-warning-sign"></span> <%= @seance.annulee %></h3>
+            <% end %>
+        </div>
+
+    <% users = User.all.users_alphabet.map{|user| user.prenom } %>
+
+  <div class="field">
+    <span class="glyphicon glyphicon-facetime-video"></span> <%= f.label :projection, :value => 'Projection' %><br>
+    <%= f.select :projection, users, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <span class="glyphicon glyphicon-briefcase"></span> <%= f.label :caisse, :value => 'Caisse' %><br>
+    <%= f.select :caisse, users, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :commentaire, :value => 'Commentaire' %><br>
+    <%= f.text_area :commentaire, :placeholder => "#{current_user.prenom.capitalize} :", autofocus: true, :maxlength => 400  %>
+  </div>
+
+  <h2>Les Entrées</h2>
+
+
 
   <div class="actions">
-    <%= f.submit %>
+    <input type="submit" class="btn btn-lg btn-warning" value="Valider" />
   </div>
 <% end %>

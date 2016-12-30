@@ -1,0 +1,80 @@
+@import url(bootstrap.min.css);
+/* line 2, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+table {
+  width: 100%;
+  border: 1px solid #999999;
+  table-layout: fixed;
+}
+
+/* line 7, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+th, td {
+  padding: 5px 10px 10px 10px;
+  font-size: 50%;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+/* line 13, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+th {
+  border-bottom: 2px solid #111111;
+  border-top: 1px solid #999999;
+  border-bottom: 5px solid #111111;
+  border-top: 1px solid #999999;
+  font-size: 80%;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* line 22, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+td {
+  font-size: 0.8em;
+}
+
+/* line 25, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+div.new-section {
+  page-break-inside: avoid;
+}
+
+/* line 28, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+.container, .new-section, .new-section table.fixed {
+  width: 100%;
+}
+
+/* line 31, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+.stripe {
+  background-color: #dddddd;
+  color: #666666;
+}
+
+/* line 35, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+tr.stripeHover {
+  background-color: #FFFACD;
+}
+
+/* line 38, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+tbody tr:hover {
+  background-color: #FFFACD;
+}
+
+/* line 41, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+div.new-section {
+  page-break-inside: avoid;
+}
+
+/* line 44, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+.container, .new-section, .new-section table.fixed {
+  width: 100%;
+}
+
+/* line 47, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+.new-section table.fixed {
+  table-layout: fixed;
+}
+
+/* line 50, /home/rodrob/git/github/plannings_cinema/app/assets/stylesheets/pdf.css.scss */
+.page-break {
+  display: block;
+  clear: both;
+  page-break-after: always;
+}

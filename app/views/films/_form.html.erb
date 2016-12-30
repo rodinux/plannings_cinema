@@ -1,10 +1,10 @@
-<%= form_for(film) do |f| %>
-  <% if film.errors.any? %>
+<%= form_for(@film) do |f| %>
+  <% if @film.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(film.errors.count, "error") %> prohibited this film from being saved:</h2>
+      <h2><%= pluralize(@film.errors.count, "error") %> prohibited this film from being saved:</h2>
 
       <ul>
-      <% film.errors.full_messages.each do |message| %>
+      <% @film.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,16 +12,24 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :titrefilm %>
-    <%= f.text_field :titrefilm %>
+     <%= f.label :titrefilm %><br>
+    <%= f.text_field :titrefilm, :maxlength => 50, :class => 'champ_input' %>
   </div>
-
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+      <% distributions = ["Autres", "ADRC"] %>
+        <span class="glyphicon glyphicon-info-sign"></span> <%= f.label :distribution, :value => 'distribution' %><br>
+        <%= f.select :distribution, distributions, include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, :maxlength => 900 %>
+  </div>
+  <div class="field">
+    <%= f.label :updated_at, 'Mis à jour le' %> (pour voir le film dans la page films, à partir de <%= l 3.week.ago, format: :very_long %><br>
+    <%= f.datetime_select :updated_at %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <input type="submit" class="btn btn-lg btn-warning" value="Valider" />
   </div>
-<% end %>
+  <% end %>

@@ -1,3 +1,66 @@
-// Place all the styles related to the seances controller here.
+// Place all the styles related to the Seances controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(asset_path('glyphicons-halflings-regular.eot'));
+  src: url(asset_path('glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'), url(asset_path('glyphicons-halflings-regular.woff')) format('woff'), url(asset_path('glyphicons-halflings-regular.ttf')) format('truetype'), url(asset_path('glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
+}
+.today {
+  background: #AB9A9A;
+}
+table {
+  width: 100%; /* à adapter selon vos contraintes */
+  table-layout: fixed;
+  border: 1px solid #999999;
+}
+td {
+   text-align: center;
+   word-wrap: break-word;
+}
+select {
+	color: black !important;
+}
+table, tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+}
+th, td {
+  padding: 7px 10px 10px 10px;
+}
+th {
+  border-bottom: 2px solid #111111;
+  border-top: 1px solid #999999;
+  font-size: 100%;
+  letter-spacing: 0.1em;
+  text-align: center;
+  word-wrap: break-word;
+  text-transform: upercase;
+}
+tr.even {
+    background-color: #efefef;
+}
+.stripe {
+  background-color: #dddddd;
+  color: #666666;
+}
+tr.stripeHover {
+  background-color: #FFFACD;
+}
+tbody tr:hover {
+    background-color: #FFFACD;
+}
+#seance_commentaire {
+  width: 80%;
+  height: 100px;
+  border-radius: 5px;
+  word-wrap: break-word;
+}
+.separation {
+  background-color: #E9B3D9;
+}
+li {
+  list-style-position: inside;
+}
+.annule {
+    text-decoration: line-through;
+}

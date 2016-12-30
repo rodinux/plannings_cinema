@@ -13,5 +13,16 @@ class CalendarController < ApplicationController
   	  @villages = Village.all
   	  lieu = params[:lieu]
   	  @date = params[:date] ? Date.parse(params[:date]) : Date.today
-  	end
+      respond_to do |format|
+        format.pdf do
+         render :pdf => "calendrier.pdf",
+                :orientation => 'Landscape',
+                :layout => "layouts/pdf.html",
+                :disable_javascript => false,
+                show_as_html: params[:debug].present?
+        end
+      format.json
+      format.html
+    end
+  end
 end

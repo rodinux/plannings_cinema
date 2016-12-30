@@ -1,19 +1,67 @@
 class Seance < ApplicationRecord
-		belongs_to :film, :inverse_of => :seances
-		belongs_to :village, :inverse_of => :seances
-	    validates :film_id, :presence => true
-	    validates :village_id, :presence => true
-	    validates :horaire, :presence => true
+	belongs_to :film, :inverse_of => :seances
+	belongs_to :village, :inverse_of => :seances
+    validates :film_id, :presence => true
+    validates :village_id, :presence => true
+    validates :horaire, :presence => true
 
-	    def self.lieuxtest
-	      lieuxtest = Hash[
-	        "lamastre" => Seance.order(horaire: :asc).map{ |seance|
-	         seance if seance.village.commune.upcase == "LAMASTRE" },
-	        "vernoux"  => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase == "VERNOUX" },
-	        "chalencon" => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase == "CHALENCON" },
-	        "itinerance" => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase != "LAMASTRE" &&
-	                seance.village.commune.upcase != "VERNOUX" && seance.village.commune.upcase != "CHALENCON" },
-	          "tous les lieux" => Seance.all.order(horaire: :asc).map{|seance| seance }
-	        ]
-	    end
+    def self.lieuxtest
+      lieuxtest = Hash[
+        "lamastre" => Seance.order(horaire: :asc).map{ |seance|
+         seance if seance.village.commune.upcase == "LAMASTRE" },
+        "vernoux"  => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase == "VERNOUX" },
+        "chalencon" => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase == "CHALENCON" },
+        "itinerance" => Seance.all.order(horaire: :asc).map{ |seance| seance if seance.village.commune.upcase != "LAMASTRE" &&
+                seance.village.commune.upcase != "VERNOUX" && seance.village.commune.upcase != "CHALENCON" },
+          "tous les lieux" => Seance.all.order(horaire: :asc).map{|seance| seance }
+        ]
+    end
+
+    def self.seances_passees_3_semaines
+         seances_passees_3_semaines = Seance.where({horaire: (3.week.ago..(Date.today + 1))}).order(horaire: :asc)
+	end
+
+	def self.seances_passees_1_mois
+         seances_passees_1_mois = Seance.where({horaire: (4.weeks.ago..Date.today)}).order(horaire: :desc)
+	end
+
+	def self.seances_mois_1_mois
+         seances_mois = Seance.where({horaire: (30.days.ago..Date.today)}).order(horaire: :desc)
+    end
+
+    def self.seances_semaine
+         seances_semaine = Seance.where({horaire: (Date.today.midnight..(Date.today + 7))}).order(horaire: :desc)
+    end
+
+    def self.seances_1_mois_avant_apres
+        seances_1_mois_avant_apres = Seance.where({horaire: (1.month.ago..(Date.today + 30))}).order(horaire: :asc)
+    end
+
+    def date
+        @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    end
+
+    def self.seances_calendrier
+    	seances_calendrier = Seance.order(horaire: :asc)
+    end
+
+    def self.seances_a_completer_projection
+    	seances_a_completer_projection = Seance.where(projection: "").order(horaire: :asc)
+    end
+
+    def self.seances_a_completer_caisse
+    	seances_a_completer_caisse = Seance.where(caisse: "").order(horaire: :asc)
+    end
+
+    def range
+        range = params[:range]
+    end
+
+    def date_range
+        date_range = range.to_i.days.ago..Date.today
+    end
+
+    def self.seances_date_range
+       seances_date_range = Seance.where({horaire: (range.to_i.days.ago..Date.today)})
+    end
 end

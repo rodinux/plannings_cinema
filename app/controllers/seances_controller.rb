@@ -1,18 +1,34 @@
 class SeancesController < ApplicationController
-  belongs_to :film, :inverse_of => :seances
-  belongs_to :village, :inverse_of => :seances
 
   before_action :set_locale
   def set_locale
     I18n.locale = :fr
   end
 
-  
+  before_action :require_login
+
   before_action :set_seance, only: [:show, :edit, :update, :destroy]
-  # GET /seances
-  # GET /seances.json
-  def index
+
+   def index
     @seances = Seance.all
+    lieu = params[:lieu]
+  end
+
+  def seances_passees
+    @seances = Seance.all
+    lieu = params[:lieu]
+  end
+
+  def mes_seances
+    @seances = Seance.all
+    lieu = params[:lieu]
+    @users = User.all
+    user = current_user
+  end
+
+  def a_completer
+    @seances = Seance.all
+    lieu = params[:lieu]
   end
 
   # GET /seances/1
@@ -22,7 +38,9 @@ class SeancesController < ApplicationController
 
   # GET /seances/new
   def new
-    @seance = Seance.new
+    @seance = Seance.new(params[:seance])
+    @film = Film.all
+    @village = Village.all
   end
 
   # GET /seances/1/edit
@@ -32,26 +50,24 @@ class SeancesController < ApplicationController
   # POST /seances
   # POST /seances.json
   def create
-    @seance = Seance.new(seance_params)
-
-    respond_to do |format|
-      if @seance.save
-        format.html { redirect_to @seance, notice: 'Seance was successfully created.' }
-        format.json { render :show, status: :created, location: @seance }
-      else
-        format.html { render :new }
-        format.json { render json: @seance.errors, status: :unprocessable_entity }
-      end
-    end
+    film_selectionne = Film.find_by_id(params["seance"]["film_id"])
+    village_selectionne = Village.find_by_id(params["seance"]["village_id"])
+    seance = Seance.new(seance_params)
+    seance.film_id = film_selectionne.id
+    seance.village_id = village_selectionne.id
+    seance.save
+    Film.find(seance.film_id)
+    Village.find(seance.village_id)
+    redirect_to films_url, notice: 'la Séance a bien été créée.'
   end
+
 
   # PATCH/PUT /seances/1
   # PATCH/PUT /seances/1.json
   def update
     respond_to do |format|
       if @seance.update(seance_params)
-        format.html { redirect_to @seance, notice: 'Seance was successfully updated.' }
-        format.json { render :show, status: :ok, location: @seance }
+        format.html { redirect_to seance_path, notice: 'La séance a bien été modifiée.' }
       else
         format.html { render :edit }
         format.json { render json: @seance.errors, status: :unprocessable_entity }
@@ -64,7 +80,7 @@ class SeancesController < ApplicationController
   def destroy
     @seance.destroy
     respond_to do |format|
-      format.html { redirect_to seances_url, notice: 'Seance was successfully destroyed.' }
+      format.html { redirect_to films_url, notice: 'La Séance a bien été suprimée.' }
       format.json { head :no_content }
     end
   end
@@ -73,10 +89,13 @@ class SeancesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_seance
       @seance = Seance.find(params[:id])
+      @films = Film.all
+      @villages = Village.all
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seance_params
-      params.require(:seance).permit(:projection, :caisse, :horaire)
+      params.require(:seance).permit(:version, :projection, :caisse, :horaire, :commentaire, :film_id, :village_id, :extras, :annulee)
     end
 end

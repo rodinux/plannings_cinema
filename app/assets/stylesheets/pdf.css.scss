@@ -1,0 +1,54 @@
+@import "bootstrap.min.css";
+table {
+  width: 100%;
+  border: 1px solid #999999;
+  table-layout: fixed;
+}
+th, td {
+  padding: 5px 10px 10px 10px;
+  font-size: 50%;
+  word-wrap: break-word;
+  text-align: center;
+}
+th {
+    border-bottom: 2px solid #111111;
+    border-top: 1px solid #999999;  border-bottom: 5px solid #111111;
+    border-top: 1px solid #999999;
+    font-size: 80%;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+}
+td {
+  font-size: 0.8em;
+}
+div.new-section {
+    page-break-inside: avoid;
+}
+.container, .new-section, .new-section table.fixed{
+    width: 100%;
+}
+.stripe {
+  background-color: #dddddd;
+  color: #666666;
+}
+tr.stripeHover {
+  background-color: #FFFACD;
+}
+tbody tr:hover {
+    background-color: #FFFACD;
+}
+div.new-section {
+    page-break-inside: avoid;
+}
+.container, .new-section, .new-section table.fixed{
+    width: 100%;
+}
+.new-section table.fixed{
+    table-layout: fixed;
+}
+.page-break {
+  display:block;
+  clear:both;
+  page-break-after:always;
+}

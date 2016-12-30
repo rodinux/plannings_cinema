@@ -5,6 +5,10 @@
   <h2 class="text-center"><strong><%= lieu.upcase %></strong></h2>
 
 <div class="container">
+<div class="actions">
+    <%= link_to 'imprimer Séances en pdf', calendrier_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= lieu.upcase %></strong>
+    <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
+  </div>
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="well controls">

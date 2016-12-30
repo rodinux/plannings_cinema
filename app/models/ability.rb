@@ -11,8 +11,8 @@ class Ability
        cannot :update, Village
        cannot :destroy, User
        cannot :destroy, Seance
-       #cannot :rails_admin
-       #cannot :import, :all
+       cannot :rails_admin
+       cannot :import, :all
 
     end
     # alias_action :update, :destroy, :create, :to => :write
@@ -22,8 +22,8 @@ class Ability
       can :update, :all
       can :destroy, :all
       can :rails_admin
-      #can :dashboard
-      #can :import, :all
+      can :dashboard
+      can :import, :all
     end
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end

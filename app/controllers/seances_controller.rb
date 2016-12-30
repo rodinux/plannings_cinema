@@ -12,11 +12,31 @@ class SeancesController < ApplicationController
    def index
     @seances = Seance.all
     lieu = params[:lieu]
+    respond_to do |format|
+        format.pdf do
+        render :pdf => "index.pdf",
+          :orientation => 'Landscape',
+          :layout => "layouts/pdf.html",
+          :disable_javascript => false,
+          show_as_html: params[:debug].present?
+        end
+      format.html
+      end
   end
 
   def seances_passees
     @seances = Seance.all
     lieu = params[:lieu]
+    respond_to do |format|
+        format.pdf do
+        render :pdf => "seances_passees.pdf",
+          :orientation => 'Landscape',
+          :layout => "layouts/pdf.html",
+          :disable_javascript => false,
+          show_as_html: params[:debug].present?
+        end
+      format.html
+      end
   end
 
   def mes_seances
@@ -30,6 +50,23 @@ class SeancesController < ApplicationController
     @seances = Seance.all
     lieu = params[:lieu]
   end
+
+  def edition_calendrier
+    @seances = Seance.all
+    lieu = params[:lieu]
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+      respond_to do |format|
+      format.pdf do
+        render :pdf => "edition_calendrier.pdf",
+          :orientation => 'Landscape',
+          :layout => "layouts/pdf.html",
+          :disable_javascript => false,
+          show_as_html: params[:debug].present?
+        end
+      format.html
+      end
+  end
+
 
   # GET /seances/1
   # GET /seances/1.json

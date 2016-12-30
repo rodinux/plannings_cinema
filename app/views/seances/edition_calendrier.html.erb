@@ -1,0 +1,92 @@
+ <% lieu = params[:lieu] %>
+<div class="cine">
+  <center><h1 class="text-center"><strong>Calendrier des Projections</strong> ( édition )</h1></center>
+</div>
+  <h2 class="text-center"><strong><%= lieu.upcase %></strong></h2>
+<p class="text-center">(Pour éditer, cliquez sur la séance)</p>
+<div class="container">
+  <div class="actions">
+  <%= link_to 'calendrier pdf (imprimer)', edition_calendrier_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= lieu.upcase %></strong>
+  <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
+  <%= link_to 'Accueil (calendrier sans édition)', root_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-warning" %>
+ </div>
+  <br>
+   <div class="actions">
+    <%= link_to 'Calendrier Vernoux', edition_calendrier_path(:lieu => "vernoux", date: @date), :class => "btn btn-default btn-lg vernoux", :title => "Que les séances de Vernoux" %>
+    <%= link_to 'Calendrier Lamastre', edition_calendrier_path(:lieu => "lamastre", date: @date), :class => "btn btn-default btn-lg lamastre", :title => "Que les séances de Lamastre" %>
+    <%= link_to 'Calendrier Chalencon', edition_calendrier_path(:lieu => "chalencon", date: @date), :class => "btn btn-default btn-lg chalencon", :title => "Que les séances de Chalencon" %>
+    <%= link_to 'Calendrier Itinérance', edition_calendrier_path(:lieu => "itinerance", date: @date), :class => "btn btn-default btn-lg itinerant", :title => "Que les séances de Itinérantes" %>
+    <%= link_to 'Calendrier Général', edition_calendrier_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-default btn-lg", :title => "Séances de tous les lieux" %>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="well controls">
+        <%= link_to edition_calendrier_path(:lieu => params[:lieu], date: @date - 1.week), class: "btn btn-default" do %>
+          <div class="glyphicon glyphicon-backward"><p>Semaine précédente</p></div>
+        <% end %>
+        <%= "#{l @date, format: :middle}, #{@date.strftime("semaine N°%W")}" %>
+        <%= link_to edition_calendrier_path(:lieu => params[:lieu], date: @date + 1.week), class: "btn btn-default" do %>
+          <div class="glyphicon glyphicon-forward"><p>Semaine suivante</p></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= calendar @date do |date| %>
+        <p><%= date.day %></p>
+        <ul class="list-unstyled calendrier">
+          <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+            <% if seance.horaire.midnight == date.midnight %>
+              <% if seance.annulee != "Annulée" %>
+                <li>
+                  <%= link_to edit_seance_path(seance), :class => seance.village.commune.downcase, :title => "éditer, modifier cette séance" do %>
+                    <p><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
+                    <p><span class='glyphicon glyphicon-film'></span> <%= seance.film.titrefilm %></p>
+                    <% if seance.version.present? %>
+                    <p><span class='glyphicon glyphicon-info-sign'></span> <%= seance.version %></p>
+                    <% end %>
+                    <% if seance.extras.present? %>
+                    <p><span class='glyphicon glyphicon-info-sign'></span> <%= seance.extras %></p>
+                    <% end %>
+                    <p><span class='glyphicon glyphicon-home'></span> <strong><%= seance.village.commune.upcase %></strong></p>
+                    <% if seance.village.salle != "" %>
+                    <p><em><%= seance.village.salle %></em></p>
+                    <% end %>
+                    <% if seance.projection %>
+                    <p><span class='glyphicon glyphicon-facetime-video'></span> <em><strong><%= seance.projection %></strong></em></p>
+                    <% end %>
+                    <% if seance.caisse %>
+                    <p><span class='glyphicon glyphicon-briefcase'></span> <em><strong><%= seance.caisse.capitalize %></strong></em></p>
+                    <% end %>
+                  <% end %>
+              <% else %>
+                  <p><span class='glyphicon glyphicon-warning-sign'></span> <%= seance.annulee %></p>
+                  <p class="annule"><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
+                  <p class="annule"><span class='glyphicon glyphicon-film'></span> <%= seance.film.titrefilm %></p>
+                  <% if seance.version.present? %>
+                  <p class="annule"><span class='glyphicon glyphicon-info-sign'></span> <%= seance.version %></p>
+                  <% end %>
+                  <p class="annule"><span class='glyphicon glyphicon-home'></span> <strong><%= seance.village.commune.upcase %></strong></p>
+                  <% if seance.village.salle != "" %>
+                  <p class="annule"><em><%= seance.village.salle %></em></p>
+                  <% end %>
+                  <% if seance.projection %>
+                  <p class="annule"><span class='glyphicon glyphicon-facetime-video'></span> <em><strong><% seance.projection.capitalize %></strong></em></p>
+                  <% end %>
+                  <% if seance.caisse %>
+                  <p class="annule"><span class='glyphicon glyphicon-briefcase'></span> <em><strong><%= seance.caisse.capitalize %></strong></em></p>
+                  <% end %>
+                </li>
+              <% end %>
+              <br>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
+

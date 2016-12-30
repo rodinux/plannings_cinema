@@ -28,7 +28,15 @@
     <%= f.label :updated_at, 'Mis à jour le' %> (pour voir le film dans la page films, à partir de <%= l 3.week.ago, format: :very_long %><br>
     <%= f.datetime_select :updated_at %>
   </div>
-
+   <div class="field">
+    <%= f.label "Cochez les classifications" %><br />
+    <%= f.collection_check_boxes :classification_ids, Classification.all, :id, :nom do |b| %>
+      <div class="collection-check-box">
+        <%= b.check_box %>
+        <%= b.label %>
+      </div>
+    <% end %>
+  </div>
   <div class="actions">
     <input type="submit" class="btn btn-lg btn-warning" value="Valider" />
   </div>

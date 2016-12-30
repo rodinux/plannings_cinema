@@ -44,6 +44,8 @@ gem 'rchardet'
 gem 'simple_xlsx_reader'
 gem 'wkhtmltopdf_binary'
 gem 'wicked_pdf'
+gem 'ransack'
+gem 'httparty'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,0 +1,10 @@
+<% response = HTTParty.get('http://www.ecranvillage.net/wp-json/ecranvillage-api/v2/export')%>
+       <% puts response.body %>
+<div class="container">
+    <center><h1>Importer les nouveaux Films</h1>
+    <h1><strong>Bravo, en arrivant ici, vous venez d'ajouter les Films à venir du site d'Ecranvillage</strong></h1></p>
+    <%= link_to 'Retour à la liste de films', films_path, :class => "btn btn-lg btn-success" %>
+    <h2>Liste des Films à venir sur le site d'Ecran Village</h2></center>
+      <strong><%= response.body %></strong>
+</div>
+<br>

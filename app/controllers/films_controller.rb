@@ -5,12 +5,30 @@ class FilmsController < ApplicationController
     I18n.locale = :fr
   end
 
+  skip_before_action :require_login, only: [:index, :ecranvillage, :show ]
+
   before_action :set_film, only: [:show, :edit, :update, :destroy]
+
+  require 'httparty'
+
+  # GET /ecranvillage.json
+  def ecranvillage
+       @films = Film.all
+       response = HTTParty.get('http://www.ecranvillage.net/wp-json/ecranvillage-api/v2/export')
+       puts response.body, response.code, response.message, response.headers.inspect
+       JSON.parse(response.body).each do |item|
+       nouveaux_films = Film.new( :id => item["id"], :titrefilm => item["titrefilm"], :description => item["description"] )
+       nouveaux_films.save
+    end
+  end
 
   # GET /films
   # GET /films.json
   def index
     @films = Film.all
+    @seances = Seance.all
+    @search = Film.search(params[:q])
+    @films = @search.result(distinct: true)
   end
 
   # GET /films/1
@@ -75,6 +93,6 @@ class FilmsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
-      params.require(:film).permit(:titrefilm, :description, :distribution)
+      params.require(:film).permit(:titrefilm, :description, :distribution, classification_ids:[])
     end
 end

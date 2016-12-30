@@ -1,0 +1,35 @@
+<meta charset='utf-8' />
+<% lieu = params[:lieu] %>
+<br>
+<center><h3><strong>Séances passées pour <%= lieu.upcase %></strong></h3></center>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-responsive table-hover">
+        <%  @seances.seances_passees_1_mois.lieuxtest[lieu].compact.each do |seance| if seance.horaire < Date.today %>
+        <% total = seance.billets_adultes.to_i + seance.billets_enfants.to_i + seance.billets_scolaires.to_i %>
+      <tbody>
+      <% if seance.annulee != "Annulée" %>
+          <tr>
+            <td class="active"><%= l seance.horaire, format: :very_long %> <br> <%= seance.extras %></td>
+            <td class="active"><strong><%= raw seance.film.titrefilm.upcase %></strong> <br>
+            <%= seance.version if seance.version.present? %> <%= seance.extras if seance.extras.present? %></td>
+            <td class="active"><%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+            <% if seance.projection.present? || seance.caisse.present? %>
+            <td class="info">Projection : <%= seance.projection %> - Caisse : <%= seance.caisse %></td>
+            <% else %>
+            <td></td>
+            <% end %>
+          <% else %>
+      <td class="warning"><%= seance.annulee %></td>
+      <td class="warning"><%= raw seance.film.titrefilm.upcase %></td>
+      <td class="warning"> le <%= l seance.horaire, format: :very_long %> a été annulée</td>
+      <td></td>
+      <td></td>
+          </tr>
+      <% end %>
+      </tbody>
+      <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -7,3 +7,50 @@
   src: url(asset_path('glyphicons-halflings-regular.eot'));
   src: url(asset_path('glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'), url(asset_path('glyphicons-halflings-regular.woff')) format('woff'), url(asset_path('glyphicons-halflings-regular.ttf')) format('truetype'), url(asset_path('glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
 }
+.capture {
+  width: 70%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+li {
+    list-style-position: inherit !important;
+}
+a.itinerant {
+  color: #9b8d26;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+}
+.calendrier li {
+    list-style-position: inherit !important;
+  }.calendrier a {
+  color: #9b8d26;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+  }a.vernoux {
+  color: #3232dd;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+  }a.lamastre {
+  color: #c1272d;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+  }a.chalencon {
+  color: #990099;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+}

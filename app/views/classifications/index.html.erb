@@ -1,0 +1,53 @@
+<h1>Liste Classifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Nombre de Films</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @classifications.each do |classification| %>
+      <tr>
+        <td><%= classification.nom %></td>
+        <td><%= classification.films.count %></td>
+        <td><%= link_to 'Voir', classification %></td>
+        <td><%= link_to 'Éditer', edit_classification_path(classification) %></td>
+        <td><%= link_to 'Supprimer', classification, method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<h1>Liste des Films Classés</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Films</th>
+      <th>Nom (classification)</th>
+      <th>Nombres de séances</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @classifications.each do |classification| %>
+    <% classification.films.each do |classification_film| %>
+      <tr>
+        <td><%= classification_film.titrefilm %></td>
+        <td><%= classification.nom %></td>
+        <td><%= classification_film.seances.count %></td>
+        <td><%= link_to 'Voir', classification %></td>
+        <td><%= link_to 'Éditer', edit_classification_path(classification) %></td>
+        <td><%= link_to 'Supprimer', classification, method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nouvelle Classification', new_classification_path %>

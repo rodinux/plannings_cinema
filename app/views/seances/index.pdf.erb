@@ -1,0 +1,32 @@
+<meta charset='utf-8' />
+<br>
+<% lieu = params[:lieu] %>
+<center><h3><strong>Séances à venir pour <%= lieu.upcase %></strong></h3></center>
+    <div class="row">
+    <div class="col-md-12">
+      <table class="table table-responsive table-hover table-striped">
+        <tbody>
+          <% @seances.seances_calendrier.lieuxtest[lieu].compact.each do |seance| if seance.horaire > Date.today %>
+          <% if seance.annulee != "Annulée" %>
+            <tr>
+              <td class="active"> <%= l seance.horaire, format: :very_long %></td>
+              <td class="active"><%= raw seance.film.titrefilm.upcase %> <%= seance.version%> <%= seance.extras %></td>
+              <td class="active"><%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+              <% if can? :update, Seance %>
+              <td class="info"><strong>Projection : <em><%= seance.projection %></em></strong> - Caisse : <strong><em><%= seance.caisse %></em></strong></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td colspan="2"><%= seance.film.description %></td>
+              <td colspan="2"><%= seance.commentaire %></td>
+            </tr>
+            <tr>
+               <td colspan="4" class="class="separation""></td>
+            </tr>
+            <% end %>
+            <% end %>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

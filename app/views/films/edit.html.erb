@@ -1,6 +1,12 @@
-<h1>Editing Film</h1>
-
-<%= render 'form', film: @film %>
-
-<%= link_to 'Show', @film %> |
-<%= link_to 'Back', films_path %>
+<center><h1>Editer un Film</h1>
+<div class="container">
+    <% if can? :manage, @film %>
+    <div class="container">
+	<%= render 'form' %>
+	</div>
+	<% end %>
+	<%= link_to 'Voir', @film, :class => "btn btn-lg btn-primary active" %>
+	<%= link_to 'Retour à la liste des Films', films_path, :class => "btn btn-lg btn-success" %>
+</div>
+</center>
+<br>

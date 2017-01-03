@@ -1,4 +1,10 @@
 class ClassificationsController < ApplicationController
+
+  before_action :set_locale
+  def set_locale
+    I18n.locale = :fr
+  end
+  
   before_action :set_classification, only: [:show, :edit, :update, :destroy]
 
   # GET /classifications
@@ -28,7 +34,7 @@ class ClassificationsController < ApplicationController
 
     respond_to do |format|
       if @classification.save
-        format.html { redirect_to @classification, notice: 'Classification was successfully created.' }
+        format.html { redirect_to @classification, notice: 'la classification a bien été créée.' }
         format.json { render :show, status: :created, location: @classification }
       else
         format.html { render :new }
@@ -42,7 +48,7 @@ class ClassificationsController < ApplicationController
   def update
     respond_to do |format|
       if @classification.update(classification_params)
-        format.html { redirect_to @classification, notice: 'Classification was successfully updated.' }
+        format.html { redirect_to @classification, notice: 'la classification a bien été mise à jour.' }
         format.json { render :show, status: :ok, location: @classification }
       else
         format.html { render :edit }
@@ -56,7 +62,7 @@ class ClassificationsController < ApplicationController
   def destroy
     @classification.destroy
     respond_to do |format|
-      format.html { redirect_to classifications_url, notice: 'Classification was successfully destroyed.' }
+      format.html { redirect_to classifications_url, notice: 'la classification a été supprimée.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +75,6 @@ class ClassificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classification_params
-      params.require(:classification).permit(:nom)
+      params.require(:classification).permit(:nom, :film_id)
     end
 end

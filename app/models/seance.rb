@@ -1,9 +1,15 @@
 class Seance < ApplicationRecord
+
 	belongs_to :film, :inverse_of => :seances
 	belongs_to :village, :inverse_of => :seances
+    has_many :entrees, :dependent => :destroy, :inverse_of => :seance
+    accepts_nested_attributes_for :entrees, :allow_destroy => true
     validates :film_id, :presence => true
     validates :village_id, :presence => true
+
     validates :horaire, :presence => true
+
+    before_create :setup_default_value_for_new_seances
 
     def self.lieuxtest
       lieuxtest = Hash[
@@ -15,6 +21,11 @@ class Seance < ApplicationRecord
                 seance.village.commune.upcase != "VERNOUX" && seance.village.commune.upcase != "CHALENCON" },
           "tous les lieux" => Seance.all.order(horaire: :asc).map{|seance| seance }
         ]
+    end
+
+    def entrees_for_form
+    collection = @entrees.where(seance_id: id)
+    collection.any? ? collection : @entrees.build
     end
 
     def self.seances_passees_3_semaines
@@ -63,5 +74,21 @@ class Seance < ApplicationRecord
 
     def self.seances_date_range
        seances_date_range = Seance.where({horaire: (range.to_i.days.ago..Date.today)})
+    end
+
+private
+
+    def setup_default_value_for_new_seances
+         Entree.all do |entree|
+        if self.entree.billets_adultes.blank?
+            self.entree.billets_adultes = 0
+        end
+        if self.entree.billets_enfants.blank?
+            self.billets_enfants = 0
+        end
+        if self.entree.billets_scolaires.blank?
+            self.entree.billets_scolaires = 0
+        end
+      end
     end
 end

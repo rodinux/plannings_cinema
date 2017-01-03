@@ -5,6 +5,7 @@
     <tr>
       <th>Nom</th>
       <th>Nombre de Films</th>
+      <th>Nombre de séances</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= classification.nom %></td>
         <td><%= classification.films.count %></td>
+        <td><%= classification.seances.count %>
         <td><%= link_to 'Voir', classification %></td>
         <td><%= link_to 'Éditer', edit_classification_path(classification) %></td>
         <td><%= link_to 'Supprimer', classification, method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %></td>

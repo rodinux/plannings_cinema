@@ -17,7 +17,7 @@ class FilmsController < ApplicationController
        response = HTTParty.get('http://www.ecranvillage.net/wp-json/ecranvillage-api/v2/export')
        puts response.body, response.code, response.message, response.headers.inspect
        JSON.parse(response.body).each do |item|
-       nouveaux_films = Film.new( :id => item["id"], :titrefilm => item["titrefilm"], :description => item["description"] )
+       nouveaux_films = Film.new( :id => item["id"], :titrefilm => item["titrefilm"], :description => item["description"], :affiche => item["affiche"] )
        nouveaux_films.save
     end
   end
@@ -93,6 +93,6 @@ class FilmsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
-      params.require(:film).permit(:titrefilm, :description, :distribution, classification_ids:[])
+      params.require(:film).permit(:titrefilm, :description, :distribution, :affiche, classification_ids:[])
     end
 end

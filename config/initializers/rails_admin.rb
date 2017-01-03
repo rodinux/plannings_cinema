@@ -22,7 +22,7 @@ RailsAdmin.config do |config|
 
   Rails.application.eager_load!
 
- config.included_models = ["Film", "Village", "Seance", "User", "Classification"]
+ config.included_models = ["Film", "Village", "Seance", "User", "Classification", "Entree"]
 
 
   ActiveRecord::Base.descendants.each do |model|

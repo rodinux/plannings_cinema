@@ -1,8 +1,10 @@
 class Film < ApplicationRecord
-	has_many :seances, :dependent => :destroy, :inverse_of => :film
+	    has_many :seances, :dependent => :destroy, :inverse_of => :film
 		accepts_nested_attributes_for :seances, :allow_destroy => true
 		has_many :villages, :through => :seances
+		has_many :entrees, :through => :seances
 		has_and_belongs_to_many :classifications
+		has_many :entrees, :through => :seances
 	    validates :id, :uniqueness => true, :case_sensitive => false
 	    validates :titrefilm,:uniqueness => true, :case_sensitive => false
 

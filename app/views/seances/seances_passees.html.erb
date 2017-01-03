@@ -25,6 +25,7 @@
           </tr>
         </thead>
           <%  @seances.seances_passees_1_mois.lieuxtest[lieu].compact.each do |seance| if seance.horaire < Date.today %>
+
           <tbody>
             <% if seance.annulee == "Annulée" %>
             <tr>
@@ -38,17 +39,21 @@
             <tr>
               <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
               <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %><br>
-              <%= seance.version if seance.version.present? %> <%= seance.statut if seance.statut.present? %></td>
+              <%= seance.version if seance.version.present? %> <%= seance.extras if seance.extras.present? %></td>
               <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
-              <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <%= seance.projection %> - <span class="glyphicon glyphicon-briefcase"></span> <%= seance.caisse %></td>
-              <td><%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
-            </tr>
+              <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <%= seance.projection %> - <span class="glyphicon glyphicon-briefcase"></span> <%= seance.caisse %><br> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+              <% seance.entrees.each do |entree| %>
+              <% if seance.entree.present? %>
+              <td><%= seance.entree.billet %> <%= seance.entree.nombre %></td>
             <% end %>
+            <% end %>
+            </tr>
             <tr>
               <td colspan="5" class="separation"></td>
             </tr>
         </tbody>
           <% end %>
+        <% end %>
         <% end %>
         <tfoot>
           <tr>

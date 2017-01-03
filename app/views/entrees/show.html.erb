@@ -1,0 +1,12 @@
+<p>
+  <strong>Billet:</strong>
+  <%= @entree.billet %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @entree.nombre %>
+</p>
+
+<%= link_to 'Editer une entrée', edit_entree_path(@entree) %> |
+<%= link_to 'Retour liste', entrees_path %>

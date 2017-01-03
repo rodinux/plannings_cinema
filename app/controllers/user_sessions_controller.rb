@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+
      before_action :set_locale
     def set_locale
       I18n.locale = :fr

@@ -1,5 +1,5 @@
-<%= form_for(classification) do |f| %>
-  <% if classification.errors.any? %>
+<%= form_for(@classification) do |f| %>
+  <% if @classification.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(classification.errors.count, "error") %> prohibited this classification from being saved:</h2>
 

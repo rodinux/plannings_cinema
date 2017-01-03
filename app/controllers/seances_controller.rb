@@ -16,6 +16,7 @@ class SeancesController < ApplicationController
         format.pdf do
         render :pdf => "index.pdf",
           :orientation => 'Landscape',
+
           :layout => "layouts/pdf.html",
           :disable_javascript => false,
           show_as_html: params[:debug].present?
@@ -76,8 +77,10 @@ class SeancesController < ApplicationController
   # GET /seances/new
   def new
     @seance = Seance.new(params[:seance])
-    @film = Film.all
-    @village = Village.all
+    @films = Film.all
+    @villages = Village.all
+    @entrees = Entree.all
+    @seance.entrees.build
   end
 
   # GET /seances/1/edit
@@ -128,11 +131,12 @@ class SeancesController < ApplicationController
       @seance = Seance.find(params[:id])
       @films = Film.all
       @villages = Village.all
+      @entrees = Entree.all
     end
 
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seance_params
-      params.require(:seance).permit(:version, :projection, :caisse, :horaire, :commentaire, :film_id, :village_id, :extras, :annulee)
+      params.require(:seance).permit(:version, :projection, :caisse, :horaire, :commentaire, :film_id, :village_id, :extras, :annulee, )
     end
 end

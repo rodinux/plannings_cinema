@@ -10,7 +10,7 @@
     </div>
 </div>
 <br>
-   <% if can? :manage, @films %>
+<% if can? :manage, @films %>
 <div class="container">
     <div class="actions">
         <%= link_to 'Créer une nouveau film', new_film_path, :class => "btn btn-primary btn-lg" %>
@@ -71,14 +71,11 @@
     <% end %>
     <h3>(Attention, içi les séances annulées sont comptées, vérifiez !)</h3>
 
-
-
 <div class="film-seances">
     <% @films.order(updated_at: :desc).each do |film| %>
     <% if film.seances.present? %>
     <div class="film description">
         <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
-        <% if can? :manage, @film %>
         <% if film.distribution.present? %>
         <%= film.distribution %>,
         <% end %>
@@ -87,16 +84,18 @@
         <% end %>
             <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier le film', edit_film_path(film), :class => "btn btn-warning" %>
             <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer le film', film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-        <% end %>
         <h3>A propos :</h3>
             <div class="text-center italic">
                 <p><%=simple_format h film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{film.id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></p>
+                <%if film.affiche.present? %>
+                <img src="#{film.affiche}">
+                <% end %>
             </div>
     </div>
     <div class="seance description">
         <br>
         <h4><strong>Séances à venir :</strong></h4>
-        <% futures_seances = film.seances.seances_calendrier.each.map do |seance| if Date.today < seance.horaire %>
+        <% futures_seances = film.seances.each.map do |seance| if Date.today < seance.horaire %>
          <%=  content_tag :film_id, futures_seances do %>
             <% if seance.annulee != "Annulée" %>
                          <p><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></p>
@@ -108,13 +107,16 @@
                         <% if seance.extras.present? %>
                         <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></p>
                         <% end %>
-                    <% if can? :update, Seance %>
                         <p><span class="glyphicon glyphicon-facetime-video"></span> <strong><%= seance.projection %></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><%= seance.caisse %></strong></p>
+                        <% if seance.entrees.present? %>
+                        <p><% seance.entrees.each do |entree| %>
+                         <%= entree.billet %> <%= entree.nombre %></p>
+                       <% end %>
+                       <% end %>
                         <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %>
                     <% if can? :manage, @seance %>
                         <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></p>
                       <% end %>
-                    <% end %>
                     <br>
             <% else %>
                 <p><strong><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></strong></p>
@@ -127,9 +129,8 @@
                         <% if seance.extras? %>
                         <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></p>
                         <% end %>
-                    <% if can? :manage, seance %>
+
                         <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %> <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-                    <% end %>
                 </div>
                 <br>
               <% end %>
@@ -137,7 +138,7 @@
         <% end %>
     <% end %>
         <h4><strong>Séances passées :</strong></h4>
-        <% seances_passees = film.seances.seances_passees_3_semaines.each.map do |seance| if Date.today > seance.horaire %>
+        <% seances_passees = film.seances.each.map do |seance| if Date.today > seance.horaire %>
         <%= content_tag :film_id, seances_passees do %>
             <% if seance.annulee != "Annulée" %>
                 <p><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></p>
@@ -149,15 +150,14 @@
             <% if seance.extras.present? %>
                 <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></p>
             <% end %>
-             <% if can? :update, Seance %>
-                <p><span class="glyphicon glyphicon-facetime-video"></span> <strong><%= seance.projection %></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><%= seance.caisse %></strong></p>
-                <p>Entrées: Adultes = <%= seance.billets_adultes %> / Enfants = <%=seance.billets_enfants %> / Scolaires = <%= seance.billets_scolaires%> / <strong>TOTAL = <%= total %></strong></p>
-                <p><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %>
+            <% if seance.entrees.present? %>
+                <% seance.entrees.each do |entree| %>
+                <%= entree.billet %> <%= entree.nombre %>
             <% end %>
-                <% if can? :manage, @seance %>
-                    <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-                <% end %>
-                </p>
+            <% end %>
+                <p><span class="glyphicon glyphicon-facetime-video"></span> <strong><%= seance.projection %></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><%= seance.caisse %></strong></p>
+            <p><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %>
+                <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></p>
                 <br>
             <% else %>
                 <p><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></p>
@@ -168,13 +168,11 @@
                     <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.version %>
                     <% end %>
                     <% if seance.extras.present? %>
-                    <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.sattut %>
+                    <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %>
                     <% end %>
-                <% if can? :manage, Seance %>
                     <p><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %></p>
                      <p><span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></p>
-                <% end %>
-               </div>
+                </div>
             <br>
             <%end%>
           <% end %>

@@ -10,25 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103021521) do
+ActiveRecord::Schema.define(version: 20170124155905) do
 
   create_table "classifications", force: :cascade do |t|
-    t.string   "nom"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "nom_classification"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "classifications_films", id: false, force: :cascade do |t|
     t.integer "classification_id", null: false
     t.integer "film_id",           null: false
-  end
-
-  create_table "entrees", force: :cascade do |t|
-    t.string   "billet"
-    t.integer  "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "seance_id"
   end
 
   create_table "films", force: :cascade do |t|
@@ -44,14 +36,18 @@ ActiveRecord::Schema.define(version: 20170103021521) do
     t.string   "projection"
     t.string   "caisse"
     t.datetime "horaire"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "annulee"
     t.string   "version"
     t.string   "commentaire"
     t.integer  "film_id"
     t.integer  "village_id"
     t.string   "extras"
+    t.integer  "billets_adultes"
+    t.integer  "billets_enfants"
+    t.integer  "billets_scolaires"
+    t.integer  "total_billets"
   end
 
   create_table "users", force: :cascade do |t|

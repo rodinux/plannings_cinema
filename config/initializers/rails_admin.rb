@@ -22,18 +22,33 @@ RailsAdmin.config do |config|
 
   Rails.application.eager_load!
 
- config.included_models = ["Film", "Village", "Seance", "User", "Classification", "Entree"]
+ config.included_models = ["Film", "Village", "Seance", "User", "Classification"]
 
 
   ActiveRecord::Base.descendants.each do |model|
 
     config.model 'Film' do
-    configure :id do
-      label "ID du film: "
+    list do
+    field :seances do
+        inverse_of :film
+    end
+    field :villages do
+        inverse_of :films
+    end
+      field :titrefilm
+      field :id
+      field :classification_ids
+      field :distribution
+      field :description
+      field :updated_at
+      field :created_at
     end
     configure :titrefilm do
       label "Nom du Film: "
      end
+    configure :id do
+      label "ID du film: "
+    end
     configure :description do
       label "Résumé du Film: "
     end
@@ -47,58 +62,96 @@ RailsAdmin.config do |config|
       include_all_fields
       default_excluded_fields [:created_at]
     end
-    list do
-      field :id
-      field :titrefilm
-      field :classification_ids
-      field :distribution
-      field :description
-      field :updated_at
-      field :created_at
-    end
+    edit do
+        field :classifications do
+          orderable true
+        end
+      end
   end
 
     config.model 'Village' do
+      list do
+      field :seances do
+        inverse_of :village
+      end
+      field :films do
+        inverse_of :villages
+      end
+        field :commune
+        field :id
+        field :salle
+        field :created_at
+        field :updated_at
+      end
+      configure :commune do
+        label "commune: "
+      end
       configure :id do
         label "ID du lieu: "
       end
-      configure :commune do
-        label "lieu"
-      end
       configure :salle do
-        label "salle"
+        label "salle: "
       end
       import do
         include_all_fields
         default_excluded_fields [:created_at, :updated_at]
       end
-      list do
-        field :id
-        field :commune
-        field :salle
-        field :created_at
-        field :updated_at
-      end
     end
 
     config.model 'Seance' do
+      configure :horaire, :date do
+        strftime_format '%d/%m/%Y %H:%M'
+      end
+      list do
+      field :film do
+        inverse_of :seances
+      end
+      field :village do
+        inverse_of :seances
+      end
+        field :horaire
+        configure :horaire, :date do
+          strftime_format '%d/%m/%Y %H:%M'
+        end
+        field :total_billets
+        field :billets_adultes
+        field :billets_enfants
+        field :billets_scolaires
+        field :extras
+        field :version
+        field :projection
+        field :caisse
+        field :annulee
+        field :updated_at
+        field :created_at
+        field :id
+      end
       configure :horaire do
         label "Date et heure: "
       end
-      configure :horaire, :date do
-        strftime_format '%d/%m/%Y %H:%M'
+      configure :total_billets do
+        label "Total Billets: "
+      end
+      configure :billets_adultes do
+        label "Billets Adultes: "
+      end
+      configure :billets_enfants do
+        label "Billets Enfants: "
+      end
+      configure :billets_scolaires do
+        label "Billets Scolaires: "
+      end
+      configure :version do
+        label "version: "
+      end
+      configure :extras do
+        label "extras: "
       end
       configure :projection do
         label "Projection: "
       end
       configure :caisse do
         label "Caisse: "
-      end
-      configure :version do
-        label "version: "
-      end
-      configure :extras do
-        label "statut: "
       end
       configure :annulee do
         label "Annulation: "
@@ -113,27 +166,14 @@ RailsAdmin.config do |config|
         include_all_fields
         default_excluded_fields [:created_at, :updated_at]
         configure :horaire, :date do
-        strftime_format '%d/%m/%Y %H:%M'
+          strftime_format '%d/%m/%Y %H:%M'
+         end
         end
-      end
       export do
         include_all_fields
         configure :horaire, :date do
-        strftime_format '%d/%m/%Y %H:%M'
+          strftime_format '%d/%m/%Y %H:%M'
         end
-      end
-      list do
-        field :film_id
-        field :horaire
-        field :village_id
-        field :projection
-        field :caisse
-        field :extras
-        field :version
-        field :annulee
-        field :updated_at
-        field :created_at
-        field :id
       end
     end
 
@@ -170,15 +210,15 @@ RailsAdmin.config do |config|
     end
 
     config.model 'Classification' do
-      configure :nom do
-        label "Nom: "
+      configure :nom_classification do
+        label "Classification: "
       end
       import do
         include_all_fields
         exclude_fields [:created_at, :updated_at]
       end
       list do
-        field :nom
+        field :nom_classification
         field :film_ids
       end
     end
@@ -186,7 +226,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   config.actions do
-    dashboard                     # mandatory
+    dashboard                    # mandatory
     index                         # mandatory
     new
     bulk_delete
@@ -221,5 +261,6 @@ RailsAdminImport.config do |config|
       config.model 'User: ' do
         label :user
       end
+
   end
 end

@@ -1,16 +1,11 @@
+<center><h1><strong>Films</strong></h1></center>
 <div class="container">
     <div class="actions">
-        <%= link_to 'Calendrier Général', root_path(:lieu => "tous les lieux"), :class => "btn btn-default btn-lg" %>
-    </div>
-</div>
-<div class="cine-mouv">
-    <div class="cine">
-        <h1 class="cine-titre"><strong>Films du mois</strong></h1>
-        <p class="cine-titre">( depuis le <%= l 3.week.ago %> )</p>
+        <%= link_to 'Retour à la page Films par défaut', films_path, :class => "btn btn-default btn-lg"  %>
     </div>
 </div>
 <br>
-<% if can? :manage, @films %>
+    <% if can? :manage, @films %>
 <div class="container">
     <div class="actions">
         <%= link_to 'Créer une nouveau film', new_film_path, :class => "btn btn-primary btn-lg" %>
@@ -18,26 +13,76 @@
         <%= link_to 'Créer une nouveau lieu', new_village_path, :class => "btn btn-primary btn-lg" %>
         <%= link_to 'Ajouter les nouveaux films à venir', ecranvillage_path, :class => "btn btn-danger btn-lg" %>
     </div>
-    <div class="actions">
-        <%= link_to 'Chercher un film pour édition', films_edition_path, :class => "btn btn-warning btn-lg" %>
+<center><fieldset class="search-field">
+   <legend>Recherche par titre et/ou classification</legend>
+    <%= search_form_for @search do |f| %>
+    <div class="field">
+      <%= f.label :titrefilm_cont, "Film(s) contien(nen)t" %>
+      <%= f.text_field :titrefilm_cont %>
     </div>
+
+    <div class="field">
+     <%= f.label "Zone de classifications" %><br />
+      <%= f.collection_check_boxes :classifications_id_in_any, Classification.all, :id, :nom_classification do |b| %>
+        <div class="collection-check-box">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
+    <div class="actions"><%= f.submit "Rechercher" %></div>
+    <% end %>
+</fieldset></center>
 </div>
 <% end %>
 <br>
+<br />
+<% if can? :manage, @films %>
+    <h3>Il y a pour cette recherche :<strong><%= @films.count %></strong> film(s)</strong>: </h3>
+
+    <% @films.order(updated_at: :desc).each do |film| %>
+    <%=  content_tag :film_id, @seances do %>
+    <table>
+        <tr>
+            <td><strong><%= film.titrefilm %></strong></td>
+            <td><strong><%= film.seances.count %></strong> séance(s)</td>
+            <% if film.classifications.where(id: 1).present? %>
+            <td><strong>Jeune public</strong></td>
+            <% end %>
+            <% if film.classifications.where(id: 2).present? %>
+            <td><strong>Recherche et Découvertes</strong></td>
+            <% end %>
+            <% if film.classifications.where(id: 3).present? %>
+            <td><strong>Patrimoine et Répertoire</strong></td>
+            <% end %>
+            <% if film.classifications.where(id: 4).present? %>
+            <td><strong>Art et Essai</strong></td>
+            <% end %>
+            <% if film.distribution.present? %>
+            <td><strong><%= film.distribution %></strong></td>
+            <% end %>
+        </tr>
+    </table>
+    <% end %>
+    <% end %>
+    <h3>(Attention, içi les séances annulées sont comptées, vérifiez !)</h3>
+
+
+
 <div class="film-seances">
-    <% @films.films_3_semaines.each do |film| %>
+    <% @films.order(updated_at: :desc).each do |film| %>
     <% if film.seances.present? %>
     <div class="film description">
         <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
         <% if can? :manage, @film %>
-            <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier le film', edit_film_path(film), :class => "btn btn-warning" %>
-            <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer le film', film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
         <% if film.distribution.present? %>
         <%= film.distribution %>,
         <% end %>
-        <% end %>
         <% if film.classifications.present? %>
         <%= film.classifications.map(&:nom_classification).sort.join(", ") %>
+        <% end %>
+            <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier le film', edit_film_path(film), :class => "btn btn-warning" %>
+            <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer le film', film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
         <% end %>
         <h3>A propos :</h3>
             <div class="text-center italic">
@@ -88,8 +133,8 @@
         <% end %>
     <% end %>
         <h4><strong>Séances passées :</strong></h4>
-        <% seances_passees = film.seances.seances_passees_3_semaines.each.map do |seance| if Date.today > seance.horaire %>
-           <%= content_tag :film_id, seances_passees do %>
+        <% seances_passees = film.seances.each.map do |seance| if Date.today > seance.horaire %>
+          <%= content_tag :film_id, seances_passees do %>
             <% if seance.annulee != "Annulée" %>
                 <p><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></p>
                 <p><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <em>(<%= seance.village.salle %>)</em>
@@ -102,11 +147,10 @@
             <% end %>
              <% if can? :update, Seance %>
                 <p><span class="glyphicon glyphicon-facetime-video"></span> <strong><%= seance.projection %></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><%= seance.caisse %></strong></p>
+                <p>Entrées: Adultes = <%= seance.billets_adultes %> / Enfants = <%= seance.billets_enfants %> / Scolaires = <%= seance.billets_scolaires%> / <strong>TOTAL = <%= seance.total_billets %></strong></p>
                 <p><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %>
             <% end %>
-                <% if can? :manage, @seance %>
                     <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-                <% end %>
                 </p>
                 <br>
             <% else %>
@@ -120,10 +164,8 @@
                     <% if seance.extras.present? %>
                     <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %>
                     <% end %>
-                <% if can? :manage, Seance %>
                     <p><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %></p>
                      <p><span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></p>
-                <% end %>
                </div>
             <br>
             <%end%>
@@ -134,4 +176,4 @@
    <% end %>
   <% end %>
 </div>
-<%= link_to '', films_path, :class => "back-to-top", :title => 'Retour haut de page' %>
+<% end %>

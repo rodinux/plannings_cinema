@@ -1,2 +1,0 @@
-module EntreesHelper
-end

@@ -86,16 +86,22 @@
   </div>
 
   <h2>Les Entrées</h2>
-  <div class="info">
-  <% if @seance.entrees.present? %>
-  <% @seance.entrees.each do |entree| %>
-  <h3>Il y eu <strong><%= entree.nombre %></strong> billets <%= entree.billet %></h3>
-  <% end %>
-  <% end %>
+
+  <div class="field">
+    <%= f.label :billets_adultes, :value => 'Billets adultes' %><br>
+    <%= f.number_field :billets_adultes, in: 0..500, step: 0 %>
   </div>
-  <div class="actions">
-  <%= link_to 'Créer une nouvelle Entrée', new_entree_path, :class => "btn btn-primary btn-lg" %>
+
+  <div class="field">
+    <%= f.label :billets_enfants, :value => 'Billets enfants' %><br>
+    <%= f.number_field :billets_enfants, in: 0..500, step: 0 %>
   </div>
+
+  <div class="field">
+    <%= f.label :billets_scolaires, :value => 'Billets scolaires' %><br>
+    <%= f.number_field :billets_scolaires, in: 0..500, step: 0 %>
+  </div>
+
   <div class="actions">
     <input type="submit" class="btn btn-lg btn-warning" value="Valider" />
   </div>

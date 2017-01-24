@@ -13,7 +13,7 @@
   <tbody>
     <% @classifications.each do |classification| %>
       <tr>
-        <td><%= classification.nom %></td>
+        <td><%= classification.nom_classification %></td>
         <td><%= classification.films.count %></td>
         <td><%= classification.seances.count %>
         <td><%= link_to 'Voir', classification %></td>
@@ -39,7 +39,7 @@
     <% classification.films.each do |classification_film| %>
       <tr>
         <td><%= classification_film.titrefilm %></td>
-        <td><%= classification.nom %></td>
+        <td><%= classification.nom_classification %></td>
         <td><%= classification_film.seances.count %></td>
         <td><%= link_to 'Voir', classification %></td>
         <td><%= link_to 'Éditer', edit_classification_path(classification) %></td>

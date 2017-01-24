@@ -1,5 +1,10 @@
-<h1>New Village</h1>
-
-<%= render 'form', village: @village %>
-
-<%= link_to 'Back', villages_path %>
+<center>
+<% if can? :manage, Village %>
+  <h1>Créer un nouveau Lieu</h1>
+	<div class="container">
+		<%= render 'form' %>
+		<%= link_to 'Retour à la liste des Villages', villages_path, :class => "btn btn-primary active" %>
+	</div>
+<% end %>
+</center>
+<br>

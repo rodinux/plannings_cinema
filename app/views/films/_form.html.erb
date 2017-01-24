@@ -30,7 +30,7 @@
   </div>
    <div class="field">
     <%= f.label "Cochez les classifications" %><br />
-    <%= f.collection_check_boxes :classification_ids, Classification.all, :id, :nom do |b| %>
+    <%= f.collection_check_boxes :classification_ids, Classification.all, :id, :nom_classification do |b| %>
       <div class="collection-check-box">
         <%= b.check_box %>
         <%= b.label %>

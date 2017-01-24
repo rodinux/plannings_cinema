@@ -1,10 +1,10 @@
 <% lieu = params[:lieu] %>
 <div class="container">
   <div class="actions">
-    <%= link_to 'Séances passées en pdf (imprimer)', seances_passees_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= lieu.upcase %></strong>
-    <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
-   </div>
-   <div class="actions">
+  <%= link_to 'Séances passées en pdf (imprimer)', seances_passees_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= lieu.upcase %></strong>
+  <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
+ </div>
+ <div class="actions">
   <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-success btn-lg" %> <strong>pour <%= lieu.upcase %></strong>
  </div>
 <% seances_annulees = @seances.seances_passees_1_mois.where(annulee: "Annulée") %>
@@ -25,7 +25,6 @@
           </tr>
         </thead>
           <%  @seances.seances_passees_1_mois.lieuxtest[lieu].compact.each do |seance| if seance.horaire < Date.today %>
-
           <tbody>
             <% if seance.annulee == "Annulée" %>
             <tr>
@@ -39,21 +38,18 @@
             <tr>
               <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
               <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %><br>
-              <%= seance.version if seance.version.present? %> <%= seance.extras if seance.extras.present? %></td>
+              <%= seance.version if seance.version.present? %> <%= seance.version if seance.version.present? %></td>
               <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
-              <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <%= seance.projection %> - <span class="glyphicon glyphicon-briefcase"></span> <%= seance.caisse %><br> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
-              <% seance.entrees.each do |entree| %>
-              <% if seance.entree.present? %>
-              <td><%= seance.entree.billet %> <%= seance.entree.nombre %></td>
-            <% end %>
-            <% end %>
+              <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <%= seance.projection %> - <span class="glyphicon glyphicon-briefcase"></span> <%= seance.caisse %></td>
+              <td class="warning">Adultes = <strong><%= seance.billets_adultes.to_i %></strong> / Enfants = <strong><%= seance.billets_enfants.to_i %></strong>
+              <br>Scolaires = <strong><%= seance.billets_scolaires.to_i %></strong> / <strong> TOTAL = <%= seance.total_billets.to_i %></strong> <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
             </tr>
+            <% end %>
             <tr>
               <td colspan="5" class="separation"></td>
             </tr>
         </tbody>
           <% end %>
-        <% end %>
         <% end %>
         <tfoot>
           <tr>
@@ -71,3 +67,4 @@
   </div>
 </div>
 <br>
+<%= link_to '', seances_passees_path(:lieu => params[:lieu],date: @date), :class => "back-to-top", :title => 'Retour haut de page' %>

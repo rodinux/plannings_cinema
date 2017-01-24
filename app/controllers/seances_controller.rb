@@ -68,6 +68,20 @@ class SeancesController < ApplicationController
       end
   end
 
+  def entrees
+    @search = SeanceSearch.new(params[:search])
+    @seances = @search.scope
+    @films = Film.all
+    respond_to do |format|
+        format.pdf do
+        render :pdf => "entrees.pdf",
+          :layout => "layouts/pdf.html",
+          :disable_javascript => false,
+          show_as_html: params[:debug].present?
+        end
+      format.html
+      end
+  end
 
   # GET /seances/1
   # GET /seances/1.json
@@ -79,8 +93,6 @@ class SeancesController < ApplicationController
     @seance = Seance.new(params[:seance])
     @films = Film.all
     @villages = Village.all
-    @entrees = Entree.all
-    @seance.entrees.build
   end
 
   # GET /seances/1/edit
@@ -131,12 +143,11 @@ class SeancesController < ApplicationController
       @seance = Seance.find(params[:id])
       @films = Film.all
       @villages = Village.all
-      @entrees = Entree.all
     end
 
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seance_params
-      params.require(:seance).permit(:version, :projection, :caisse, :horaire, :commentaire, :film_id, :village_id, :extras, :annulee, )
+      params.require(:seance).permit(:horaire, :film_id, :village_id, :version, :projection, :caisse, :extras, :annulee, :billets_adultes, :billets_scolaires, :billets_enfants, :total_billets )
     end
 end

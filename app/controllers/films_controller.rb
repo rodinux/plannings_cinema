@@ -22,13 +22,18 @@ class FilmsController < ApplicationController
     end
   end
 
-  # GET /films
-  # GET /films.json
-  def index
+  def films_edition
     @films = Film.all
     @seances = Seance.all
     @search = Film.search(params[:q])
     @films = @search.result(distinct: true)
+  end
+
+  # GET /films
+  # GET /films.json
+  def index
+    @seances = Seance.all
+    @films = Film.all
   end
 
   # GET /films/1

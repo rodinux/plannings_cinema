@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
-
-<p>
+<center>
+<h2>
   <strong>Commune:</strong>
   <%= @village.commune %>
-</p>
+</h2>
 
-<p>
+<h2>
   <strong>Salle:</strong>
   <%= @village.salle %>
-</p>
-
-<%= link_to 'Edit', edit_village_path(@village) %> |
-<%= link_to 'Back', villages_path %>
+</h2>
+<%= link_to 'Editer', edit_village_path(@village), :class => "btn btn-warning" %> |
+<%= link_to 'Retour liste des lieux', villages_path, :class => "btn btn-primary" %>
+</center>

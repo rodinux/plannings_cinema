@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Villages</h1>
-
+<center><h1>Lieux</h1></center>
+<div class="actions">
+<%= link_to 'Créer un nouveau Lieu', new_village_path, :class => "btn btn-warning" %>
+</div>
 <table>
   <thead>
     <tr>
@@ -16,9 +17,9 @@
       <tr>
         <td><%= village.commune %></td>
         <td><%= village.salle %></td>
-        <td><%= link_to 'Show', village %></td>
-        <td><%= link_to 'Edit', edit_village_path(village) %></td>
-        <td><%= link_to 'Destroy', village, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Voir', village %></td>
+        <td><%= link_to 'Éditer', edit_village_path(village) %></td>
+        <td><%= link_to 'Supprimer', village, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +27,3 @@
 
 <br>
 
-<%= link_to 'New Village', new_village_path %>

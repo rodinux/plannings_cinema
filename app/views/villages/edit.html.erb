@@ -1,6 +1,7 @@
-<h1>Editing Village</h1>
-
+<center>
+<h1>Edition du Lieu</h1>
 <%= render 'form', village: @village %>
 
-<%= link_to 'Show', @village %> |
-<%= link_to 'Back', villages_path %>
+<%= link_to 'Voir', @village, :class => "btn btn-primary" %> |
+<%= link_to 'Retour liste lieux', villages_path, :class => "btn btn-primary"%>
+</center>

@@ -4,13 +4,15 @@ class ClassificationsController < ApplicationController
   def set_locale
     I18n.locale = :fr
   end
-  
+
   before_action :set_classification, only: [:show, :edit, :update, :destroy]
 
   # GET /classifications
   # GET /classifications.json
   def index
     @classifications = Classification.all
+    @films = Film.all
+    @seances = Seance.all
   end
 
   # GET /classifications/1
@@ -71,10 +73,12 @@ class ClassificationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_classification
       @classification = Classification.find(params[:id])
+      @films = Film.all
+      @seances = Seance.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classification_params
-      params.require(:classification).permit(:nom, :film_id)
+      params.require(:classification).permit(:nom_classification, :film_id)
     end
 end

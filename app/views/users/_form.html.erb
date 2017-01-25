@@ -2,8 +2,8 @@
 <p><strong>Aux curieux:</strong> Cette inscription ne sert qu'aux bénévoles d'Ecran Village, elle ne vous apportera rien d'autre. Si vous n'en faites pas partie, s'il vous plaît, revenez à l'accueil.</p>
 <p><strong>Pour les bénévoles:</strong> Une fois inscrits, veuillez m'en avertir par mail pour que je vous autorise à accéder à l'édition des plannings.</p>
 <br>
-<%= form_for(user) do |f| %>
-  <% if user.errors.any? %>
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 

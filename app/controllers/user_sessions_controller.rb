@@ -12,13 +12,17 @@ class UserSessionsController < ApplicationController
   	end
 
     def create
-        if @user = login(params[:email], params[:password])
-            redirect_back_or_to(root_path, notice: 'Connexion réussie !')
+      if @user = login(params[:email], params[:password])
+        if @user.role == "guest"
+          redirect_back_or_to(root_path, notice: 'Connexion réussie !')
         else
-         flash.now[:error] = "Oups! une erreur semble-t-il... veuillez recommencez s'il vous plaît."
-         render action: 'new'
+          redirect_back_or_to(calendrier_path(:lieu => "tous les lieux"), notice: 'Connexion réussie !')
         end
-    end
+      else
+       flash.now[:error] = "Oups! une erreur semble-t-il... veuillez recommencez s'il vous plaît."
+       render action: 'new'
+      end
+  end
 
     def destroy
       logout

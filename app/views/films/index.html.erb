@@ -3,12 +3,12 @@
         <%= link_to 'Calendrier Général', root_path(:lieu => "tous les lieux"), :class => "btn btn-default btn-lg" %>
     </div>
 </div>
-<div class="cine-mouv">
+
     <div class="cine">
         <h1 class="cine-titre"><strong>Films du mois</strong></h1>
         <p class="cine-titre">( depuis le <%= l 3.week.ago %> )</p>
     </div>
-</div>
+
 <br>
 <% if can? :manage, @films %>
 <div class="container">

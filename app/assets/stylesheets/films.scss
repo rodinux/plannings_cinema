@@ -47,57 +47,10 @@
     background: #ecf0f1;
 }
 .cine {
-  background-image: url(cine.jpg);
+  background-image: url(banniere.jpg);
   background-repeat: repeat-x;
   width: 100%;
   height: 241px;
-}
-.cine-mouv {
- -webkit-animation: bannermove 10s linear infinite;
-    -moz-animation: bannermove 10s linear infinite;
-     -ms-animation: bannermove 10s linear infinite;
-      -o-animation: bannermove 10s linear infinite;
-         animation: bannermove 10s linear infinite;
-}
-@keyframes "bannermove" {
- 0% {
-    margin-left: 0%;
- }
- 100% {
-    margin-left: -1000%;
- }
-}
-@-moz-keyframes bannermove {
- 0% {
-   margin-left: 0%;
- }
- 100% {
-   margin-left: -1000%;
- }
-}
-@-webkit-keyframes "bannermove" {
- 0% {
-   margin-left: 0%;
- }
- 100% {
-   margin-left: -1000%;
- }
-}
-@-ms-keyframes "bannermove" {
- 0% {
-   margin-left: 0%;
- }
- 100% {
-   margin-left: -1000%;
- }
-}
-@-o-keyframes "bannermove" {
-0% {
-   margin-left: 0%;
- }
- 100% {
-   margin-left: -1000%;
- }
 }
 .cine h1{
   padding-top: 90px;

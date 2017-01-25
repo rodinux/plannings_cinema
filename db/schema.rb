@@ -11,6 +11,8 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170124155905) do
+  
+enable_extension "plpgsql"
 
   create_table "classifications", force: :cascade do |t|
     t.string   "nom_classification"

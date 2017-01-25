@@ -27,5 +27,5 @@ production:
   timeout: 5000
   username: plannings_cinema
   password: ecran2017
-  database: plannings_ecranvillage_production
+  database: plannings_cinema_production
   host: 127.0.0.1

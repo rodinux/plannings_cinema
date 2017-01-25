@@ -16,7 +16,7 @@ class UserSessionsController < ApplicationController
         if @user.role == "guest"
           redirect_back_or_to(root_path, notice: 'Connexion réussie !')
         else
-          redirect_back_or_to(calendrier_path(:lieu => "tous les lieux"), notice: 'Connexion réussie !')
+          redirect_back_or_to(edition_calendrier_path(:lieu => "tous les lieux"), notice: 'Connexion réussie !')
         end
       else
        flash.now[:error] = "Oups! une erreur semble-t-il... veuillez recommencez s'il vous plaît."

@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :films
   resources :classifications
   resources :users
-  resources :users
   resources :user_sessions
   get 'aide' => 'calendar#aide'
   get 'calendrier' => 'calendar#calendrier'

@@ -25,4 +25,7 @@ class CalendarController < ApplicationController
       format.html
     end
   end
+
+  def aide
+  end
 end

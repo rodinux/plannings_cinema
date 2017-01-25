@@ -1,5 +1,6 @@
 <nav class="navbar navbar-inverse navbar-static-top" role = "navigation">
     <%= link_to 'Films', films_path, :class => "btn btn-lg navbar-btn" %>
+    <%= link_to 'Aide', aide_path, :class => "btn btn-lg navbar-btn" %>
 <% if can? :update, Seance %>
   <%= link_to 'Édition Calendriers', edition_calendrier_path(:lieu => "tous les lieux"), :class => "btn btn-lg navbar-btn" %>
   <div class="btn-group">

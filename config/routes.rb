@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :users
   resources :users
   resources :user_sessions
+  get 'aide' => 'calendar#aide'
   get 'calendrier' => 'calendar#calendrier'
   get 'a_completer' => 'seances#a_completer'
   get 'mes_seances' => 'seances#mes_seances'

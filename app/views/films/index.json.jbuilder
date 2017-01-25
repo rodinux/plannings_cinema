@@ -1,1 +1,4 @@
-json.array! @films, partial: 'films/film', as: :film
+json.array!(@films.films_2_mois_avant) do |film|
+  json.extract! film, :id, :titrefilm, :description
+  json.url film_url(film, format: :json)
+end

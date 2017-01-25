@@ -1,1 +1,1 @@
-json.partial! "villages/village", village: @village
+json.extract! @village, :id, :commune, :salle

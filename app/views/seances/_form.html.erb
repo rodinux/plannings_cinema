@@ -14,7 +14,7 @@
   <div class="field">
     <% if can? :manage, Seance %>
         <span class="glyphicon glyphicon-film"></span> <%= f.label :film_id, :value => 'Film' %><br>
-        <%=  select("seance", "film_id", Film.all.order(created_at: :asc).collect {|film| [ film.titrefilm, film.id ] }) %>
+        <%=  select("seance", "film_id", Film.all.order(updated_at: :desc).collect {|film| [ film.titrefilm, film.id ] }) %>
     <% else %>
       <h3><span class="glyphicon glyphicon-film"></span> <%= raw @seance.film.titrefilm.upcase %></h3>
     <% end %>
@@ -42,7 +42,7 @@
   <div class="field">
         <% if can? :manage, Seance %>
           <span class="glyphicon glyphicon-home"></span> <%= f.label :village_id, :value => 'Lieu' %><br>
-          <%= f.select :village_id, Village.all.collect {|village| [ village.commune + " " + village.salle, village.id ] } %>
+          <%= f.select :village_id, Village.all.order(id: :asc).collect {|village| [ village.commune + " " + village.salle, village.id ] } %>
         <% else %>
           <h3><span class="glyphicon glyphicon-home"></span> <%= @seance.village.commune.upcase %> <%= @seance.village.salle %></h3>
         <% end %>

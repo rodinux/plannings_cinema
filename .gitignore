@@ -23,3 +23,6 @@
 # Ignore secret key
 /config/secrets.yml
 
+# Ignore assets
+/public/assets/
+

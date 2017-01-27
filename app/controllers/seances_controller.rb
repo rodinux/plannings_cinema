@@ -148,6 +148,6 @@ class SeancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seance_params
-      params.require(:seance).permit(:horaire, :film_id, :village_id, :version, :projection, :caisse, :extras, :annulee, :billets_adultes, :billets_scolaires, :billets_enfants, :total_billets )
+      params.require(:seance).permit(:horaire, :film_id, :village_id, :version, :projection, :commentaire, :caisse, :extras, :annulee, :billets_adultes, :billets_scolaires, :billets_enfants, :total_billets )
     end
 end

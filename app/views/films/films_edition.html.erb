@@ -8,7 +8,6 @@
     <% if can? :manage, @films %>
 <div class="container">
     <div class="actions">
-        <%= link_to 'Créer une nouveau film', new_film_path, :class => "btn btn-primary btn-lg" %>
         <%= link_to 'Créer une nouvelle seance', new_seance_path, :class => "btn btn-primary btn-lg" %>
         <%= link_to 'Créer une nouveau lieu', new_village_path, :class => "btn btn-primary btn-lg" %>
         <%= link_to 'Ajouter les nouveaux films à venir', ecranvillage_path, :class => "btn btn-danger btn-lg" %>

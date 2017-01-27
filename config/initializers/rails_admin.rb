@@ -261,6 +261,5 @@ RailsAdminImport.config do |config|
       config.model 'User: ' do
         label :user
       end
-
   end
 end

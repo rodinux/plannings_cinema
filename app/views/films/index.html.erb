@@ -57,7 +57,7 @@
         <% end %>
     </div>
     <div class="seance description">
-        <br>
+        <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
         <h4><strong>Séances à venir :</strong></h4>
         <% futures_seances = film.seances.seances_calendrier.each.map do |seance| if Date.today < seance.horaire %>
           <%=  content_tag :film_id, futures_seances do %>

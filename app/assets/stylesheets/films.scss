@@ -46,6 +46,9 @@
     width: 60%;
     background: #ecf0f1;
 }
+.film img {
+  width: 50%;
+}
 .cine {
   background-image: url(banniere.jpg);
   background-repeat: repeat-x;
@@ -66,4 +69,7 @@
    .film-seances {
       padding: 0 16px 0;
    }
+   .film img {
+      width: 30%;
+  }
 }

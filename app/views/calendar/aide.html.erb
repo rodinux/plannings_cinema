@@ -1,34 +1,29 @@
 <div class="container">
 	<h1 class="text-center"><strong>FAQ</strong></h1>
 	<div class="description">
-	<% if can? :update, Seance %>
-	    <h4>Vous êtes bien connecté, enregistré et avez au moins des permissions d'édition si vous lisez ce message.</h4>
-	    <h4>Bonne navigation, si vous avez des suggestions, des choses à me remonter, n'hésitez pas à me le dire par mail <a href="mailto:rodolphe.robles@sfr.fr">rodolphe.robles@sfr.fr</a></h4>
-	<% else %>
-		<h4>Pour vous inscrire, il faut cliquer sur la petite icône blanche qui se trouve en haut à gauche et sous la barre de navigation, un petit carré avec trois lignes que l'on appelle dans le jargon des geeks un sandwich, il ressemble à ceci  <button class="connexion" >
-      &#9776;
-        </button>
-		<br>
-		En cliquant dessus, vous devriez voir apparaître un message de mise en garde pour prévenir que ce site est réservé aux bénévoles d'Ecran Village. Il y a un bouton pour s'enregister (en orange) et un autre pour se connecter (en vert).
-		<br>
-		Si vous n'êtes pas enregistré, il faut commencer par l'enregistrement <strong>(Nota : à priori tous les bénévoles sont déjà inscrits, écrivez-moi si vous avez un doute)</strong>.
-		<br>
-		Ouvrez le petit sandwich le petit sandwich, puis cliquez sur ce bouton <span><%= link_to "S'enregistrer", new_user_path, :class => "label label-warning" %></span>, (ou cliquez sur celui_ci)
-		<br>
-		<br>
-		On vous demandera votre prénom (qui servira aux inscriptions des séances), votre nom  (facultatif), votre téléphone (facultatif aussi), votre adresse mail (indispensable) qui servira à vous connecter et votre mot de passe, qu'il faut retaper (et bien retenir), puis cliquez sur le bouton 'Valider'. <br>
-		Ensuite, vous pourrez vous connecter en cliquant sur le bouton vert 'Se connecter' qui doit ressembler à celui-ci : <span class="connexion"><%= link_to "Se connecter", log_in_path, :class => "btn btn-lg btn-success"%></span>.
-		<br>
-		 Vous devriez voir ensuite un message : Bienvenue ! <span class="label label-info">Votre nom d'utilisateur</span> en haut à droite.
-		 <br>
-		 A ce stade, vous n'avez plus besoin de vous enregistrer par la suite, si vous n'arrivez plus à vous connecter après avoir été enregistré, prévenez-moi par mail (ci-dessous).
-		<br>
-		 Si c'est la première fois que vous vous inscrivez et que vous pensez faire partie des bénévoles d'Ecran Village, vous ne verrez rien d'autre tant que je n'aurai pas changé vos permissions, vous devez me demander de vous ouvrir ces permissions en me le demandant par mail : <a href="mailto:rodolphe.robles@sfr.fr" title="M'envoyer un mail">rodolphe.robles@sfr.fr</a>.</h4>
-	<% end %>
-</div>
+		<% if can? :update, Seance %>
+		    <h4>Vous êtes bien connecté, enregistré et avez au moins des permissions d'édition si vous lisez ce message.</h4>
+		    <h4>Bonne navigation, si vous avez des suggestions, des choses à me remonter, n'hésitez pas à me le dire par mail <a href="mailto:rodolphe.robles@sfr.fr">rodolphe.robles@sfr.fr</a></h4>
+		<% else %>
+			<h4>Bienvenue bénévole, si vous n'êtes pas encore enregistré, pour vous inscrire, il vous faut cliquer sur ce bouton <span><%= link_to "S'enregistrer", new_user_path, :class => "label label-warning" %></span>
+			<br>
+			En cliquant dessus, vous devriez voir apparaître un message de mise en garde pour prévenir que ce site est réservé aux bénévoles d'Écran Village.
+			<br>
+			<strong>(Nota : à priori tous les bénévoles sont déjà inscrits, écrivez-moi si vous avez un doute)</strong>.
+			<br>
+			On vous demandera votre prénom (qui servira aux inscriptions des séances), votre nom  (facultatif), votre téléphone (facultatif aussi), votre adresse mail (indispensable) qui servira à vous connecter et votre mot de passe, qu'il faut retaper (et bien retenir), puis cliquez sur le bouton 'Valider'. Vous ariverez ensuite sur une session connectée.<br>
+			Ensuite, à l'avenir, vous pourrez vous connecter en allant sur ce lien <%= link_to "Se connecter", log_in_path, :class => "btn btn-lg btn-success" %> en cliquant sur le bouton vert. Pensez à marquer ce lien dans votre Marque-page ou Favoris de votre navigateur internet !
+			<br>
+			 Vous devriez voir ensuite un message : Bienvenue ! <span class="label label-info">Votre nom d'utilisateur</span> en haut à droite.
+			 <br>
+			 A ce stade, vous n'avez plus besoin de vous enregistrer par la suite, si vous n'arrivez plus à vous connecter après avoir été enregistré, prévenez-moi par mail (ci-dessous).
+			<br>
+			 Si c'est la première fois que vous vous inscrivez et que vous pensez faire partie des bénévoles d'Ecran Village, vous ne verrez rien d'autre tant que je n'aurai pas changé vos permissions, <strong>vous devez me demander de vous ouvrir ces permissions</strong> en me le demandant par mail : <a href="mailto:rodolphe.robles@sfr.fr" title="M'envoyer un mail">rodolphe.robles@sfr.fr</a>.</h4>
+		<% end %>
+    </div>
 <% if can? :update, Seance %>
    <div class="description">
-    <h1>Sommaire</h1>
+    <center><h1>Sommaire</h1></center>
     <h4><%= link_to 'Les Calendriers', aide_path(:anchor => "calendriers") %></h4>
     <h4><%= link_to 'Comment m\'inscrire pour la projection ou la caisse d\'une séance', aide_path(:anchor => "inscriptions") %></h4>
     <h4><%= link_to 'Comment éditer le nombre de séances après une projection ?', aide_path(:anchor => "editer-entrees") %></h4>
@@ -42,39 +37,43 @@
 	<div class="description">
 	    <h4>Sur la page d'Accueil ou Calendrier Public, avant d'être connecté, les calendriers ne montre que les séances (pas nos inscriptions en tant que bénévoles) où en survolant une séance avec la souris et en cliquant dessus, une page d'Ecran Village sur le film s'ouvre dans un onglet.</h4>
 	    <h4>On peut choisir un calendrier par lieu en cliquant sur les boutons avec leur noms, il y a une couleur par nom dans les séances (<span class="vernoux">Vernoux</span>,<span class="lamastre">Lamastre</span>,<span class="chalencon">Chalencon</span>,<span class="itinerant">Itinérance</span>).</h4>
-	    <div class="container">
-		<center><%= image_tag("calendrier-accueil.png", :alt => "calendrier, choix lieu", :class => "capture") %></center>
-		</div>
-		<div><h4>Une fois connecté, vous arriverez sur la page 'Édition Calendriers'. Vous pourrez choisir un calendrier par lieu. En cliquant sur une séance, on peut éditer celle-ci. Pour avancer d'une semaine on clique sur les flèches en haut du calendrier</h4>
-		<div class="container">
-        <center><%= image_tag("calendrier-avancer-semaine.png", :alt => "calendrier, flèche avancer", :class => "capture") %></center>
-		</div>
+		    <div class="container">
+				<center><%= image_tag("calendrier-accueil.png", :alt => "calendrier, choix lieu", :class => "capture") %></center>
+			</div>
+		<h4>Une fois connecté, vous arriverez sur la page 'Édition Calendriers'. Vous pourrez choisir un calendrier par lieu. En cliquant sur une séance, on peut éditer celle-ci. Pour avancer d'une semaine on clique sur les flèches en haut du calendrier</h4>
+			<div class="container">
+	        	<center><%= image_tag("calendrier-avancer-semaine.png", :alt => "calendrier, flèche avancer", :class => "capture") %></center>
+			</div>
 	    <h4>Dans la barre de navigation, on a accés à 'Édition Calendriers' où les calendriers précisent les inscriptions des bénévoles.</h4>
 		<h4>On peut éditer une séance en cliquant dessus, elle s'inscrit en vert quand on passe dessus avec la souris.</h4>
-		<div class="container">
-		<center><%= image_tag("calendrier-edition.png", :alt => "calendrier, survol séance et choix édition", :class => "capture") %></center>
-		</div>
+			<div class="container">
+				<center><%= image_tag("calendrier-edition.png", :alt => "calendrier, survol séance et choix édition", :class => "capture") %></center>
+			</div>
     </div>
 	<center><h2 id ="inscriptions"><strong>Comment m'inscrire pour la projection ou la caisse d'une séance</strong></h2></center>
 	<div class="description">
 		<h4>Pour vous insrire dans une séance, soit dans une des pages Calendriers et en choisissant votre lieu et en cliquant sur une séance pour l'éditer (elle devient verte avant de cliquer dessus), soit en allant dans  l'onglet Séances, choisissez votre Lieu si vous préférez ou sur "Tous les lieux" ou bien dans l'onglet Films (la liste des Films est rangée par Film avec les séances correspondantes à ce film par date), là aussi vous pouvez cliquer sur le bouton éditer sur une séance. Cliquez sur le bouton "Editer" en face de la séance en question.</h4>
 		<h4>Pour s'inscrire pour la projection ou la caisse,  cliquez sur le champ en question et vous verrez la liste des noms des bénévoles (par ordre alphabètique), si vous êtes plus bas, il faut descendre. Faîtes attention à ne pas choisir un autre nom que le votre !</h4>
-		<div class="container">
-		<center><%= image_tag("edition-projection-scroll.png", :alt => "fenêtre d'édition d'une séance, choix bénévole projection", :class => "capture") %></center>
-		</div>
-		<div class="container">
-		<center><%= image_tag("edition-projection-choix.png", :alt => "fenêtre d'édition d'une séance, choix bénévole projection", :class => "capture") %></center>
-        </div>
+			<div class="container">
+				<center><%= image_tag("edition-projection-scroll.png", :alt => "fenêtre d'édition d'une séance, choix bénévole projection", :class => "capture") %></center>
+				<center><%= image_tag("edition-projection-choix.png", :alt => "fenêtre d'édition d'une séance, choix bénévole projection", :class => "capture") %></center>
+	        </div>
         <h4>Vous pouvez aussi ajouter un commentaire si vous le souhaitez. Ensuite, il vous reste à Valider la séance en descendant en bas de la page.</h4>
-        <div class="container">
-		<center><%= image_tag("capture-valider-seance.png", :alt => "fenêtre d'édition d'une séance, validation", :class => "capture") %></center>
-		</div>
-		<h4>Astuce: Si on veut de nouveau laisser le champ vide pour une projection (si on s'est inscrit par erreur), tout en haut du champ, il y a un champ vide, il suffit de le sélectionner et de valider de nouveau.</h4>
+	        <div class="container">
+				<center><%= image_tag("capture-valider-seance.png", :alt => "fenêtre d'édition d'une séance, validation", :class => "capture") %></center>
+			</div>
+		<h4><strong>Astuces:</strong>Quand vous choisissez des Séances par lieu (Lamastre, Vernoux ou Chalencon), vous avez un bouton 'Sénces où il manque des inscriptions' qui vous listera toutes les séances où il manque un projectionniste et les séances où il manque une personne à la caisse pour ce lieu !</h4>
+            <div class="container">
+				<center><%= image_tag("bouton_seances_manque_inscriptions.png", :alt => "fenêtre séances à compléter", :class => "capture") %></center>
+            	<center><%= image_tag("seances_a_completer.png", :alt => "fenêtre séances à compléter", :class => "capture") %></center>
+            	<center><%= image_tag("seances_a_completer2.png", :alt => "fenêtre séances à compléter", :class => "capture") %></center>
+            </div>
+		<h4>Si on veut de nouveau laisser le champ vide pour une projection (si on s'est inscrit par erreur), tout en haut du champ, il y a un champ vide, il suffit de le sélectionner et de valider de nouveau.</h4>
 		<h4>Quand vous validez, vous voyez le résulat de ce que vous venez d'éditer. Vous avez alors le choix de modifier de nouveau la séance, de revenir à la page 'Films', aux séances (par lieu de la séance), aux séances à compléter (celles où il manque quelqu'un par lieu de la séance), aux séances(de tous les lieux), ou bien encore à 'Mes Séances' pour voir les séances où vous vous êtes inscrits.</h4>
 		<h4>Si les informations sont correctes, elles sont déjà prises en compte, vous pouvez aussi choisir de revenir à une autre page dans la barre de navigation en haut.</h4>
-		<div class="container">
-		<center><%= image_tag("edition-seance-show.png", :alt => "fenêtre d'édition d'une séance, vue après validation", :class => "capture") %></center>
-        </div>
+			<div class="container">
+				<center><%= image_tag("edition-seance-show.png", :alt => "fenêtre d'édition d'une séance, vue après validation", :class => "capture") %></center>
+	        </div>
     </div>
 
    <center><h2 id="editer-entrees"><strong>Comment éditer le nombre de séances après une projection ?</strong></h2></center>
@@ -91,31 +90,41 @@
 	    <div class="container">
 				<center><%= image_tag("menu-mes_seances.png", :alt => "onglet Séances et choix mes séances", :class => "capture") %></center>
 				<center><%= image_tag("seance-choix-mes-seances", :alt => "onglet Séances et choix mes séances", :class => "capture") %></center>
-
 		</div>
 	</div>
 	<center><h2 id="me_modifier"><strong>Comment modifier mon mot de passe ou autre information me concernant ?</strong></h2></center>
 	<div class="description">
-	<h4>Dans l'onglet Utilisateurs, vous voyez la liste des utilisateurs avec leur informations. Sur la ligne devant votre nom, il y a un bouton 'Me modifier', vous pouvez cliquer dessus pour changer des informations vous concernant ou votre mot de passe (quoi que vous changiez, je vous conseille de retaper votre mot de passe). Puis pensez à valider vos changements.</h4>
-		<div class="container">
+		<h4>Dans l'onglet Utilisateurs, vous voyez la liste des utilisateurs avec leur informations. Sur la ligne devant votre nom, il y a un bouton 'Me modifier', vous pouvez cliquer dessus pour changer des informations vous concernant ou votre mot de passe (quoi que vous changiez, je vous conseille de retaper votre mot de passe). Puis pensez à valider vos changements.</h4>
+			<div class="container">
 				<center><%= image_tag("capture-modif-utilisateur.png", :alt => "résultat du choix des jours pour le calcul des entrées", :class => "capture") %></center>
-		</div>
-		<div class="container">
 				<center><%= image_tag("capture-modif-manager-valid.png", :alt => "résultat du choix des jours pour le calcul des entrées", :class => "capture") %></center>
-		</div>
+			</div>
 	</div>
 	<center><h2 id="calcul"><strong>Comment calculer le nombre d'entrées ?</strong></h2></center>
 	<div class="description">
-	<h4>Dans l'onglet Entrées, en début de page, il y a un champ à remplir pour choisir le nombres de jours avant aujourd'hui pour calculer le nombre d'entrées de ce choix à aujourd'hui. On choisit le nombre de jours en cliquant sur la flèche du haut et en cliquant sur le bouton 'jours' devant le champ. On voit ensuite en-dessous le choix qui sera pris en compte pour les calculs.</h4>
-	<div class="container">
-				<center><%= image_tag("capture-choix-entrées.png", :alt => "choix jours pour le calcul les entrées", :class => "capture") %></center>
-		</div>
-		<div class="container">
-				<center><%= image_tag("capture-valider-entrees.png", :alt => "valider choix des jours pour le calcul des entrées", :class => "capture") %></center>
-		</div>
-		<div class="container">
-				<center><%= image_tag("capture-résultat-entrees.png", :alt => "résultat du choix des jours pour le calcul des entrées", :class => "capture") %></center>
-		</div>
+		<h4>Dans l'onglet Entrées, en début de page, il y a un champ à remplir avec la date de début puis un champ avec la date de fin pour définir la période choisie pour le calcul de nombre d'entrées. On choisit les dates <strong>en respectant le format écrit "Année-Mois-Date"</strong> (exemple = 2017-01-28 et 2017-02-04), puis on clique sur le bouton 'Chercher".</h4>
+		<h4>On voit ensuite en-dessous le choix qui sera pris en compte pour les calculs. Par défaut, il y aura un calcul d'une semaine jusqu'à aujourd'hui.</h4>
+		<h4>On aura ensuite le calcul des séances,des films pour cette période, dont celle(s) annulée(s). Puis par classifications (Jeune Public, Patrimoine et Répertoire, Recherche et Découvertes, Toutes les classifications). Par distibition ADRC. Puis les totaux par lieux, puis enfin par film et par lieux. Et la liste des séances prises en compte.</h4>
+			<div class="container">
+				<center><%= image_tag("entrees.png", :alt => "choix jours pour le calcul les entrées", :class => "capture") %></center>
+				<center><%= image_tag("resultat-classifications.png", :alt => "résultats classifications", :class => "capture") %></center>
+				<center><%= image_tag("resultat-distrib.png", :alt => "résultats classifications", :class => "capture") %></center>
+				<center><%= image_tag("resultat-lieux.png", :alt => "résultat par lieux", :class => "capture") %></center>
+				<center><%= image_tag("resultat-film.png", :alt => "résultat par film", :class => "capture") %></center>
+			</div>
 	</div>
+	<center><h2 id="ajout-film"><strong>Comment ajouter un film ?</strong></h2></center>
+	<div class="description">
+		<h4>Pour ajouter un film sur l'application, il vaut mieux passer par le site Wordpress. Pourquoi ? Par ce que l'on risque d'avoir des problèmes avec la base de données si on mélange des IDs des Films qui viennent du site et d'autres de l'application. Donc, le mieux sera de procéder comme suit :</h4>
+		<h4>Éditer le film sur le site Écran Village en Wordpress, même si il ne doit pas être visible par les visiteurs. Dans le cas où il ne doit apparaître que sur l'application, il faudra bien songer à <strong>cocher la catégorie 'Export'</strong> et l'<strong>exclure du XML sitemap "Exclude from XML Sitemap"</strong> pour pas que google le recherche dans les métas du site, surtout si on le supprime par la suite !</h4>
+			<div class="container">
+				<center><%= image_tag("cat-export-wp-ev.png", :alt => "cocher catégorie export", :class => "capture") %></center>
+				<center><%= image_tag("excude-sitemap-wp-ev.png", :alt => "exclure du sitemap", :class => "capture") %></center>
+			</div>
+		<h4>Puis il ne restera plus qu'à importer le film avec le bouton d'import de l'appication dans la page Films.</h4>	<div class="container">
+				<center><%= image_tag("ajout-films.png", :alt => "cocher catégorie export", :class => "capture") %></center>
+			</div>
+	</div>
+</div>
 	<% end %>
 	<%= link_to '', aide_path, :class => "back-to-top", :title => 'Retour haut de page' %>

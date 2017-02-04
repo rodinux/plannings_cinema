@@ -1,24 +1,11 @@
 <div class="container">
   <nav class="nav navbar-light bg-inverse navbar-nav navbar-left connexion">
-        <button class="navbar-toggler connexion" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar" >
-      &#9776;
-        </button>
     <div class="nav navbar-nav navbar-right connexion">
       <% if current_user %>
       <br>
         <h4>Bienvenue ! <span class="label label-info"><%= current_user.prenom%></span></h4>
           <%= link_to "Se déconnecter", :log_out, method: :post, :class => 'btn btn-lg btn-success' %>
-      <% else %>
-        <div class="collapse" id="exCollapsingNavbar">
-          <div class="bg-inverse p-a-1">
-              <div class="container connexion">
-              <h3><span class="glyphicon glyphicon-warning-sign"></span> Attention, réservé aux bénévoles d'Ecran Village :</h3>
-              <h4>Si vous ne l'avez pas encore fait, enregistrez-vous : <span><%= link_to "S'enregistrer", new_user_path, :class => "label label-warning" %></span></h4>
-              <h4>Puis connectez-vous ! <span><%= link_to "Se connecter", log_in_path, :class => "btn btn-lg btn-success"%></span></h4>
-              </div>
-          </div>
-        </div>
-      <% end %>
+       <% end %>
     </div>
   </nav>
   <div class="logo">

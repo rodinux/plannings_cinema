@@ -41,19 +41,36 @@
             <% if seance.horaire.midnight == date.midnight %>
               <% if seance.annulee != "Annulée" %>
                 <li>
+                <% if seance.film.affiche.present? %>
                   <%= link_to "http://www.ecranvillage.net/?p=#{seance.film_id}", :class => seance.village.commune.downcase, :title => "article sur le site Ecran Village", :target => "_blank", :rel => "noopener noreferrer" do %>
-                     <p><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
-                     <p><span class='glyphicon glyphicon-film'></span> <%= seance.film.titrefilm %></p>
-                     <% if seance.version.present? %>
-                     <p><span class='glyphicon glyphicon-info-sign'></span> <%= seance.version %></p>
-                     <% end %>
-                     <% if seance.extras.present? %>
-                     <p><span class='glyphicon glyphicon-info-sign'></span> <%= seance.extras %></p>
-                     <% end %>
-                     <p><span class='glyphicon glyphicon-home'></span> <strong><%= seance.village.commune.upcase %></strong></p>
-                     <% if seance.village.salle %>
-                     <p><em><%= seance.village.salle %></em></p>
-                     <% end %>
+                       <p><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
+                       <p><span class='glyphicon glyphicon-film'></span> <%= seance.film.titrefilm %></p>
+                       <% if seance.version.present? %>
+                       <p><span class='glyphicon glyphicon-info-sign'></span> <%= seance.version %></p>
+                       <% end %>
+                       <% if seance.extras.present? %>
+                       <p><span class='glyphicon glyphicon-info-sign'></span> <%= seance.extras %></p>
+                       <% end %>
+                       <p><span class='glyphicon glyphicon-home'></span> <strong><%= seance.village.commune.upcase %></strong></p>
+                       <% if seance.village.salle %>
+                       <p><em><%= seance.village.salle %></em></p>
+                       <% end %>
+                    <% end %>
+                  <% else %>
+                    <div class='<%= seance.village.commune.downcase %>'>
+                    <p><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
+                    <p><span class='glyphicon glyphicon-film'></span> <%= seance.film.titrefilm %></p>
+                    <% if seance.version.present? %>
+                    <p><span class='glyphicon glyphicon-info-sign'></span> <%= seance.version %></p>
+                    <% end %>
+                    <% if seance.extras.present? %>
+                    <p><span class='glyphicon glyphicon-info-sign'></span> <%= seance.extras %></p>
+                    <% end %>
+                    <p><span class='glyphicon glyphicon-home'></span> <strong><%= seance.village.commune.upcase %></strong></p>
+                    <% if seance.village.salle %>
+                    <p><em><%= seance.village.salle %></em></p>
+                    <% end %>
+                    </div>
                   <% end %>
               <% else %>
                    <p><span class='glyphicon glyphicon-warning-sign'></span> <%= seance.annulee %></p>

@@ -42,7 +42,11 @@
               <% end %>
             </tr>
             <tr>
-              <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
+              <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description %>
+              <% if seance.film.affiche.present? %> 
+              <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %>
+              <% end %>
+              </td>
               <% if can? :update, Seance %>
               <td colspan="2" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
               <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %>

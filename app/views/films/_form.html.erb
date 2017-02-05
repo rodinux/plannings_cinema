@@ -24,8 +24,9 @@
     <%= f.label :description %><br>
     <%= f.text_area :description, :maxlength => 900 %>
   </div>
+  pour voir le film dans la page Films, choisir une date entre <%= l 3.week.ago.midnight, format: :middle_long %> et <%= l Date.today, format: :middle_long  %>, les films mis à jour il y a 3 semaines à aujourd'hui appaîtront.<br>
   <div class="field">
-    <%= f.label :updated_at, 'Mis à jour le' %> (pour voir le film dans la page films, à partir de <%= l 3.week.ago, format: :very_long %><br>
+    <%= f.label :updated_at, 'Mis à jour le' %>
     <%= f.datetime_select :updated_at %>
   </div>
    <div class="field">

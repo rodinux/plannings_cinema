@@ -7,15 +7,15 @@ class Film < ApplicationRecord
 	    validates :titrefilm,:uniqueness => true, :case_sensitive => false
 
 	    def self.films_3_semaines
-	        films_3_semaines = Film.where({ updated_at: (3.week.ago..(Date.today + 1))}).order(created_at: :asc)
+	        films_3_semaines = Film.where({ updated_at: (3.week.ago.midnight..(Date.today + 1))}).order(created_at: :asc)
 	    end
 
 	    def self.films_2_mois_avant
-	        films_2_mois_avant = Film.where({ updated_at: (2.month.ago..(Date.today + 1))}).order(created_at: :desc)
+	        films_2_mois_avant = Film.where({ updated_at: (2.month.ago.midnight..(Date.today + 1))}).order(created_at: :desc)
 	    end
 
 	    def self.films_mois
-	    	films_mois = Film.where({updated_at: 1.month.ago..(Date.today + 1)}).order(created_at: :asc)
+	    	films_mois = Film.where({updated_at: 1.month.ago.midnight..(Date.today + 1)}).order(created_at: :asc)
 	    end
 
 	    def self.films_entrees

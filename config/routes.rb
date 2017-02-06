@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :films
   resources :classifications
   resources :users
-  resources :user_sessions
+  resources :user_sessions, only: [:new, :create, :destroy]
   get 'aide' => 'calendar#aide'
   get 'calendrier' => 'calendar#calendrier'
   get 'a_completer' => 'seances#a_completer'

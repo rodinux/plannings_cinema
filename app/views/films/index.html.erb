@@ -42,10 +42,12 @@
         <div class="row">
             <div class=".col-xs-6 .col-md-4">
                 <img style="float:left" src="<%= film.affiche %>" />
-            <div class="content-heading text-center"><h3>A propos :</h3></div>
-                <div class="text-center italic">
-                    <p><%=simple_format h film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{film.id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></p>
-                </div>
+            <div class="apropos">
+                <div class="content-heading text-center"><h3>A propos :</h3></div>
+                    <div class="text-center italic">
+                        <p><%=simple_format h film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{film.id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></p>
+                    </div>
+                </div>    
             </div>
             <div style="clear:both"></div>
         </div>

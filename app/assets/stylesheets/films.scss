@@ -48,6 +48,10 @@
 }
 .film img {
   width: 50%;
+  max-width: 300px;
+}
+.apropos {
+   vertical-align: middle;
 }
 .cine {
   background-image: url(banniere.jpg);
@@ -71,5 +75,6 @@
    }
    .film img {
       width: 30%;
+      min-width: 260px;
   }
 }

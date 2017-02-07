@@ -5,7 +5,7 @@ class FilmsController < ApplicationController
     I18n.locale = :fr
   end
 
-  skip_before_action :require_login, only: [:index, :ecranvillage, :show ]
+  skip_before_action :require_login, only: [:films_a_venir, :ecranvillage, :show ]
 
   before_action :set_film, only: [:show, :edit, :update, :destroy]
 
@@ -22,7 +22,7 @@ class FilmsController < ApplicationController
     end
   end
 
-  def films_edition
+  def index
     @films = Film.all
     @seances = Seance.all
     @search = Film.search(params[:q])
@@ -31,7 +31,7 @@ class FilmsController < ApplicationController
 
   # GET /films
   # GET /films.json
-  def index
+  def films_a_venir
     @seances = Seance.all
     @films = Film.all
   end
@@ -57,7 +57,7 @@ class FilmsController < ApplicationController
 
     respond_to do |format|
       if @film.save
-        format.html { redirect_to @film, notice: 'Film was successfully created.' }
+        format.html { redirect_to @film, notice: 'Le Film a bien été créé.' }
         format.json { render :show, status: :created, location: @film }
       else
         format.html { render :new }
@@ -71,7 +71,7 @@ class FilmsController < ApplicationController
   def update
     respond_to do |format|
       if @film.update(film_params)
-        format.html { redirect_to @film, notice: 'Film was successfully updated.' }
+        format.html { redirect_to @film, notice: 'Le Film a bien été mis à jour.' }
         format.json { render :show, status: :ok, location: @film }
       else
         format.html { render :edit }
@@ -85,7 +85,7 @@ class FilmsController < ApplicationController
   def destroy
     @film.destroy
     respond_to do |format|
-      format.html { redirect_to films_url, notice: 'Film was successfully destroyed.' }
+      format.html { redirect_to films_url, notice: 'Le Film a bien été supprimé.' }
       format.json { head :no_content }
     end
   end
@@ -98,6 +98,6 @@ class FilmsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
-      params.require(:film).permit(:titrefilm, :description, :distribution, :affiche, classification_ids:[])
+      params.require(:film).permit(:titrefilm, :description, :distribution, :affiche, :updated_at, classification_ids:[])
     end
 end

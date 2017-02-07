@@ -110,7 +110,7 @@ class SeancesController < ApplicationController
     seance.save
     Film.find(seance.film_id)
     Village.find(seance.village_id)
-    redirect_to films_url, notice: 'la Séance a bien été créée.'
+    redirect_to films_a_venir_url, notice: 'la Séance a bien été créée.'
   end
 
 

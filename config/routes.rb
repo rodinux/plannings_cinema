@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   post 'log_out' => 'user_sessions#destroy', :as => :log_out
 
   resource :calendar, only: [:calendrier], controller: :calendar
-
   resources :seances
   resources :villages
   resources :films
@@ -22,6 +21,6 @@ Rails.application.routes.draw do
   get 'edition_calendrier' => 'seances#edition_calendrier'
   get 'entrees' => 'seances#entrees'
   get 'ecranvillage' => 'films#ecranvillage'
-  get 'films_edition' => 'films#films_edition'
+  get 'films_a_venir' => 'films#films_a_venir'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

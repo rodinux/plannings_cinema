@@ -17,7 +17,7 @@
 <h3><strong>Calcul des séances en tenant compte de ces dates :</strong></h3>
 <h4>Séances compris entre le <strong><%= l @search.date_from.to_date, format: :middle_long %></strong> et le <strong><%= l @search.date_to.to_date, format: :middle_long %></strong></h4>
 </div>
-
+<%= date_range = @search.date_from.to_date..@search.date_to.to_date %>
 <% seances_semaine_annulee = @seances.where(annulee: "Annulée") %>
 <% seances_semaine = @seances.where(annulee: [nil, ""]) %>
 <% group_films_seances_selection = @seances.where(annulee: [nil, ""]).joins(:film).group(:film_id).count %>
@@ -223,8 +223,8 @@
 <div class="container">
       <%  films_order_total = group_films_seances.joins(:seances).group(:id).merge(@seances.order("sum(total_billets) DESC")) %>
       <% films_order_total.each do |film| %>
-      <% if film.seances.present? %>
-       <% film_seances_semaine = film.seances.where(annulee: [nil, ""]) %>
+      <% if film.seances.where(horaire: date_range).present? %>
+       <% film_seances_semaine = film.seances.where(horaire: date_range, annulee: [nil, ""]) %>
       <% film_vernoux= film_seances_semaine.where(village_id: 1) %>
       <% film_lamastre = film_seances_semaine.where(village_id: 6) %>
       <% film_chalencon = film_seances_semaine.where(village_id: 3) %>

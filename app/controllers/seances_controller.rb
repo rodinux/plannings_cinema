@@ -132,7 +132,7 @@ class SeancesController < ApplicationController
   def destroy
     @seance.destroy
     respond_to do |format|
-      format.html { redirect_to films_url, notice: 'La Séance a bien été suprimée.' }
+      format.html { redirect_to films_a_venir_url, notice: 'La Séance a bien été suprimée.' }
       format.json { head :no_content }
     end
   end

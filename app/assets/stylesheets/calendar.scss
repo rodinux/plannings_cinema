@@ -15,18 +15,6 @@
 li {
     list-style-position: inherit !important;
 }
-.itinerant {
-  color: #9b8d26;
-}
-.vernoux {
-  color: #3232dd;
-}
-.lamastre {
-  color: #c1272d;
-}
-.chalencon {
-  color: #990099;
-}
 .calendrier li {
     list-style-position: inherit !important;
   }.calendrier a {
@@ -56,12 +44,12 @@ li {
   &:hover {
     color: #449d44;
     text-decoration: none;
-  }a.itinerant {
+  }
+  }a.itinerance {
   color: #9b8d26;
 
-  &:hover {
+   &:hover {
     color: #449d44;
     text-decoration: none;
-  }
- }
+    }
 }

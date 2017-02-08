@@ -5,7 +5,7 @@ class FilmsController < ApplicationController
     I18n.locale = :fr
   end
 
-  skip_before_action :require_login, only: [:films_a_venir, :ecranvillage, :show ]
+  skip_before_action :require_login, only: [:index, :films_a_venir, :ecranvillage, :show ]
 
   before_action :set_film, only: [:show, :edit, :update, :destroy]
 
@@ -22,6 +22,8 @@ class FilmsController < ApplicationController
     end
   end
 
+  # GET /films
+  # GET /films.json
   def index
     @films = Film.all
     @seances = Seance.all

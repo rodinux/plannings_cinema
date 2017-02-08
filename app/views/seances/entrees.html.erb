@@ -17,7 +17,7 @@
 <h3><strong>Calcul des séances en tenant compte de ces dates :</strong></h3>
 <h4>Séances compris entre le <strong><%= l @search.date_from.to_date, format: :middle_long %></strong> et le <strong><%= l @search.date_to.to_date, format: :middle_long %></strong></h4>
 </div>
-<%= date_range = @search.date_from.to_date..@search.date_to.to_date %>
+<% date_range = @search.date_from.to_date..@search.date_to.to_date %>
 <% seances_semaine_annulee = @seances.where(annulee: "Annulée") %>
 <% seances_semaine = @seances.where(annulee: [nil, ""]) %>
 <% group_films_seances_selection = @seances.where(annulee: [nil, ""]).joins(:film).group(:film_id).count %>
@@ -55,7 +55,7 @@
     <% seances_classees = group_films_seances.joins(:classifications).merge(Classification.all) %>
     <% films_seances_classees = seances_classees.group(:id) %>
     <% seances_films_classees = @seances.where(film_id: films_seances_classees).where(annulee: [nil, ""]) %>
-      <h4>En tout pour <strong>Toutes les classifications</strong> : <strong><%= seances_films_classees.map.count %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_classees.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_classees.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_classees.sum("billets_scolaires") %></strong> / Total<strong> entrées :<%= seances_films_classees.sum("total_billets") %></strong></h4>
+      <h4>En tout pour <strong>Toutes les classifications</strong> : <strong><%= seances_films_classees.map.count %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_classees.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_classees.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_classees.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_classees.sum("total_billets") %></strong></h4>
       <h4>Pour ce(s) <strong><%= films_seances_classees.compact.count %></strong> Film(s) :</h4>
       <% films_seances_classees.each do |film| %>
      "<%= film.titrefilm %>";
@@ -65,7 +65,7 @@
     <h3><strong>Pour le(s) films classé(s)</strong></h3>
       <% films_adrc_classee = films_seances_classees.where(distribution: "ADRC").compact %>
       <% seances_adrc_classee = @seances.where(film_id: films_adrc_classee).where(annulee: [nil, ""]) %>
-    <h4><strong><%= films_adrc_classee.count %></strong> Film(s) distribué(s) par ARDC ayant eu <strong><%= seances_adrc_classee.count %></strong> séance(s), avec pour <strong>Entrées</strong> : <strong><%= seances_adrc_classee.sum("billets_adultes") %></strong> Adultes, <strong><%= seances_adrc_classee.sum("billets_enfants") %></strong> Enfants, <strong><%= seances_adrc_classee.sum("billets_scolaires") %></strong> Scolaires, <strong>Total</strong> entrées: <strong><%= seances_adrc_classee.sum("total_billets") %></strong>.</h4>
+    <h4><strong><%= films_adrc_classee.count %></strong> Film(s) distribué(s) par ARDC ayant eu <strong><%= seances_adrc_classee.count %></strong> séance(s), avec pour <strong>Entrées:</strong>  Adultes: <strong><%= seances_adrc_classee.sum("billets_adultes") %></strong>, Enfants: <strong><%= seances_adrc_classee.sum("billets_enfants") %></strong>, Scolaires: <strong><%= seances_adrc_classee.sum("billets_scolaires") %></strong>, Total: <strong><%= seances_adrc_classee.sum("total_billets") %></strong>.</h4>
        <% films_adrc_classee.each do |film| %>
        "<%= film.titrefilm %>";
        <% end %>
@@ -75,7 +75,7 @@
     <% films_seances_adrc = group_films_seances.where(distribution: "ADRC") %>
     <% films_adrc = films_seances_adrc.group(:id).compact %>
     <% seances_adrc = @seances.where(film_id: films_adrc).where(annulee: [nil, ""]) %>
-    <h4><strong><%= films_adrc.count %></strong> Film(s) distribué(s) par ARDC ayant eu <strong><%= seances_adrc.count %></strong> séance(s), avec pour <strong>Entrées</strong>: <strong><%= seances_adrc.sum("billets_adultes") %></strong> Adultes, <strong><%= seances_adrc.sum("billets_enfants") %></strong> Enfants, <strong><%= seances_adrc.sum("billets_scolaires") %></strong> Scolaires, <strong>Total</strong> entrées: <strong><%= seances_adrc.sum("total_billets") %></strong></h4>
+    <h4><strong><%= films_adrc.count %></strong> Film(s) distribué(s) par ARDC ayant eu <strong><%= seances_adrc.count %></strong> séance(s), avec pour <strong>Entrées:</strong> Adultes: <strong><%= seances_adrc.sum("billets_adultes") %></strong>, Enfants: <strong><%= seances_adrc.sum("billets_enfants") %></strong>, Scolaires: <strong><%= seances_adrc.sum("billets_scolaires") %></strong>, Total: <strong><%= seances_adrc.sum("total_billets") %></strong></h4>
       <% films_adrc.each do |film| %>
    <% if film.seances.present? %>
       "<%= film.titrefilm %>";
@@ -96,15 +96,15 @@
       <tbody>
       <%  films_seances_classees_order_total = films_seances_classees.joins(:seances).merge(@seances.order("sum(total_billets) DESC")) %>
       <% films_seances_classees_order_total.each do |film| %>
-          <% if film.seances.present? %>
+          <% if film.seances.where(horaire: date_range).present? %>
           <% if film.classifications.present? %>
           <tr>
             <td><%= film.titrefilm %></td>
             <td><%= film.classifications.map(&:nom_classification)%></td>
             <td><%= film.distribution %></td>
-            <td><%= film.seances.where(annulee: [nil, ""]).count %></td>
-            <td>Adultes: <%= film.seances.sum("billets_adultes") %> / Enfants: <%= film.seances.sum("billets_enfants") %> / Scolaires: <%= film.seances.sum("billets_scolaires") %><br>
-            Total: <%=  film.seances.sum("total_billets") %>
+            <td><%= film.seances.where(horaire: date_range, annulee: [nil, ""]).count %></td>
+            <td>Adultes: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_adultes") %> / Enfants: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_enfants") %> / Scolaires: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_scolaires") %><br>
+            Total: <%=  film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("total_billets") %>
             </td>
           </tr>
           <% end %>
@@ -130,14 +130,14 @@
 
       <% films_seances_adrc_order = films_seances_adrc.group(:id).joins(:seances).merge(@seances.order("sum(total_billets) DESC"))%>
       <% films_seances_adrc_order.each do |film| %>
-          <% if film.seances.present? %>
+          <% if film.seances.where(horaire: date_range).present? %>
           <tr>
             <td><%= film.titrefilm %></td>
             <td><%= film.classifications.map(&:nom_classification)%></td>
             <td><%= film.distribution %></td>
-            <td><%= film.seances.where(annulee: [nil, ""]).count %></td>
-            <td>Adultes: <%= film.seances.sum("billets_adultes") %> / Enfants: <%= film.seances.sum("billets_enfants") %> / Scolaires: <%= film.seances.sum("billets_scolaires") %><br>
-            Total: <%=  film.seances.sum("total_billets") %>
+            <td><%= film.seances.where(horaire: date_range, annulee: [nil, ""]).count %></td>
+            <td>Adultes: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_adultes") %> / Enfants: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_enfants") %> / Scolaires: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_scolaires") %><br>
+            Total: <%=  film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("total_billets") %>
             </td>
           </tr>
          <% end %>

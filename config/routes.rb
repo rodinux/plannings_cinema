@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'log_in' => 'user_sessions#new', :as => :log_in
   post 'log_out' => 'user_sessions#destroy', :as => :log_out
 
-  resource :calendar, only: [:calendrier], controller: :calendar
+  resource :calendar, only: [:calendrier, :aide], controller: :calendar
   resources :seances
   resources :villages
   resources :films

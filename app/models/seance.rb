@@ -21,11 +21,6 @@ class Seance < ApplicationRecord
         ]
     end
 
-    def entrees_for_form
-    collection = @entrees.where(seance_id: id)
-    collection.any? ? collection : @entrees.build
-    end
-
     def self.seances_passees_3_semaines
          seances_passees_3_semaines = Seance.where({horaire: (3.week.ago..(Date.today + 1))}).order(horaire: :asc)
 	end
@@ -44,10 +39,6 @@ class Seance < ApplicationRecord
 
     def self.seances_1_mois_avant_apres
         seances_1_mois_avant_apres = Seance.where({horaire: (1.month.ago..(Date.today + 30))}).order(horaire: :asc)
-    end
-
-    def date
-        @date = params[:date] ? Date.parse(params[:date]) : Date.today
     end
 
     def self.seances_calendrier

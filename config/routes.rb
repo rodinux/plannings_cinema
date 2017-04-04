@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'entrees/calcul_entrees'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount RailsAdminImport::Engine => '/rails_admin_import', :as => 'rails_admin_import'
   root to: "calendar#calendrier", :lieu => "tous les lieux"

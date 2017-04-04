@@ -18,65 +18,44 @@
 <h4>Séances compris entre le <strong><%= l @search.date_from.to_date, format: :middle_long %></strong> et le <strong><%= l @search.date_to.to_date, format: :middle_long %></strong></h4>
 </div>
 <% date_range = @search.date_from.to_date..@search.date_to.to_date %>
-<% seances_semaine_annulee = @seances.where(annulee: "Annulée") %>
-<% seances_semaine = @seances.where(annulee: [nil, ""]) %>
-<% group_films_seances_selection = @seances.where(annulee: [nil, ""]).joins(:film).group(:film_id).count %>
 
 <div class="container">
   <center><h2><strong>Comptes</strong></h2></center>
-  <h3>Il y a eu <strong><%= group_films_seances_selection.map.count %></strong> film(s) pour cette période avec <strong><%= seances_semaine.count %></strong> séance(s) et <strong><%= seances_semaine_annulee.count %></strong> séance(s) annulée(s).</h3>
+  <h3>Il y a eu <strong><%= @stats.films_per_daterange %></strong> film(s) pour cette période avec <strong><%= @stats.seances_range.length %></strong> séance(s) et <strong><%= @stats.seances_range_annulee.length %></strong> séance(s) annulée(s).</h3>
 
      <center><h1><strong>Les entrées</strong></h1></center>
 
   <center><h2><strong>Par Classifications</strong></h2></center>
 
-  <% group_films_seances = Film.joins(:seances).merge(@seances.where(annulee: [nil, ""])) %>
+    <% seances_films_jeune_public = @stats.seances_per_film_classification("Jeune Public") %>
+      <h4>Pour <strong>Jeune Public</strong> : <strong><%= seances_films_jeune_public.length %></strong> séance(s) pour cette période. <strong>Entrées:</strong>  Adultes: <strong><%= seances_films_jeune_public.sum("billets_adultes") %></strong>/ Enfants: <strong><%= seances_films_jeune_public.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_jeune_public.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_jeune_public.sum("total_billets") %></strong></h4>
 
-    <% seances_jeune_public = group_films_seances.joins(:classifications).merge(Classification.where(nom_classification: "Jeune Public")) %>
-    <% films_seances_jeune_public = seances_jeune_public.group(:id) %>
-    <% seances_films_jeune_public = @seances.where(film_id: films_seances_jeune_public).where(annulee: [nil, ""]) %>
-      <h4>Pour <strong>Jeune Public</strong> : <strong><%= seances_films_jeune_public.map.count %></strong> séance(s) pour cette période. <strong>Entrées:</strong>  Adultes: <strong><%= seances_films_jeune_public.sum("billets_adultes") %></strong>/ Enfants: <strong><%= seances_films_jeune_public.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_jeune_public.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_jeune_public.sum("total_billets") %></strong></h4>
+    <% seances_films_patrimoine_repertoire = @stats.seances_per_film_classification("Patrimoine et Répertoire") %>
+      <h4>Pour <strong>Patrimoine et Répertoire</strong> : <strong><%= seances_films_patrimoine_repertoire.length %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_patrimoine_repertoire.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_patrimoine_repertoire.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_patrimoine_repertoire.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_patrimoine_repertoire.sum("total_billets") %></strong></h4>
 
-    <% seances_patrimoine_repertoire = group_films_seances.joins(:classifications).merge(Classification.where(nom_classification: "Patrimoine et Répertoire")) %>
-    <% films_seances_patrimoine_repertoire = seances_patrimoine_repertoire.group(:id) %>
-    <% seances_films_patrimoine_repertoire = @seances.where(film_id: films_seances_patrimoine_repertoire).where(annulee: [nil, ""]) %>
-      <h4>Pour <strong>Patrimoine et Répertoire</strong> : <strong><%= seances_films_patrimoine_repertoire.map.count %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_patrimoine_repertoire.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_patrimoine_repertoire.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_patrimoine_repertoire.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_patrimoine_repertoire.sum("total_billets") %></strong></h4>
+    <% seances_films_recherche_decouverte = @stats.seances_per_film_classification("Recherche et Découvertes") %>
+      <h4>Pour <strong>Recherche et Découvertes</strong> : <strong><%= seances_films_recherche_decouverte.length %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_recherche_decouverte.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_recherche_decouverte.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_recherche_decouverte.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_recherche_decouverte.sum("total_billets") %></strong></h4>
 
-    <% seances_recherche_decouverte = group_films_seances.joins(:classifications).merge(Classification.where(nom_classification: "Recherche et Découvertes")) %>
-    <% films_seances_recherche_decouverte = seances_recherche_decouverte.group(:id) %>
-    <% seances_films_recherche_decouverte = @seances.where(film_id: films_seances_recherche_decouverte).where(annulee: [nil, ""]) %>
-      <h4>Pour <strong>Recherche et Découvertes</strong> : <strong><%= seances_films_recherche_decouverte.map.count %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_recherche_decouverte.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_recherche_decouverte.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_recherche_decouverte.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_recherche_decouverte.sum("total_billets") %></strong></h4>
+    <% seances_films_art_essai = @stats.seances_per_film_classification("Art et Essai") %>
+      <h4>Pour <strong>Art et Essai</strong> : <strong><%= seances_films_art_essai.length %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_art_essai.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_art_essai.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_art_essai.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_art_essai.sum("total_billets") %></strong></h4>
 
-      <% seances_art_essai = group_films_seances.joins(:classifications).merge(Classification.where(nom_classification: "Art et Essai")) %>
-      <% films_seances_art_essai = seances_art_essai.group(:id) %>
-    <% seances_films_art_essai = @seances.where(film_id: films_seances_art_essai).where(annulee: [nil, ""]) %>
-      <h4>Pour <strong>Art et Essai</strong> : <strong><%= seances_films_art_essai.map.count %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_art_essai.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_art_essai.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_art_essai.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_art_essai.sum("total_billets") %></strong></h4>
-
-    <% seances_classees = group_films_seances.joins(:classifications).merge(Classification.all) %>
-    <% films_seances_classees = seances_classees.group(:id) %>
-    <% seances_films_classees = @seances.where(film_id: films_seances_classees).where(annulee: [nil, ""]) %>
-      <h4>En tout pour <strong>Toutes les classifications</strong> : <strong><%= seances_films_classees.map.count %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_classees.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_classees.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_classees.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_classees.sum("total_billets") %></strong></h4>
-      <h4>Pour ce(s) <strong><%= films_seances_classees.compact.count %></strong> Film(s) :</h4>
-      <% films_seances_classees.each do |film| %>
+    <% seances_films_classees = @stats.seances_per_film_classification_all %>
+      <h4>En tout pour <strong>Toutes les classifications</strong> : <strong><%= seances_films_classees.length %></strong> séance(s) pour cette période. <strong>Entrées:</strong> Adultes: <strong><%= seances_films_classees.sum("billets_adultes") %></strong> / Enfants: <strong><%= seances_films_classees.sum("billets_enfants") %></strong> / Scolaires: <strong><%= seances_films_classees.sum("billets_scolaires") %></strong> / Total: <strong><%= seances_films_classees.sum("total_billets") %></strong></h4>
+      <h4>Pour ce(s) <strong><%= @stats.films_seances_classees.length %></strong> Film(s) :</h4>
+      <% @stats.films_seances_classees.each do |film| %>
      "<%= film.titrefilm %>";
       <% end %>
 
     <center><h2><strong>Par Distribution ADRC</strong></h2></center>
-    <h3><strong>Pour le(s) films classé(s)</strong></h3>
-      <% films_adrc_classee = films_seances_classees.where(distribution: "ADRC").compact %>
-      <% seances_adrc_classee = @seances.where(film_id: films_adrc_classee).where(annulee: [nil, ""]) %>
-    <h4><strong><%= films_adrc_classee.count %></strong> Film(s) distribué(s) par ARDC ayant eu <strong><%= seances_adrc_classee.count %></strong> séance(s), avec pour <strong>Entrées:</strong>  Adultes: <strong><%= seances_adrc_classee.sum("billets_adultes") %></strong>, Enfants: <strong><%= seances_adrc_classee.sum("billets_enfants") %></strong>, Scolaires: <strong><%= seances_adrc_classee.sum("billets_scolaires") %></strong>, Total: <strong><%= seances_adrc_classee.sum("total_billets") %></strong>.</h4>
-       <% films_adrc_classee.each do |film| %>
+    <h3><strong><%= t('classified', count: @stats.films_adrc_classee.length) %></strong></h3>
+    <h4><strong><%= @stats.films_adrc_classee.length %></strong> Film(s) distribué(s) par ARDC ayant eu <strong><%= @stats.seances_adrc_classee.length %></strong> séance(s), avec pour <strong>Entrées:</strong>  Adultes: <strong><%= @stats.seances_adrc_classee.sum("billets_adultes") %></strong>, Enfants: <strong><%= @stats.seances_adrc_classee.sum("billets_enfants") %></strong>, Scolaires: <strong><%= @stats.seances_adrc_classee.sum("billets_scolaires") %></strong>, Total: <strong><%= @stats.seances_adrc_classee.sum("total_billets") %></strong>.</h4>
+       <% @stats.films_adrc_classee.each do |film| %>
        "<%= film.titrefilm %>";
        <% end %>
 
     <h3><strong>Pour tous les films de cette période</strong></h3>
-    <% @films = Film.all %>
-    <% films_seances_adrc = group_films_seances.where(distribution: "ADRC") %>
-    <% films_adrc = films_seances_adrc.group(:id).compact %>
-    <% seances_adrc = @seances.where(film_id: films_adrc).where(annulee: [nil, ""]) %>
-    <h4><strong><%= films_adrc.count %></strong> Film(s) distribué(s) par ARDC ayant eu <strong><%= seances_adrc.count %></strong> séance(s), avec pour <strong>Entrées:</strong> Adultes: <strong><%= seances_adrc.sum("billets_adultes") %></strong>, Enfants: <strong><%= seances_adrc.sum("billets_enfants") %></strong>, Scolaires: <strong><%= seances_adrc.sum("billets_scolaires") %></strong>, Total: <strong><%= seances_adrc.sum("total_billets") %></strong></h4>
-      <% films_adrc.each do |film| %>
+    <h4><strong><%= @stats.films_adrc.length %></strong> Film(s) distribué(s) par ARDC ayant eu <strong><%= @stats.seances_adrc.length %></strong> séance(s), avec pour <strong>Entrées:</strong> Adultes: <strong><%= @stats.seances_adrc.sum("billets_adultes") %></strong>, Enfants: <strong><%= @stats.seances_adrc.sum("billets_enfants") %></strong>, Scolaires: <strong><%= @stats.seances_adrc.sum("billets_scolaires") %></strong>, Total: <strong><%= @stats.seances_adrc.sum("total_billets") %></strong></h4>
+      <% @stats.films_adrc.each do |film| %>
    <% if film.seances.present? %>
       "<%= film.titrefilm %>";
        <% end %>
@@ -94,27 +73,22 @@
         </tr>
       </thead>
       <tbody>
-      <%  films_seances_classees_order_total = films_seances_classees.joins(:seances).merge(@seances.order("sum(total_billets) DESC")) %>
-      <% films_seances_classees_order_total.each do |film| %>
-          <% if film.seances.where(horaire: date_range).present? %>
-          <% if film.classifications.present? %>
-          <tr>
+      <% @stats.films_seances_classees_order_total.each do |film| %>
+        <tr>
             <td><%= film.titrefilm %></td>
             <td><%= film.classifications.map(&:nom_classification)%></td>
             <td><%= film.distribution %></td>
-            <td><%= film.seances.where(horaire: date_range, annulee: [nil, ""]).count %></td>
-            <td>Adultes: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_adultes") %> / Enfants: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_enfants") %> / Scolaires: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_scolaires") %><br>
-            Total: <%=  film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("total_billets") %>
+            <td><%= film.seances.length %></td>
+            <td>Adultes: <%= film.seances.sum("billets_adultes") %> / Enfants: <%= film.seances.sum("billets_enfants") %> / Scolaires: <%= film.seances.sum("billets_scolaires") %><br>
+            Total: <%=  film.seances.sum("total_billets") %>
             </td>
           </tr>
-          <% end %>
          <% end %>
-        <% end %>
       </tbody>
     </table>
 
 
-<center><h2><strong>Résumé Disrtibution ADRC par ordre du Total des entrées</strong></h2></center>
+<center><h2><strong>Résumé Distribution ADRC par ordre du Total des entrées</strong></h2></center>
     <table class="table table-responsive table-hover table-striped">
       <thead>
         <tr>
@@ -127,17 +101,15 @@
       </thead>
       <tbody>
 
-
-      <% films_seances_adrc_order = films_seances_adrc.group(:id).joins(:seances).merge(@seances.order("sum(total_billets) DESC"))%>
-      <% films_seances_adrc_order.each do |film| %>
+      <% @stats.films_seances_adrc_order.each do |film| %>
           <% if film.seances.where(horaire: date_range).present? %>
           <tr>
             <td><%= film.titrefilm %></td>
             <td><%= film.classifications.map(&:nom_classification)%></td>
             <td><%= film.distribution %></td>
-            <td><%= film.seances.where(horaire: date_range, annulee: [nil, ""]).count %></td>
-            <td>Adultes: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_adultes") %> / Enfants: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_enfants") %> / Scolaires: <%= film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("billets_scolaires") %><br>
-            Total: <%=  film.seances.where(horaire: date_range, annulee: [nil, ""]).sum("total_billets") %>
+            <td><%= film.seances.length %></td>
+            <td>Adultes: <%= film.seances.sum("billets_adultes") %> / Enfants: <%= film.seances.sum("billets_enfants") %> / Scolaires: <%= film.seances.sum("billets_scolaires") %><br>
+            Total: <%=  film.seances.sum("total_billets") %>
             </td>
           </tr>
          <% end %>
@@ -147,8 +119,6 @@
 </div>
 
       <center><h1><strong>Totaux par Lieux</strong></h1></center>
-              <% @villages = Village.all %>
-              <% seances = @seances %>
 <div class="container">
   <table class="table table-responsive table-hover table-striped">
     <thead>
@@ -164,68 +134,63 @@
        </th>
     </thead>
     <tbody>
-      <% seances_vernoux_mois = @seances.where(village_id: 1, annulee: [nil, ""]) %>
-      <% seances_lamastre_mois = @seances.where(village_id: 6, annulee: [nil, ""]) %>
-      <% seances_chalencon_mois = @seances.where(village_id: 3, annulee: [nil, ""]) %>
       <tr>
         <td class="active">Tous</td>
-        <td class="warning"><strong><%= seances_semaine.count %></strong></td>
-        <td class="info"><strong><%= seances_semaine.sum("billets_scolaires") %></strong></td>
-        <td class="info"><strong><%= seances_semaine.sum("billets_enfants") %></strong></td>
-        <td class="info"><strong><%= seances_semaine.sum("billets_adultes") %></strong></td>
-        <td class="warning"><strong><%= seances_semaine.sum("total_billets") %></strong></td>
+        <td class="warning"><strong><%= @stats.seances_range.count %></strong></td>
+        <td class="info"><strong><%= @stats.seances_range.sum("billets_scolaires") %></strong></td>
+        <td class="info"><strong><%= @stats.seances_range.sum("billets_enfants") %></strong></td>
+        <td class="info"><strong><%= @stats.seances_range.sum("billets_adultes") %></strong></td>
+        <td class="warning"><strong><%= @stats.seances_range.sum("total_billets") %></strong></td>
       </tr>
       <tr>
           <td class="active">Vernoux</td>
-          <td class="warning"><strong><%= seances_vernoux_mois.count %></strong></td>
-          <td class="info"><strong><%= seances_vernoux_mois.sum("billets_scolaires") %></strong></td>
-          <td class="info"><strong><%= seances_vernoux_mois.sum("billets_enfants") %></strong></td>
-          <td class="info"><strong><%= seances_vernoux_mois.sum("billets_adultes") %></strong></td>
-          <td class="warning"><strong><%= seances_vernoux_mois.sum("total_billets") %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_film_per_lieu(1).length %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(1).sum("billets_scolaires") %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(1).sum("billets_enfants") %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(1).sum("billets_adultes") %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_film_per_lieu(1).sum("total_billets") %></strong></td>
       </tr>
       <tr>
           <td class="active">Lamastre</td>
-          <td class="warning"><strong><%= seances_lamastre_mois.count %></strong></td>
-          <td class="info"><strong><%= seances_lamastre_mois.sum("billets_scolaires") %></strong></td>
-          <td class="info"><strong><%= seances_lamastre_mois.sum("billets_enfants") %></strong></td>
-          <td class="info"><strong><%= seances_lamastre_mois.sum("billets_adultes") %></strong></td>
-          <td class="warning"><strong><%= seances_lamastre_mois.sum("total_billets") %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_film_per_lieu(6).length %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(6).sum("billets_scolaires") %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(6).sum("billets_enfants") %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(6).sum("billets_adultes") %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_film_per_lieu(6).sum("total_billets") %></strong></td>
       </tr>
 
       <tr>
           <td class="active">Chalencon</td>
-          <td class="warning"><strong><%= seances_chalencon_mois.count %></strong></td>
-          <td class="info"><strong><%= seances_chalencon_mois.sum("billets_scolaires") %></strong></td>
-          <td class="info"><strong><%= seances_chalencon_mois.sum("billets_enfants") %></strong></td>
-          <td class="info"><strong><%= seances_chalencon_mois.sum("billets_adultes") %></strong></td>
-          <td class="warning"><strong><%= seances_chalencon_mois.sum("total_billets") %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_film_per_lieu(3).length %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(3).sum("billets_scolaires") %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(3).sum("billets_enfants") %></strong></td>
+          <td class="info"><strong><%= @stats.seances_film_per_lieu(3).sum("billets_adultes") %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_film_per_lieu(3).sum("total_billets") %></strong></td>
       </tr>
       <tr>
           <td class="active">Itinérance</td>
-          <td class="warning"><strong><%= seances_semaine.count - (seances_vernoux_mois.count + seances_lamastre_mois.count + seances_chalencon_mois.count) %></strong></td>
-          <td class="info"><strong><%= seances_semaine.sum("billets_scolaires") - (seances_vernoux_mois.sum("billets_scolaires")  + seances_lamastre_mois.sum("billets_scolaires") + seances_chalencon_mois.sum("billets_scolaires")) %></strong></td>
-          <td class="info"><strong><%= seances_semaine.sum("billets_enfants") - (seances_vernoux_mois.sum("billets_enfants") + seances_lamastre_mois.sum("billets_enfants") + seances_chalencon_mois.sum("billets_enfants")) %></strong></td>
-          <td class="info"><strong><%= seances_semaine.sum("billets_adultes") - (seances_vernoux_mois.sum("billets_adultes") + seances_lamastre_mois.sum("billets_adultes") + seances_chalencon_mois.sum("billets_adultes")) %></strong></td>
-          <td class="warning"><strong><%= seances_semaine.sum("total_billets") - (seances_vernoux_mois.sum("total_billets") + seances_lamastre_mois.sum("total_billets") + seances_chalencon_mois.sum("total_billets")) %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_range.count - (@stats.seances_film_per_lieu(1).count + @stats.seances_film_per_lieu(6).count + @stats.seances_film_per_lieu(3).count) %></strong></td>
+          <td class="info"><strong><%= @stats.seances_range.sum("billets_scolaires") - (@stats.seances_film_per_lieu(1).sum("billets_scolaires")  + @stats.seances_film_per_lieu(6).sum("billets_scolaires") + @stats.seances_film_per_lieu(3).sum("billets_scolaires")) %></strong></td>
+          <td class="info"><strong><%= @stats.seances_range.sum("billets_enfants") - (@stats.seances_film_per_lieu(1).sum("billets_enfants") + @stats.seances_film_per_lieu(6).sum("billets_enfants") + @stats.seances_film_per_lieu(3).sum("billets_enfants")) %></strong></td>
+          <td class="info"><strong><%= @stats.seances_range.sum("billets_adultes") - (@stats.seances_film_per_lieu(1).sum("billets_adultes") + @stats.seances_film_per_lieu(6).sum("billets_adultes") + @stats.seances_film_per_lieu(3).sum("billets_adultes")) %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_range.sum("total_billets") - (@stats.seances_film_per_lieu(1).sum("total_billets") + @stats.seances_film_per_lieu(6).sum("total_billets") + @stats.seances_film_per_lieu(3).sum("total_billets")) %></strong></td>
       </tr>
       <tr>
           <td class="active">Tournée (Lamastre, Chalencon, Itinérance)</td>
-          <td class="warning"><strong><%= seances_semaine.count - seances_vernoux_mois.count %></strong></td>
-          <td class="info"><strong><%= seances_semaine.sum("billets_scolaires") - seances_vernoux_mois.sum("billets_scolaires") %></strong></td>
-          <td class="info"><strong><%= seances_semaine.sum("billets_enfants") - seances_vernoux_mois.sum("billets_enfants") %></strong></td>
-          <td class="info"><strong><%= seances_semaine.sum("billets_adultes") - seances_vernoux_mois.sum("billets_adultes") %></strong></td>
-          <td class="warning"><strong><%= seances_semaine.sum("total_billets") - seances_vernoux_mois.sum("total_billets") %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_range.count - @stats.seances_film_per_lieu(1).count %></strong></td>
+          <td class="info"><strong><%= @stats.seances_range.sum("billets_scolaires") - @stats.seances_film_per_lieu(1).sum("billets_scolaires") %></strong></td>
+          <td class="info"><strong><%= @stats.seances_range.sum("billets_enfants") - @stats.seances_film_per_lieu(1).sum("billets_enfants") %></strong></td>
+          <td class="info"><strong><%= @stats.seances_range.sum("billets_adultes") - @stats.seances_film_per_lieu(1).sum("billets_adultes") %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_range.sum("total_billets") - @stats.seances_film_per_lieu(1).sum("total_billets") %></strong></td>
       </tr>
     </tbody>
   </table>
 </div>
-    <center><h1><strong>Par Film et ordonné par Total des entrées</strong></<h1></center>
+    <center><h1><strong>Par Film et ordonné par Total des entrées</strong></h1></center>
 <div class="container">
-      <%  films_order_total = group_films_seances.joins(:seances).group(:id).merge(@seances.order("sum(total_billets) DESC")) %>
-      <% films_order_total.each do |film| %>
-      <% if film.seances.where(horaire: date_range).present? %>
-       <% film_seances_semaine = film.seances.where(horaire: date_range, annulee: [nil, ""]) %>
-      <% film_vernoux= film_seances_semaine.where(village_id: 1) %>
+      <% @stats.films_order_total.each do |film| %>
+      <% film_seances_semaine = film.seances %>
+      <% film_vernoux = film_seances_semaine.where(village_id: 1) %>
       <% film_lamastre = film_seances_semaine.where(village_id: 6) %>
       <% film_chalencon = film_seances_semaine.where(village_id: 3) %>
 
@@ -302,13 +267,13 @@
     </tbody>
   <% end %>
   </table>
-  <% end %>
+
 
 </div>
 <br>
 <center><h2>Les Séances prises en compte</h2></center>
 <div class="container">
-  <%  seances_semaine.order(horaire: :desc).compact.each do |seance| %>
+  <%  @stats.seances_range.order(horaire: :desc).each do |seance| %>
   <table class="table table-responsive table-hover table-striped">
     <tbody>
       <tr>

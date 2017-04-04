@@ -26,14 +26,10 @@ class Seance < ApplicationRecord
 	end
 
 	def self.seances_passees_1_mois
-         seances_passees_1_mois = Seance.where({horaire: (4.weeks.ago..Date.today)}).order(horaire: :desc)
+         seances_mois = Seance.where({horaire: (30.days.ago..Date.today)}).order(horaire: :desc)
 	end
 
-	def self.seances_mois_1_mois
-         seances_mois = Seance.where({horaire: (30.days.ago..Date.today)}).order(horaire: :desc)
-    end
-
-    def self.seances_semaine
+	def self.seances_semaine
          seances_semaine = Seance.where({horaire: (Date.today.midnight..(Date.today + 7))}).order(horaire: :desc)
     end
 
@@ -46,7 +42,7 @@ class Seance < ApplicationRecord
     end
 
     def self.seances_a_completer_projection
-    	seances_a_completer_projection = Seance.where(projection: "").order(horaire: :asc)
+    	where(projection: "").order(horaire: :asc)
     end
 
     def self.seances_a_completer_caisse
@@ -56,6 +52,14 @@ class Seance < ApplicationRecord
     def self.seances_date_range
        seances_date_range = Seance.where({horaire: (range.to_i.days.ago..Date.today)})
     end
+
+    def self.seances_annulee
+       seances_annulee = Seance.where(annulee: "Annulée")
+    end
+
+
+
+
 
 private
 

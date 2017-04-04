@@ -1,10 +1,5 @@
 class FilmsController < ApplicationController
 
-  before_action :set_locale
-  def set_locale
-    I18n.locale = :fr
-  end
-
   skip_before_action :require_login, only: [:index, :films_a_venir, :ecranvillage, :show ]
 
   before_action :set_film, only: [:show, :edit, :update, :destroy]

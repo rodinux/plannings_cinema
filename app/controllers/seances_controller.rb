@@ -1,12 +1,7 @@
 class SeancesController < ApplicationController
 
-  before_action :set_locale
-  def set_locale
-    I18n.locale = :fr
-  end
-
+  before_action :get_lieu
   before_action :require_login
-
   before_action :set_seance, only: [:show, :edit, :update, :destroy]
 
    def index
@@ -71,6 +66,7 @@ class SeancesController < ApplicationController
   def entrees
     @search = SeanceSearch.new(params[:search])
     @seances = @search.scope
+    @stats = EntreeFacade.new(@seances)
     @films = Film.all
     respond_to do |format|
         format.pdf do
@@ -108,8 +104,6 @@ class SeancesController < ApplicationController
     seance.film_id = film_selectionne.id
     seance.village_id = village_selectionne.id
     seance.save
-    Film.find(seance.film_id)
-    Village.find(seance.village_id)
     redirect_to films_a_venir_url, notice: 'la Séance a bien été créée.'
   end
 
@@ -145,6 +139,9 @@ class SeancesController < ApplicationController
       @villages = Village.all
     end
 
+    def get_lieu
+      @lieu = params[:lieu]
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seance_params

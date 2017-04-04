@@ -1,11 +1,6 @@
 class CalendarController < ApplicationController
 
-  before_action :set_locale
-  def set_locale
-    I18n.locale = :fr
-  end
-
-  skip_before_action :require_login
+   skip_before_action :require_login
 
   def calendrier
   	  @seances = Seance.all

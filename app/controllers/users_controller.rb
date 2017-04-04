@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
 
-   before_action :set_locale
-  def set_locale
-    I18n.locale = :fr
-  end
-
+   
   skip_before_action :require_login, only: [:index, :new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 

@@ -1,10 +1,6 @@
 class ClassificationsController < ApplicationController
 
-  before_action :set_locale
-  def set_locale
-    I18n.locale = :fr
-  end
-
+ 
   before_action :set_classification, only: [:show, :edit, :update, :destroy]
 
   # GET /classifications

@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module PlanningsCinema
   class Application < Rails::Application
-  	config.autoload_paths += %W(#{config.root}/lib, app/services, app/facades)
+  	config.autoload_paths += %W(#{config.root}/lib)
   	config.eager_load_paths += %W(#{config.root}/lib)
     config.assets.paths << Rails.root.join('vendor', 'assets', "*")
     config.assets.precompile += ['rails_admin/rails_admin.css', 'rails_admin/rails_admin.js','pdf.css', 'pdf.js', 'scroll.js']

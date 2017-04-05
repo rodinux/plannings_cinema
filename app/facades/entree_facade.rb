@@ -54,26 +54,14 @@ class EntreeFacade
     end
 
     def seances_range
-        @seances.where(annulee: [nil, ""])
+        @seances.where(annulee: [nil, ""]).order(horaire: :desc)
     end
 
     def seances_range_annulee
-       @seances.where(annulee: "Annulée")
+       @seances.where(annulee: "Annulée").order(horaire: :desc)
     end
 
     def films_order_total
-    	seances_per_film.joins(:seances).group(:id).merge(@seances.where(annulee: [nil, ""]).order("sum(total_billets) DESC"))
+    	seances_per_film.group(:id).merge(@seances.where(annulee: [nil, ""]).order("sum(total_billets) DESC"))
     end
-
-     def seances_film
-     	@seances.films_order_total.each do |film|
-     	film.seances.where(annulee: [nil, ""])
-     end
- end
-
-     def film_seances_semaine_per_lieu(lieu_id)
-     	 film_seances_semaine.where(village_id: lieu_id)
-     end
-
-
 end

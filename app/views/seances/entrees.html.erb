@@ -73,20 +73,19 @@
         </tr>
       </thead>
       <tbody>
-      <% @stats.films_seances_classees_order_total.each do |film| %>
+      <% @stats.films_seances_classees_order_total.each do |film_classe| %>
         <tr>
-            <td><%= film.titrefilm %></td>
-            <td><%= film.classifications.map(&:nom_classification)%></td>
-            <td><%= film.distribution %></td>
-            <td><%= film.seances.length %></td>
-            <td>Adultes: <%= film.seances.sum("billets_adultes") %> / Enfants: <%= film.seances.sum("billets_enfants") %> / Scolaires: <%= film.seances.sum("billets_scolaires") %><br>
-            Total: <%=  film.seances.sum("total_billets") %>
+            <td><%= film_classe.titrefilm %></td>
+            <td><%= film_classe.classifications.map(&:nom_classification)%></td>
+            <td><%= film_classe.distribution %></td>
+            <td><%= film_classe.seances.length %></td>
+            <td>Adultes: <%= film_classe.seances.sum("billets_adultes") %> / Enfants: <%= film_classe.seances.sum("billets_enfants") %> / Scolaires: <%= film_classe.seances.sum("billets_scolaires") %><br>
+            Total: <%=  film_classe.seances.sum("total_billets") %>
             </td>
           </tr>
          <% end %>
       </tbody>
     </table>
-
 
 <center><h2><strong>Résumé Distribution ADRC par ordre du Total des entrées</strong></h2></center>
     <table class="table table-responsive table-hover table-striped">
@@ -100,16 +99,15 @@
         </tr>
       </thead>
       <tbody>
-
-      <% @stats.films_seances_adrc_order.each do |film| %>
-          <% if film.seances.where(horaire: date_range).present? %>
+      <% @stats.films_seances_adrc_order.each do |film_adrc| %>
+          <% if film_adrc.seances.where(horaire: date_range).present? %>
           <tr>
-            <td><%= film.titrefilm %></td>
-            <td><%= film.classifications.map(&:nom_classification)%></td>
-            <td><%= film.distribution %></td>
-            <td><%= film.seances.length %></td>
-            <td>Adultes: <%= film.seances.sum("billets_adultes") %> / Enfants: <%= film.seances.sum("billets_enfants") %> / Scolaires: <%= film.seances.sum("billets_scolaires") %><br>
-            Total: <%=  film.seances.sum("total_billets") %>
+            <td><%= film_adrc.titrefilm %></td>
+            <td><%= film_adrc.classifications.map(&:nom_classification)%></td>
+            <td><%= film_adrc.distribution %></td>
+            <td><%= film_adrc.seances.length %></td>
+            <td>Adultes: <%= film_adrc.seances.sum("billets_adultes") %> / Enfants: <%= film_adrc.seances.sum("billets_enfants") %> / Scolaires: <%= film_adrc.seances.sum("billets_scolaires") %><br>
+            Total: <%=  film_adrc.seances.sum("total_billets") %>
             </td>
           </tr>
          <% end %>
@@ -186,11 +184,13 @@
     </tbody>
   </table>
 </div>
+
     <center><h1><strong>Par Film et ordonné par Total des entrées</strong></h1></center>
 <div class="container">
       <% @stats.films_order_total.each do |film| %>
-      <% film_seances_semaine = film.seances %>
-      <% film_vernoux = film_seances_semaine.where(village_id: 1) %>
+      <% if film.seances.where(horaire: date_range).present? %>
+       <% film_seances_semaine = film.seances.where(horaire: date_range, annulee: [nil, ""]) %>
+      <% film_vernoux= film_seances_semaine.where(village_id: 1) %>
       <% film_lamastre = film_seances_semaine.where(village_id: 6) %>
       <% film_chalencon = film_seances_semaine.where(village_id: 3) %>
 
@@ -267,13 +267,12 @@
     </tbody>
   <% end %>
   </table>
-
-
+  <% end %>
 </div>
 <br>
 <center><h2>Les Séances prises en compte</h2></center>
 <div class="container">
-  <%  @stats.seances_range.order(horaire: :desc).each do |seance| %>
+  <%  @stats.seances_range.each do |seance| %>
   <table class="table table-responsive table-hover table-striped">
     <tbody>
       <tr>

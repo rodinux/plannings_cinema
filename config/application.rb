@@ -13,6 +13,7 @@ module PlanningsCinema
     config.assets.paths << Rails.root.join('vendor', 'assets', "*")
     config.assets.precompile += ['rails_admin/rails_admin.css', 'rails_admin/rails_admin.js','pdf.css', 'pdf.js', 'scroll.js']
   	config.time_zone = 'Paris'
+    config.beginning_of_week = :wednesday
   	config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
   	config.i18n.default_locale = :fr
     # Settings in config/environments/* take precedence over those specified here.

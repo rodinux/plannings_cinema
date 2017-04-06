@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :disponibilites
   get 'entrees/calcul_entrees'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

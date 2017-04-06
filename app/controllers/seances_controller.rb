@@ -6,12 +6,10 @@ class SeancesController < ApplicationController
 
    def index
     @seances = Seance.all
-    lieu = params[:lieu]
     respond_to do |format|
         format.pdf do
         render :pdf => "index.pdf",
           :orientation => 'Landscape',
-
           :layout => "layouts/pdf.html",
           :disable_javascript => false,
           show_as_html: params[:debug].present?
@@ -22,7 +20,6 @@ class SeancesController < ApplicationController
 
   def seances_passees
     @seances = Seance.all
-    lieu = params[:lieu]
     respond_to do |format|
         format.pdf do
         render :pdf => "seances_passees.pdf",
@@ -37,7 +34,6 @@ class SeancesController < ApplicationController
 
   def mes_seances
     @seances = Seance.all
-    lieu = params[:lieu]
     @users = User.all
     user = current_user
   end
@@ -49,7 +45,6 @@ class SeancesController < ApplicationController
 
   def edition_calendrier
     @seances = Seance.all
-    lieu = params[:lieu]
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
       respond_to do |format|
       format.pdf do

@@ -1,0 +1,2 @@
+class Disponibilite < ApplicationRecord
+end

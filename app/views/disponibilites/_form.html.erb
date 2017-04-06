@@ -1,0 +1,35 @@
+<%= form_for(disponibilite) do |f| %>
+  <% if disponibilite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(disponibilite.errors.count, "error") %> prohibited this disponibilite from being saved:</h2>
+
+      <ul>
+      <% disponibilite.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="container">
+  <% users = User.all.users_alphabet.map{|user| user.prenom } %>
+  <div class="field">
+    <%= f.label :nom, :value => 'Prénom' %><br>
+    <%= f.select :nom, users, include_blank: true %>
+  </div>
+<h2>Sera indisponible</h2>
+  <div class="field">
+    <%= f.label :start_time, :value => 'Du:' %>
+    <%= f.datetime_select :start_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_time, :value => 'Au:' %>
+    <%= f.datetime_select :end_time %>
+  </div>
+
+  <div class="actions">
+    <input type="submit" class="btn btn-lg btn-warning" value="Valider" />
+  </div>
+<% end %>
+</div>

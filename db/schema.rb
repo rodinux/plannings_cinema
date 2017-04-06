@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124155905) do
+ActiveRecord::Schema.define(version: 20170406102111) do
 
   create_table "classifications", force: :cascade do |t|
     t.string   "nom_classification"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20170124155905) do
   create_table "classifications_films", id: false, force: :cascade do |t|
     t.integer "classification_id", null: false
     t.integer "film_id",           null: false
+  end
+
+  create_table "disponibilites", force: :cascade do |t|
+    t.string   "nom"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "films", force: :cascade do |t|

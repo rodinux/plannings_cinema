@@ -57,10 +57,6 @@ class Seance < ApplicationRecord
        seances_annulee = Seance.where(annulee: "Annulée")
     end
 
-
-
-
-
 private
 
     def setup_default_value_for_new_seances

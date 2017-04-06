@@ -1,12 +1,12 @@
 <div class="container">
   <div class="actions">
-  <%= link_to 'Séances à venir pdf (imprimer)', seances_path(:lieu => @lieu, date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= lieu.upcase %></strong>
+  <%= link_to 'Séances à venir pdf (imprimer)', seances_path(:lieu => @lieu, date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= @lieu.upcase %></strong>
   <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
   </div>
   <div class="actions">
-  <%= link_to 'Séances où il manque des inscriptions', a_completer_path(:lieu => @lieu), :class => "btn btn-warning" %> <strong>pour <%= lieu.upcase %></strong> <%= link_to 'Séances passées', seances_passees_path(:lieu => @lieu), :class => "btn btn-success" %> <strong>pour <%= lieu.upcase %></strong> <%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %>
+  <%= link_to 'Séances où il manque des inscriptions', a_completer_path(:lieu => @lieu), :class => "btn btn-warning" %> <strong>pour <%= @lieu.upcase %></strong> <%= link_to 'Séances passées', seances_passees_path(:lieu => @lieu), :class => "btn btn-success" %> <strong>pour <%= @lieu.upcase %></strong> <%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %>
   </div>
-  <center><h1 id="liste"><strong>Séances à venir pour <%= lieu.upcase %></strong></h1></center>
+  <center><h1 id="liste"><strong>Séances à venir pour <%= @lieu.upcase %></strong></h1></center>
   <div class="row">
     <div class="col-md-12">
       <table class="table table-responsive table-hover table-striped">
@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @seances.seances_calendrier.lieuxtest[lieu].compact.each do |seance| if seance.horaire > Date.today %>
+          <% @seances.seances_calendrier.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today %>
           <% if seance.annulee != "Annulée" %>
             <tr>
               <% if seance.extras.present? %>

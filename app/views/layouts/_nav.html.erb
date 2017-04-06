@@ -31,6 +31,7 @@
     </div>
       <%= link_to 'Utilisateurs', users_path, :class => "btn btn-lg navbar-btn hidden-xs" %>
       <%= link_to 'Entrees', entrees_path, :class => "btn btn-lg hidden-xs"  %>
+      <%= link_to 'Disponibilités', disponibilites_path, :class => "btn btn-lg hidden-xs"  %>
   <% end %>
   <% if can? :manage, Village %>
       <%= link_to 'Villages', villages_path, :class => "btn btn-lg navbar-btn hidden-xs" %>

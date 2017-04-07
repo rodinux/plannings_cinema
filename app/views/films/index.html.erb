@@ -5,7 +5,6 @@
     </div>
 </div>
 <br>
-    <% if can? :manage, @films %>
 <div class="container">
     <div class="actions">
         <%= link_to 'Créer une nouvelle seance', new_seance_path, :class => "btn btn-primary btn-lg" %>
@@ -13,7 +12,9 @@
         <%= link_to 'Ajouter les nouveaux films à venir', ecranvillage_path, :class => "btn btn-danger btn-lg" %>
     </div>
 </div>
-<center><fieldset class="search-field">
+<div class="container">
+<center>
+<fieldset class="search-field">
    <legend>Recherche par titre et/ou classification</legend>
     <%= search_form_for @search do |f| %>
     <div class="field">
@@ -30,150 +31,94 @@
         </div>
       <% end %>
     </div>
-    <div class="actions"><%= f.submit "Rechercher" %></div>
+    <div class="actions">
+        <%= f.submit "Rechercher" %>
+    </div>
     <% end %>
-</fieldset></center>
+</fieldset>
+</center>
 </div>
-<% end %>
 <br>
-<br />
-<% if can? :manage, @films %>
-    <h3>Il y a pour cette recherche :<strong><%= @films.count %></strong> film(s)</strong>: </h3>
+<div class="container">
+    <h3>Il y a pour cette recherche :<strong><%= @films.length %></strong> film(s)</strong>: </h3>
 
     <% @films.order(updated_at: :desc).each do |film| %>
-    <%=  content_tag :film_id, @seances do %>
-    <table>
-        <tr>
-            <td><strong><%= film.titrefilm %></strong></td>
-            <td><strong><%= film.seances.count %></strong> séance(s)</td>
-            <% if film.classifications.where(id: 1).present? %>
-            <td><strong>Jeune public</strong></td>
-            <% end %>
-            <% if film.classifications.where(id: 2).present? %>
-            <td><strong>Recherche et Découvertes</strong></td>
-            <% end %>
-            <% if film.classifications.where(id: 3).present? %>
-            <td><strong>Patrimoine et Répertoire</strong></td>
-            <% end %>
-            <% if film.classifications.where(id: 4).present? %>
-            <td><strong>Art et Essai</strong></td>
-            <% end %>
-            <% if film.distribution.present? %>
-            <td><strong><%= film.distribution %></strong></td>
-            <% end %>
-        </tr>
-    </table>
-    <% end %>
-    <% end %>
-    <h3>(Attention, içi les séances annulées sont comptées, vérifiez !)</h3>
+     <% film_seances_semaine = film.seances.where(annulee: [nil, ""]) %>
+      <% film_vernoux= film_seances_semaine.where(village_id: 1) %>
+      <% film_lamastre = film_seances_semaine.where(village_id: 6) %>
+      <% film_chalencon = film_seances_semaine.where(village_id: 3) %>
 
 
-
-<div class="film-seances">
-    <% @films.order(updated_at: :desc).each do |film| %>
-    <% if film.seances.present? %>
-    <div class="film description">
-        <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
-        <% if can? :manage, @film %>
-            <% if film.distribution.present? %>
-                <%= film.distribution %>,
-            <% end %>
-            <% if film.classifications.present? %>
-                <%= film.classifications.map(&:nom_classification).sort.join(", ") %>
-            <% end %>
-                <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier le film', edit_film_path(film), :class => "btn btn-warning" %>
-                <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer le film', film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-        <% end %>
-        <h3>A propos :</h3>
-            <div class="text-center italic">
-                <p><%=simple_format h film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{film.id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></p>
-            </div>
-    </div>
-    <div class="seance description">
-        <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
-        <h4><strong>Séances à venir :</strong></h4>
-        <% futures_seances = film.seances.seances_calendrier.each.map do |seance| if Date.today < seance.horaire %>
-          <%=  content_tag :film_id, futures_seances do %>
-            <% if seance.annulee != "Annulée" %>
-                         <p><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></p>
-                         <p><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <em>(<%= seance.village.salle %>)</em>
-                        <% if seance.version.present? %>
-                        , <span class="glyphicon glyphicon-info-sign"></span> <%= seance.version %>
-                        <% end %>
-                        </p>
-                        <% if seance.extras.present? %>
-                        <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></p>
-                        <% end %>
-                    <% if can? :update, Seance %>
-                        <p><span class="glyphicon glyphicon-facetime-video"></span> <strong><%= seance.projection %></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><%= seance.caisse %></strong></p>
-                        <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %>
-                    <% if can? :manage, @seance %>
-                        <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></p>
-                      <% end %>
-                    <% end %>
-                    <br>
-            <% else %>
-                <p><strong><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></strong></p>
-                <div class="annule">
-                        <p><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %>
-                        <p><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <em>(<%= seance.village.salle %>)</em></p>
-                        <% if seance.version.present? %>
-                        <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.version %></p>
-                        <% end %>
-                        <% if seance.extras? %>
-                        <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></p>
-                        <% end %>
-                    <% if can? :manage, seance %>
-                        <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %> <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-                    <% end %>
-                </div>
-                <br>
-              <% end %>
-            <% end %>
-        <% end %>
+  <table class="table table-responsive table-hover table-striped">
+    <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
+    <% if film.classifications.present? %>
+    <center>classé <%= film.classifications.map(&:nom_classification) %></center>
     <% end %>
-        <h4><strong>Séances passées :</strong></h4>
-        <% seances_passees = film.seances.each.map do |seance| if Date.today > seance.horaire %>
-          <%= content_tag :film_id, seances_passees do %>
-            <% if seance.annulee != "Annulée" %>
-                <p><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></p>
-                <p><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <em>(<%= seance.village.salle %>)</em>
-            <% if seance.version.present? %>
-                , <span class="glyphicon glyphicon-info-sign"></span> <%= seance.version %>
-            <% end %>
-                </p>
-            <% if seance.extras.present? %>
-                <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></p>
-            <% end %>
-             <% if can? :update, Seance %>
-                <p><span class="glyphicon glyphicon-facetime-video"></span> <strong><%= seance.projection %></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><%= seance.caisse %></strong></p>
-                <p>Entrées: Adultes = <%= seance.billets_adultes %> / Enfants = <%= seance.billets_enfants %> / Scolaires = <%= seance.billets_scolaires%> / <strong>TOTAL = <%= seance.total_billets %></strong></p>
-                <p><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %>
-            <% end %>
-                    <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-                </p>
-                <br>
-            <% else %>
-                <p><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></p>
-                <div class="annule">
-                    <p><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></p>
-                    <p><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> (<%= seance.village.salle %>)</p>
-                    <% if seance.version.present? %>
-                    <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.version %>
-                    <% end %>
-                    <% if seance.extras.present? %>
-                    <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %>
-                    <% end %>
-                    <p><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Modifier la séance', edit_seance_path(seance), :class => "btn btn-warning" %></p>
-                     <p><span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer la séance', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></p>
-               </div>
-            <br>
-            <%end%>
-          <% end %>
-        <% end %>
-        <%end %>
-    </div>
-   <% end %>
+    <% if film.distribution.present? %>
+    <center>distribué par <%= film.distribution %></center>
+    <% end %>
+    <thead>
+      <th>
+         <tr>
+           <th>Lieu</th>
+           <th>Nombre de séances</th>
+           <th>Billets scolaires</th>
+           <th>Billets enfants</th>
+           <th>Billets adultes</th>
+           <th>Total Billets</th>
+         </tr>
+       </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="active">Tous</td>
+        <td class="warning"><strong><%= film_seances_semaine.count %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_scolaires") %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_enfants") %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_adultes") %></strong></td>
+        <td class="warning"><strong><%= film_seances_semaine.sum("total_billets") %></strong></td>
+      </tr>
+      <tr>
+        <td class="active">Vernoux</td>
+        <td class="warning"><strong><%= film_vernoux.count %></strong></td>
+        <td class="info"><strong><%= film_vernoux.sum("billets_scolaires") %></strong></td>
+        <td class="info"><strong><%= film_vernoux.sum("billets_enfants") %></strong></td>
+        <td class="info"><strong><%= film_vernoux.sum("billets_adultes") %></strong></td>
+        <td class="warning"><strong><%= film_vernoux.sum("total_billets") %></strong></td>
+      </tr>
+      <tr>
+        <td class="active">Lamastre</td>
+        <td class="warning"><strong><%= film_lamastre.count %></strong></td>
+        <td class="info"><strong><%= film_lamastre.sum("billets_scolaires") %></strong></td>
+        <td class="info"><strong><%= film_lamastre.sum("billets_enfants") %></strong></td>
+        <td class="info"><strong><%= film_lamastre.sum("billets_adultes") %></strong></td>
+        <td class="warning"><strong><%= film_lamastre.sum("total_billets") %></strong></td>
+      </tr>
+      <tr>
+        <td class="active">Chalencon</td>
+        <td class="warning"><strong><%= film_chalencon.count %></strong></td>
+        <td class="info"><strong><%= film_chalencon.sum("billets_scolaires") %></strong></td>
+        <td class="info"><strong><%= film_chalencon.sum("billets_enfants") %></strong></td>
+        <td class="info"><strong><%= film_chalencon.sum("billets_adultes") %></strong></td>
+        <td class="warning"><strong><%= film_chalencon.sum("total_billets") %></strong></td>
+      </tr>
+      <tr>
+        <td class="active">Itinérance</td>
+        <td class="warning"><strong><%= film_seances_semaine.count  - (film_vernoux.count  + film_lamastre.count  + film_chalencon.count) %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_scolaires") - (film_vernoux.sum("billets_scolaires") + film_lamastre.sum("billets_scolaires") + film_chalencon.sum("billets_scolaires")) %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_enfants") - (film_vernoux.sum("billets_enfants")  + film_lamastre.sum("billets_enfants") + film_chalencon.sum("billets_enfants")) %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_adultes") - (film_vernoux.sum("billets_adultes") + film_lamastre.sum("billets_adultes") + film_chalencon.sum("billets_adultes")) %></strong></td>
+        <td class="warning"><strong><%= film_seances_semaine.sum("total_billets") - (film_vernoux.sum("total_billets") + film_lamastre.sum("total_billets") + film_chalencon.sum("total_billets")) %></strong></td>
+      </tr>
+      <tr>
+        <td class="active">Tournée (Lamastre, Chalencon, Itinérance)</td>
+        <td class="warning"><strong><%= film_seances_semaine.count - film_vernoux.count %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_scolaires") - film_vernoux.sum("billets_scolaires") %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_enfants") - film_vernoux.sum("billets_enfants") %></strong></td>
+        <td class="info"><strong><%= film_seances_semaine.sum("billets_adultes") - film_vernoux.sum("billets_adultes") %></strong></td>
+        <td class="warning"><strong><%= film_seances_semaine.sum("total_billets") - film_vernoux.sum("total_billets") %></strong></td>
+      </tr>
+    </tbody>
   <% end %>
+  </table>
 </div>
-<% end %>

@@ -1,4 +1,4 @@
-    <center><h1><strong>Nombre de séances et d'entrées'</strong></h1></center>
+    <center><h1><strong>Nombre de séances et d'entrées</strong></h1></center>
 </div>
 <div class="container">
   <div class="row">
@@ -194,6 +194,8 @@
       <% film_lamastre = film_seances_semaine.where(village_id: 6) %>
       <% film_chalencon = film_seances_semaine.where(village_id: 3) %>
 
+
+  <table class="table table-responsive table-hover table-striped">
     <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
     <% if film.classifications.present? %>
     <center>classé <%= film.classifications.map(&:nom_classification) %></center>
@@ -201,8 +203,6 @@
     <% if film.distribution.present? %>
     <center>distribué par <%= film.distribution %></center>
     <% end %>
-
-  <table class="table table-responsive table-hover table-striped">
     <thead>
       <th>
          <tr>

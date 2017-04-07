@@ -38,8 +38,8 @@
     <% @disponibilites.order(start_time: :asc).each do |disponibilite| %>
       <tr>
         <td><%= disponibilite.nom %></td>
-        <td><%= l disponibilite.start_time, format: :very_long %></td>
-        <td><%= l disponibilite.end_time, format: :very_long %></td>
+        <td><%= l disponibilite.start_time, format: :middle_long %></td>
+        <td><%= l disponibilite.end_time, format: :middle_long %></td>
         <td><%= link_to 'Voir', disponibilite %></td>
         <td><%= link_to 'Modifier', edit_disponibilite_path(disponibilite) %></td>
         <td><%= link_to 'Suprimer', disponibilite, method: :delete, data: { confirm: 'Are you sure?' } %></td>

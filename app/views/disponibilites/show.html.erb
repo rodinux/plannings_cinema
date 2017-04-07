@@ -7,12 +7,12 @@
 <h3>Absent</h3>
 <h4>
   <strong>Du:</strong>
-  <%= l @disponibilite.start_time, format: :very_long  %>
+  <%= l @disponibilite.start_time, format: :middle_long  %>
 </h4>
 
 <h4>
   <strong>Au:</strong>
-  <%= l @disponibilite.end_time, format: :very_long %>
+  <%= l @disponibilite.end_time, format: :middle_long %>
 </h4>
 <%= link_to 'Éditer', edit_disponibilite_path(@disponibilite), :class => "btn btn-warning" %> |
 <%= link_to 'Retour liste', disponibilites_path, :class => "btn btn-success"  %>

@@ -14,18 +14,18 @@
 <div class="container">
   <% users = User.all.users_alphabet.map{|user| user.prenom } %>
   <div class="field">
-    <%= f.label :nom, :value => 'Prénom' %><br>
-    <%= f.select :nom, users, include_blank: true %>
+    <%= f.label :nom, :value => 'Choisissez votre Prénom' %><br>
+    <%= f.select :nom, users %>
   </div>
-<h2>Sera indisponible</h2>
+<h2>Je serai absent</h2>
   <div class="field">
     <%= f.label :start_time, :value => 'Du:' %>
-    <%= f.datetime_select :start_time %>
+    <%= f.date_select :start_time %>
   </div>
 
   <div class="field">
     <%= f.label :end_time, :value => 'Au:' %>
-    <%= f.datetime_select :end_time %>
+    <%= f.date_select :end_time %>
   </div>
 
   <div class="actions">

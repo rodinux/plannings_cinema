@@ -1,6 +1,7 @@
-<h1>Editing Disponibilite</h1>
-
+<center>
+<h1>Modifier Indisponibilité</h1>
 <%= render 'form', disponibilite: @disponibilite %>
 
-<%= link_to 'Show', @disponibilite %> |
-<%= link_to 'Back', disponibilites_path %>
+<%= link_to 'Voir', @disponibilite, :class => "btn btn-primary" %> |
+<%= link_to 'Retour liste', disponibilites_path, :class => "btn btn-success" %>
+</center>

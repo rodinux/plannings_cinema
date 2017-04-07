@@ -1,9 +1,9 @@
 
-<center><h1>Indisponibilitées</h1></center>
+<center><h1>Indisponibilités</h1></center>
 
 <div class="container">
 <div class="actions">
-<%= link_to 'Nouvelle Indisponibilitée', new_disponibilite_path, :class => "btn btn-warning" %>
+<%= link_to 'Nouvelle Indisponibilité', new_disponibilite_path, :class => "btn btn-warning" %>
 </div>
  <div class="table-responsive">
   <div class="table-row">
@@ -12,8 +12,8 @@
         <%= l date, format: :short %>
         <% disponibilites.each do |disponibilite| %>
           <div>
-            <%= disponibilite.nom %>
-            <%= link_to 'modifier', edit_disponibilite_path(disponibilite) %>
+            <p><%= disponibilite.nom %>
+            <%= link_to 'modifier', edit_disponibilite_path(disponibilite) %></p>
           </div>
         <% end %>
       <% end %>
@@ -24,6 +24,7 @@
 
 <br>
 <div class="container">
+<center><h2>Liste détaillée des absences</h2></center>
 <table class="table-responsive">
   <thead>
     <tr>
@@ -34,13 +35,13 @@
     </tr>
   </thead>
   <tbody>
-    <% @disponibilites.each do |disponibilite| %>
+    <% @disponibilites.order(start_time: :asc).each do |disponibilite| %>
       <tr>
         <td><%= disponibilite.nom %></td>
         <td><%= l disponibilite.start_time, format: :very_long %></td>
         <td><%= l disponibilite.end_time, format: :very_long %></td>
         <td><%= link_to 'Voir', disponibilite %></td>
-        <td><%= link_to 'Éditer', edit_disponibilite_path(disponibilite) %></td>
+        <td><%= link_to 'Modifier', edit_disponibilite_path(disponibilite) %></td>
         <td><%= link_to 'Suprimer', disponibilite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -1,4 +1,5 @@
 @import "bootstrap.min.css";
+
 table {
   width: 100%;
   border: 1px solid #999999;
@@ -31,12 +32,6 @@ div.new-section {
 .stripe {
   background-color: #dddddd;
   color: #666666;
-}
-tr.stripeHover {
-  background-color: #FFFACD;
-}
-tbody tr:hover {
-    background-color: #FFFACD;
 }
 div.new-section {
     page-break-inside: avoid;

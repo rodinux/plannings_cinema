@@ -1,12 +1,12 @@
 class CalendarController < ApplicationController
 
    skip_before_action :require_login
+   before_action :get_lieu
 
   def calendrier
   	  @seances = Seance.all
   	  @films = Film.all
   	  @villages = Village.all
-  	  lieu = params[:lieu]
   	  @date = params[:date] ? Date.parse(params[:date]) : Date.today
       respond_to do |format|
         format.pdf do
@@ -23,4 +23,11 @@ class CalendarController < ApplicationController
 
   def aide
   end
+
+  private
+
+    def get_lieu
+      @lieu = params[:lieu]
+    end
+
 end

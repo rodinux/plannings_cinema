@@ -1,18 +1,7 @@
 class VillagesController < ApplicationController
 
-  before_action :set_locale
-  def set_locale
-    I18n.locale = :fr
-  end
-
   skip_before_action :require_login, only: [:index, :show ]
-
   before_action :set_village, only: [:show, :edit, :update, :destroy]
-
-  before_action :set_locale
-  def set_locale
-    I18n.locale = :fr
-  end
 
   # GET /villages
   # GET /villages.json

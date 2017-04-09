@@ -40,7 +40,6 @@ class SeancesController < ApplicationController
 
   def a_completer
     @seances = Seance.all
-    lieu = params[:lieu]
   end
 
   def edition_calendrier

@@ -1,11 +1,10 @@
-  <% lieu = params[:lieu] %>
 <div class="cine">
   <center><h1 class="text-center"><strong>Calendrier des Projections</strong></h1></center>
 </div>
-  <h2 class="text-center"><strong><%= lieu.upcase %></strong></h2>
+  <h2 class="text-center"><strong><%= @lieu.upcase %></strong></h2>
 <div class="container">
   <div class="actions">
-    <%= link_to 'imprimer Séances en pdf', calendrier_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= lieu.upcase %></strong>
+    <%= link_to 'imprimer Séances en pdf', calendrier_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= @lieu.upcase %></strong>
     <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
   </div>
   <br>
@@ -37,7 +36,7 @@
       <%= calendar @date do |date| %>
         <p><center><%= date.day %></center></p>
         <ul class="list-unstyled calendrier">
-          <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+          <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[@lieu].compact.each do |seance| %>
             <% if seance.horaire.midnight == date.midnight %>
               <% if seance.annulee != "Annulée" %>
                 <li>

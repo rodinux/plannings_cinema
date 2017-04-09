@@ -15,31 +15,18 @@
  *= require_tree .
  */
 @import "font-awesome";
- p, ul, li, h4, h3, h2, h1, td, th {
- 	font-family: 'Raleway-Light',
- }
- .italic {
+@import "bootstrap.min.css";
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(asset_path('glyphicons-halflings-regular.eot'));
+  src: url(asset_path('glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'),
+  url(asset_path('glyphicons-halflings-regular.woff')) format('woff'),
+  url(asset_path('glyphicons-halflings-regular.ttf')) format('truetype'),
+  url(asset_path('glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
+}
+p, ul, li, h4, h3, h2, h1, td, th {
+	font-family: 'Raleway-Light' !important;
+}
+.italic {
  	font-style: italic;
- }
- a.back-to-top {
- 	display: none;
- 	width: 60px;
- 	height: 60px;
- 	text-indent: -9999px;
- 	position: fixed;
- 	z-index: 999;
- 	right: 20px;
- 	bottom: 20px;
- 	background: #27AE61 url(<%= asset_data_uri 'up-arrow.png' %>) no-repeat center 43%;
- 	-webkit-border-radius: 30px;
- 	-moz-border-radius: 30px;
- 	border-radius: 30px;
- }
- tbody tr:hover {
- 	background-color: transparent;
- }
- #error {
- 	font-size: 1.2em;
-     color: green;
-     padding: 2px 5px;
- }
+}

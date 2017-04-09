@@ -1,10 +1,7 @@
-<% lieu = params[:lieu] %>
-<div class="container">
   <div class="actions">
-  <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-primary btn-lg" %> <strong>pour <%= lieu.upcase %></strong>
+  <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-primary btn-lg" %> <strong>pour <%= @lieu.upcase %></strong>
   </div>
-
-  <center><h3 id="liste"><strong>Séances à venir pour <%= lieu.upcase %> sans personne inscrit pour la projection :</strong></h3></center>
+  <center><h3 id="liste"><strong>Séances à venir pour <%= @lieu.upcase %> sans personne inscrit pour la projection :</strong></h3></center>
   <div class="row">
     <div class="col-md-12">
         <table class="table table-responsive table-hover table-striped">
@@ -19,7 +16,7 @@
               <% end %>
             </tr>
           </thead>
-        <% seances = @seances.seances_a_completer_projection.lieuxtest[lieu].compact.each do |seance| if seance.horaire > Date.today   %>
+        <% seances = @seances.seances_a_completer_projection.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today   %>
             <tbody>
               <% if seance.annulee != "Annulée" %>
                 <tr>
@@ -80,7 +77,7 @@
     </div>
   </div>
    <br>
-  <center><h3 id="liste"><strong>Séances à venir pour <%= lieu.upcase %> sans personne inscrit pour la caisse :</strong></h3></center>
+  <center><h3 id="liste"><strong>Séances à venir pour <%= @lieu.upcase %> sans personne inscrit pour la caisse :</strong></h3></center>
   <div class="row">
     <div class="col-md-12">
         <table class="calendar table table-bordered table-striped">
@@ -95,7 +92,7 @@
               <% end %>
             </tr>
           </thead>
-        <% seances = @seances.seances_a_completer_caisse.lieuxtest[lieu].compact.each do |seance| if seance.horaire > Date.today   %>
+        <% seances = @seances.seances_a_completer_caisse.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today   %>
             <tbody>
               <% if seance.annulee != "Annulée" %>
                 <tr>
@@ -155,5 +152,5 @@
         </table>
     </div>
   </div>
-</div>
+
   <br>

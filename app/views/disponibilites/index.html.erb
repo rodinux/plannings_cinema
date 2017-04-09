@@ -3,17 +3,17 @@
 
 <div class="container">
 <div class="actions">
-<%= link_to 'Nouvelle Indisponibilité', new_disponibilite_path, :class => "btn btn-warning" %>
+<%= link_to 'Céer une Nouvelle Indisponibilité', new_disponibilite_path, :class => "btn btn-warning" %>
 </div>
- <div class="table-responsive">
+ <div class="table table-responsive table-hover table-striped">
   <div class="table-row">
     <div class="col-md-12">
         <%= month_calendar events: @disponibilites do |date, disponibilites| %>
         <%= l date, format: :short %>
         <% disponibilites.each do |disponibilite| %>
           <div>
-            <p><%= disponibilite.nom %>
-            <%= link_to 'modifier', edit_disponibilite_path(disponibilite) %></p>
+            <p>
+            <%= link_to "#{disponibilite.nom}", edit_disponibilite_path(disponibilite), :class => "btn btn-danger", :title => "Modifier" %></p>
           </div>
         <% end %>
       <% end %>
@@ -22,10 +22,8 @@
   </div>
 </div>
 
-<br>
-<div class="container">
 <center><h2>Liste détaillée des absences</h2></center>
-<table class="table-responsive">
+<table class="table table-responsive table-hover table-striped">
   <thead>
     <tr>
       <th>Prénom</th>
@@ -40,11 +38,10 @@
         <td><%= disponibilite.nom %></td>
         <td><%= l disponibilite.start_time, format: :middle_long %></td>
         <td><%= l disponibilite.end_time, format: :middle_long %></td>
-        <td><%= link_to 'Voir', disponibilite %></td>
-        <td><%= link_to 'Modifier', edit_disponibilite_path(disponibilite) %></td>
-        <td><%= link_to 'Suprimer', disponibilite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <td><%= link_to 'Voir', disponibilite, :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Modifier', edit_disponibilite_path(disponibilite), :class => "btn btn-warning" %></td>
+        <td><%= link_to 'Suprimer', disponibilite, method: :delete, data: { confirm: 'En êtes-vous sûr ?' }, :class => "btn btn-danger" %>
     <% end %>
   </tbody>
 </table>
-</div>
+

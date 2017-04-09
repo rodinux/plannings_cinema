@@ -2,7 +2,6 @@
   <center><h1 class="text-center"><strong>Calendrier des Projections</strong></h1></center>
 </div>
   <h2 class="text-center"><strong><%= @lieu.upcase %></strong></h2>
-<div class="container">
   <div class="actions">
     <%= link_to 'imprimer Séances en pdf', calendrier_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= @lieu.upcase %></strong>
     <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
@@ -15,8 +14,6 @@
     <%= link_to 'Calendrier Itinérance', calendrier_path(:lieu => "itinerance", date: @date), :class => "btn btn-default btn-lg itinerance", :title => "Que les séances de Itinérantes" %>
     <%= link_to 'Calendrier tous les lieux', root_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-default btn-lg", :title => "Séances de tous les lieux" %>
   </div>
-</div>
-<div class="container">
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="well controls">
@@ -95,4 +92,3 @@
       </div>
     </div>
   </div>
-</div>

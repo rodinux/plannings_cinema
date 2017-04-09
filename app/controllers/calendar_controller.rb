@@ -24,7 +24,7 @@ class CalendarController < ApplicationController
   def aide
   end
 
-  private
+private
 
     def get_lieu
       @lieu = params[:lieu]

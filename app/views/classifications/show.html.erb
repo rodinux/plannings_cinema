@@ -1,7 +1,9 @@
-<p>
-  <strong>Nom:</strong>
+<center>
+<h2>
+  <strong>Nom de la classification:</strong>
   <%= @classification.nom_classification %>
-</p>
+</h2>
 
-<%= link_to 'Editer', edit_classification_path(@classification) %> |
-<%= link_to 'Retour à la liste', classifications_path %>
+<%= link_to 'Editer', edit_classification_path(@classification), :class => "btn btn-warning" %> |
+<%= link_to 'Retour à la liste', classifications_path, :class => "btn btn-primary" %>
+</center>

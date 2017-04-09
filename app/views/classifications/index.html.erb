@@ -1,6 +1,9 @@
-<h1>Liste Classifications</h1>
-
-<table>
+<center><h1>Liste Classifications</h1></center>
+<div class="container">
+  <%= link_to 'Créer une Nouvelle Classification', new_classification_path, :class => "btn btn-warning" %>
+</div>
+<br>
+<table class="table table-responsive table-hover table-striped">
   <thead>
     <tr>
       <th>Nom</th>
@@ -14,18 +17,18 @@
     <% @classifications.each do |classification| %>
       <tr>
         <td><%= classification.nom_classification %></td>
-        <td><%= classification.films.count %></td>
-        <td><%= classification.seances.count %>
-        <td><%= link_to 'Voir', classification %></td>
-        <td><%= link_to 'Éditer', edit_classification_path(classification) %></td>
-        <td><%= link_to 'Supprimer', classification, method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %></td>
+        <td><%= classification.films.length %></td>
+        <td><%= classification.seances.length %>
+        <td><%= link_to 'Voir', classification, :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Éditer', edit_classification_path(classification), :class => "btn btn-warning" %></td>
+        <td><%= link_to 'Supprimer', classification, method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, :class => "btn btn-danger"  %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
 <h1>Liste des Films Classés</h1>
-<table>
+<table class="table table-responsive table-hover table-striped">
   <thead>
     <tr>
       <th>Films</th>
@@ -40,16 +43,15 @@
       <tr>
         <td><%= classification_film.titrefilm %></td>
         <td><%= classification.nom_classification %></td>
-        <td><%= classification_film.seances.count %></td>
-        <td><%= link_to 'Voir', classification %></td>
-        <td><%= link_to 'Éditer', edit_classification_path(classification) %></td>
-        <td><%= link_to 'Supprimer', classification, method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %></td>
+        <td><%= classification_film.seances.length %></td>
+        <td><%= link_to 'Voir', classification, :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Éditer', edit_classification_path(classification), :class => "btn btn-warning" %></td>
+        <td><%= link_to 'Supprimer', classification, method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
     <% end %>
   </tbody>
 </table>
-
+<%= link_to '', classifications_path, :class => "back-to-top", :title => 'Retour haut de page' %>
 <br>
 
-<%= link_to 'Nouvelle Classification', new_classification_path %>

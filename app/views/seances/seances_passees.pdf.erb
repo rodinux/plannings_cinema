@@ -1,11 +1,10 @@
 <meta charset='utf-8' />
-<% lieu = params[:lieu] %>
 <br>
-<center><h3><strong>Séances passées pour <%= lieu.upcase %></strong></h3></center>
+<center><h3><strong>Séances passées pour <%= @lieu.upcase %></strong></h3></center>
 <div class="row">
   <div class="col-md-12">
     <table class="table table-responsive table-hover">
-        <%  @seances.seances_passees_1_mois.lieuxtest[lieu].compact.each do |seance| if seance.horaire < Date.today %>
+        <%  @seances.seances_passees_1_mois.lieuxtest[@lieu].compact.each do |seance| if seance.horaire < Date.today %>
       <tbody>
       <% if seance.annulee != "Annulée" %>
           <tr>

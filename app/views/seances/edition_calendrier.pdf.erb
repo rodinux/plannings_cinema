@@ -1,12 +1,11 @@
 <meta charset='utf-8' />
 <p>Du Mercredi <%= "#{l @date.at_beginning_of_week + 2.day, format: :middle}, #{@date.strftime("semaine N°%W")}" %> au Mardi <%= "#{l @date.at_beginning_of_week + 29.day, format: :middle}, #{(@date + 4.week).strftime("semaine N°%W")}" %></p>
-<% lieu = params[:lieu] %>
-<center><h2><%= lieu.upcase %></h2></center>
+<center><h2><%= @lieu.upcase %></h2></center>
 <div class="row">
   <div class="col-md-12">
     <%= calendar @date do |date| %>
       <p><center><%= date.day %></center></p>
-        <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+        <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[@lieu].compact.each do |seance| %>
           <% if seance.horaire.midnight == date.midnight %>
             <ul class="list-unstyled">
               <% if seance.annulee != "Annulée" %>
@@ -43,7 +42,7 @@
   <div class="col-md-12">
    <%= calendar @date + 1.weeks do |date| %>
       <p><center><%= date.day %></center></p>
-        <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+        <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[@lieu].compact.each do |seance| %>
           <% if seance.horaire.midnight == date.midnight %>
             <ul class="list-unstyled">
               <% if seance.annulee != "Annulée" %>
@@ -80,7 +79,7 @@
   <div class="col-md-12">
     <%= calendar @date + 2.weeks do |date| %>
       <p><center><%= date.day %></center></p>
-        <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+        <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[@lieu].compact.each do |seance| %>
           <% if seance.horaire.midnight == date.midnight %>
             <ul class="list-unstyled">
               <% if seance.annulee != "Annulée" %>
@@ -117,7 +116,7 @@
   <div class="col-md-12">
    <%= calendar @date + 3.weeks do |date| %>
       <p><center><%= date.day %></center></p>
-        <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[lieu].compact.each do |seance| %>
+        <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[@lieu].compact.each do |seance| %>
           <% if seance.horaire.midnight == date.midnight %>
             <ul class="list-unstyled">
               <% if seance.annulee != "Annulée" %>

@@ -13,7 +13,7 @@
         <% disponibilites.each do |disponibilite| %>
           <div>
             <p>
-            <%= link_to "#{disponibilite.nom}", edit_disponibilite_path(disponibilite), :class => "btn btn-danger", :title => "Modifier" %></p>
+            <%= link_to "#{disponibilite.nom}", edit_disponibilite_path(disponibilite), :title => "Modifier" %></p>
           </div>
         <% end %>
       <% end %>

@@ -42,17 +42,24 @@
             </tr>
             <tr>
               <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description %>
-              <% if seance.film.affiche.present? %> 
+              <% if seance.film.affiche.present? %>
               <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %>
               <% end %>
               </td>
               <% if can? :update, Seance %>
-              <td colspan="2" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
+              <% @disponibilites.each do |disponibilite| %>
+              <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
+              <td colspan= "2" class="warning"><strong>Absence:</strong> <%= disponibilite.nom %> </td>
+              <% end %>
+              <% end %>
               <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %>
-                <% if can? :manage, @seance %>
+              <% if can? :manage, @seance %>
               <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
               </td>
                <% end %>
+            </tr>
+            <tr>
+               <td colspan="5" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
               <% end %>
             </tr>
             <% else %>

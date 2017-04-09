@@ -6,6 +6,7 @@ class SeancesController < ApplicationController
 
    def index
     @seances = Seance.all
+    @disponibilites = Disponibilite.all
     respond_to do |format|
         format.pdf do
         render :pdf => "index.pdf",

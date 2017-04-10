@@ -41,6 +41,7 @@ class SeancesController < ApplicationController
 
   def a_completer
     @seances = Seance.all
+    @disponibilites = Disponibilite.all
   end
 
   def edition_calendrier

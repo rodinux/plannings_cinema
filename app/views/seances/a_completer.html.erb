@@ -43,6 +43,13 @@
                   </td>
                 <% end %>
                 </tr>
+                <tr>
+                  <% @disponibilites.each do |disponibilite| %>
+                  <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
+                  <td colspan= "5" class="warning"><strong>Absence(s):</strong> <%= disponibilite.nom %> </td>
+                  <% end %>
+                  <% end %>
+                </tr>
                 <% else %>
                  <tr>
                   <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
@@ -118,6 +125,13 @@
                   <td class="danger"><span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
                   </td>
                 <% end %>
+                </tr>
+                <tr>
+                  <% @disponibilites.each do |disponibilite| %>
+                  <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
+                  <td colspan= "5" class="warning"><strong>Absence(s):</strong> <%= disponibilite.nom %> </td>
+                  <% end %>
+                  <% end %>
                 </tr>
                 <% else %>
                  <tr>

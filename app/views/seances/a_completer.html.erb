@@ -51,7 +51,7 @@
                       , <%= disponibilite.nom %>
                     <% end %>
                     <% end %>
-                  </td>  
+                  </td>
                 </tr>
                 <% else %>
                  <tr>
@@ -129,12 +129,15 @@
                   </td>
                 <% end %>
                 </tr>
-                <tr>
-                  <% @disponibilites.each do |disponibilite| %>
-                  <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
-                  <td colspan= "5" class="warning"><strong>Absence(s):</strong> <%= disponibilite.nom %> </td>
-                  <% end %>
-                  <% end %>
+               <tr>
+                  <td colspan="5" class="warning">
+                    <strong>Absence(s):</strong>
+                    <% @disponibilites.each do |disponibilite| %>
+                    <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
+                      , <%= disponibilite.nom %>
+                    <% end %>
+                    <% end %>
+                  </td>
                 </tr>
                 <% else %>
                  <tr>

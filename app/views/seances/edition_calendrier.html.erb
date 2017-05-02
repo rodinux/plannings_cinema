@@ -35,7 +35,7 @@
   <div class="row">
     <div class="col-md-12">
       <%= calendar @date do |date| %>
-        <p><%= date.day %></p>
+        <p><%= l date, format: :short %></p>
         <ul class="list-unstyled calendrier">
           <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[@lieu].compact.each do |seance| %>
             <% if seance.horaire.midnight == date.midnight %>

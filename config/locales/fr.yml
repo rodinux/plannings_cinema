@@ -222,7 +222,7 @@ fr:
     formats:
       default: ! '%d/%m/%Y'
       long: ! '%d %B %Y %H:%M %p'
-      short: ! '%d %b'
+      short: ! '%a %d %b'
       only_day: ! '%e'
       only_hour: ! '%Hh %M'
       very_long: ! '%A %d %B %Y %Hh %M'

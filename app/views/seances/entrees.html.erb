@@ -76,7 +76,7 @@
       <% @stats.films_seances_classees_order_total.each do |film_classe| %>
         <tr>
             <td><%= film_classe.titrefilm %></td>
-            <td><%= film_classe.classifications.map(&:nom_classification)%></td>
+            <td><%= film_classe.classifications.map(&:nom_classification) %></td>
             <td><%= film_classe.distribution %></td>
             <td><%= film_classe.seances.length %></td>
             <td>Adultes: <%= film_classe.seances.sum("billets_adultes") %> / Enfants: <%= film_classe.seances.sum("billets_enfants") %> / Scolaires: <%= film_classe.seances.sum("billets_scolaires") %><br>
@@ -103,7 +103,7 @@
           <% if film_adrc.seances.where(horaire: date_range).present? %>
           <tr>
             <td><%= film_adrc.titrefilm %></td>
-            <td><%= film_adrc.classifications.map(&:nom_classification)%></td>
+            <td><%= film_adrc.classifications.map(&:nom_classification) %></td>
             <td><%= film_adrc.distribution %></td>
             <td><%= film_adrc.seances.length %></td>
             <td>Adultes: <%= film_adrc.seances.sum("billets_adultes") %> / Enfants: <%= film_adrc.seances.sum("billets_enfants") %> / Scolaires: <%= film_adrc.seances.sum("billets_scolaires") %><br>

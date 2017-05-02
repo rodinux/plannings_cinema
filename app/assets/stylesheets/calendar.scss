@@ -63,3 +63,25 @@ li {
     text-decoration: none;
     }
 }
+tbody tr:nth-of-type(2n) {
+background-color: #f0f0f0;
+}
+
+table.table.table-responsive th, table.table.table-responsive td {
+  word-break: break-all !important;
+  padding: 3px;
+  text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+thead, th {display:none}
+table {width:100%;}
+tr:nth-of-type(2n) {background-color: inherit;}
+tr td:first-child {background: #f0f0f0;}
+tbody td {display: block;  text-align:center;}
+tbody td:before { 
+    content: attr(data-th); 
+    display: block;
+    text-align:center;  
+  }
+}

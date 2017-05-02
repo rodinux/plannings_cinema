@@ -134,7 +134,7 @@
     <tbody>
       <tr>
         <td class="active">Tous</td>
-        <td class="warning"><strong><%= @stats.seances_range.count %></strong></td>
+        <td class="warning"><strong><%= @stats.seances_range.length %></strong></td>
         <td class="info"><strong><%= @stats.seances_range.sum("billets_scolaires") %></strong></td>
         <td class="info"><strong><%= @stats.seances_range.sum("billets_enfants") %></strong></td>
         <td class="info"><strong><%= @stats.seances_range.sum("billets_adultes") %></strong></td>
@@ -167,7 +167,7 @@
       </tr>
       <tr>
           <td class="active">Itinérance</td>
-          <td class="warning"><strong><%= @stats.seances_range.count - (@stats.seances_film_per_lieu(1).count + @stats.seances_film_per_lieu(6).count + @stats.seances_film_per_lieu(3).count) %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_range.length - (@stats.seances_film_per_lieu(1).length + @stats.seances_film_per_lieu(6).length + @stats.seances_film_per_lieu(3).length) %></strong></td>
           <td class="info"><strong><%= @stats.seances_range.sum("billets_scolaires") - (@stats.seances_film_per_lieu(1).sum("billets_scolaires")  + @stats.seances_film_per_lieu(6).sum("billets_scolaires") + @stats.seances_film_per_lieu(3).sum("billets_scolaires")) %></strong></td>
           <td class="info"><strong><%= @stats.seances_range.sum("billets_enfants") - (@stats.seances_film_per_lieu(1).sum("billets_enfants") + @stats.seances_film_per_lieu(6).sum("billets_enfants") + @stats.seances_film_per_lieu(3).sum("billets_enfants")) %></strong></td>
           <td class="info"><strong><%= @stats.seances_range.sum("billets_adultes") - (@stats.seances_film_per_lieu(1).sum("billets_adultes") + @stats.seances_film_per_lieu(6).sum("billets_adultes") + @stats.seances_film_per_lieu(3).sum("billets_adultes")) %></strong></td>
@@ -175,7 +175,7 @@
       </tr>
       <tr>
           <td class="active">Tournée (Lamastre, Chalencon, Itinérance)</td>
-          <td class="warning"><strong><%= @stats.seances_range.count - @stats.seances_film_per_lieu(1).count %></strong></td>
+          <td class="warning"><strong><%= @stats.seances_range.length - @stats.seances_film_per_lieu(1).length %></strong></td>
           <td class="info"><strong><%= @stats.seances_range.sum("billets_scolaires") - @stats.seances_film_per_lieu(1).sum("billets_scolaires") %></strong></td>
           <td class="info"><strong><%= @stats.seances_range.sum("billets_enfants") - @stats.seances_film_per_lieu(1).sum("billets_enfants") %></strong></td>
           <td class="info"><strong><%= @stats.seances_range.sum("billets_adultes") - @stats.seances_film_per_lieu(1).sum("billets_adultes") %></strong></td>
@@ -218,7 +218,7 @@
     <tbody>
       <tr>
         <td class="active">Tous</td>
-        <td class="warning"><strong><%= film_seances_semaine.count %></strong></td>
+        <td class="warning"><strong><%= film_seances_semaine.length %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_scolaires") %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_enfants") %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_adultes") %></strong></td>
@@ -226,7 +226,7 @@
       </tr>
       <tr>
         <td class="active">Vernoux</td>
-        <td class="warning"><strong><%= film_vernoux.count %></strong></td>
+        <td class="warning"><strong><%= film_vernoux.length %></strong></td>
         <td class="info"><strong><%= film_vernoux.sum("billets_scolaires") %></strong></td>
         <td class="info"><strong><%= film_vernoux.sum("billets_enfants") %></strong></td>
         <td class="info"><strong><%= film_vernoux.sum("billets_adultes") %></strong></td>
@@ -234,7 +234,7 @@
       </tr>
       <tr>
         <td class="active">Lamastre</td>
-        <td class="warning"><strong><%= film_lamastre.count %></strong></td>
+        <td class="warning"><strong><%= film_lamastre.length %></strong></td>
         <td class="info"><strong><%= film_lamastre.sum("billets_scolaires") %></strong></td>
         <td class="info"><strong><%= film_lamastre.sum("billets_enfants") %></strong></td>
         <td class="info"><strong><%= film_lamastre.sum("billets_adultes") %></strong></td>
@@ -242,7 +242,7 @@
       </tr>
       <tr>
         <td class="active">Chalencon</td>
-        <td class="warning"><strong><%= film_chalencon.count %></strong></td>
+        <td class="warning"><strong><%= film_chalencon.length %></strong></td>
         <td class="info"><strong><%= film_chalencon.sum("billets_scolaires") %></strong></td>
         <td class="info"><strong><%= film_chalencon.sum("billets_enfants") %></strong></td>
         <td class="info"><strong><%= film_chalencon.sum("billets_adultes") %></strong></td>
@@ -250,7 +250,7 @@
       </tr>
       <tr>
         <td class="active">Itinérance</td>
-        <td class="warning"><strong><%= film_seances_semaine.count  - (film_vernoux.count  + film_lamastre.count  + film_chalencon.count) %></strong></td>
+        <td class="warning"><strong><%= film_seances_semaine.length  - (film_vernoux.length  + film_lamastre.length  + film_chalencon.length) %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_scolaires") - (film_vernoux.sum("billets_scolaires") + film_lamastre.sum("billets_scolaires") + film_chalencon.sum("billets_scolaires")) %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_enfants") - (film_vernoux.sum("billets_enfants")  + film_lamastre.sum("billets_enfants") + film_chalencon.sum("billets_enfants")) %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_adultes") - (film_vernoux.sum("billets_adultes") + film_lamastre.sum("billets_adultes") + film_chalencon.sum("billets_adultes")) %></strong></td>
@@ -258,7 +258,7 @@
       </tr>
       <tr>
         <td class="active">Tournée (Lamastre, Chalencon, Itinérance)</td>
-        <td class="warning"><strong><%= film_seances_semaine.count - film_vernoux.count %></strong></td>
+        <td class="warning"><strong><%= film_seances_semaine.length - film_vernoux.length %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_scolaires") - film_vernoux.sum("billets_scolaires") %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_enfants") - film_vernoux.sum("billets_enfants") %></strong></td>
         <td class="info"><strong><%= film_seances_semaine.sum("billets_adultes") - film_vernoux.sum("billets_adultes") %></strong></td>

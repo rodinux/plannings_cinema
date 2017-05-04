@@ -50,7 +50,7 @@
 
 
   <table class="table table-responsive table-hover table-striped">
-    <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
+    <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong> <%= link_to 'Modifier', edit_film_path(film), class: "btn btn-warning" %></h3></center>
     <% if film.classifications.present? %>
     <center>classé <%= film.classifications.map(&:nom_classification) %></center>
     <% end %>

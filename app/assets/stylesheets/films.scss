@@ -48,7 +48,7 @@
 }
 .film img {
   width: 50%;
-  max-width: 240px;
+  max-width: 260px;
 }
 .apropos {
    vertical-align: middle;
@@ -75,6 +75,9 @@
    }
    .film img {
       width: 30%;
-      min-width: 260px;
+      min-width: 240px;
   }
+  .cine h1 {
+    font-size: 24px;
+  }  
 }

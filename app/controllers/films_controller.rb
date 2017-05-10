@@ -19,10 +19,10 @@ class FilmsController < ApplicationController
   # GET /films
   # GET /films.json
   def index
-    @films = Film.all
+    @films = Film.order(updated_at: :desc).all
     @seances = Seance.all
     @search = Film.search(params[:q])
-    @films = @search.result(distinct: true)
+    @films = @search.result(distinct: true).page params[:page]
   end
 
   # GET /films

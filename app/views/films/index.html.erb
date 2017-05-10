@@ -40,7 +40,9 @@
 </div>
 <br>
 <div class="container">
-    <h3>Il y a pour cette recherche :<strong><%= @films.length %></strong> film(s)</strong>: </h3>
+
+    <h3>Il y a pour cette recherche :<strong><%= @search.result.length %></strong> film(s)</strong>: </h3>
+    <%= paginate @films %>
 
     <% @films.order(updated_at: :desc).each do |film| %>
      <% film_seances_semaine = film.seances.where(annulee: [nil, ""]) %>

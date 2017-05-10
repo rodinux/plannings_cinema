@@ -6,6 +6,7 @@ class Film < ApplicationRecord
 		validates :id, :uniqueness => true, :case_sensitive => false
 	    validates :titrefilm,:uniqueness => true, :case_sensitive => false
 
+
 	    def self.films_3_semaines
 	        films_3_semaines = Film.where({ updated_at: (3.week.ago.midnight..(Date.today + 1))}).order(created_at: :asc)
 	    end

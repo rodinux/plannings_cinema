@@ -21,7 +21,7 @@ p, ol, ul, td {
 }
 
 ol, ul {
-  padding: 10%;
+  padding: 1%;
 }
 
 pre {
@@ -81,3 +81,9 @@ div {
     list-style: square;
   }
 }
+
+#error {
+  font-size: 1.2em;
+  color: green;
+  padding: 2px 5px;
+ }

@@ -1,6 +1,7 @@
 // Place all the styles related to the films controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 #film_description {
     width: 100%;
     height: 250px;
@@ -64,6 +65,12 @@
   text-align: center;
 }
 .cine-titre {
+  text-align: center;
+}
+.pagination, .calendar-heading {
+  border-width: 1px;
+  border-style: outset;
+  padding: 1em;
   text-align: center;
 }
 @media (max-width: 1185px) {

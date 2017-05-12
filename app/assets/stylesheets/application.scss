@@ -33,3 +33,11 @@ p, ul, li, h4, h3, h2, h1, td, th {
 ol, ul {
 	padding: 1% !important;
 }
+ tbody tr:hover {
+ 	background-color: transparent;
+ }
+ #error {
+ 	font-size: 1.2em;
+     color: green;
+     padding: 2px 5px;
+ }

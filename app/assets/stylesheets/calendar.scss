@@ -72,7 +72,7 @@ table.table.table-responsive th, table.table.table-responsive td {
   text-align: center;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 800px) {
 thead, th {display:none}
 table {width:100%;}
 tr:nth-of-type(2n) {background-color: inherit;}

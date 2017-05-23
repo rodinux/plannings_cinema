@@ -55,14 +55,14 @@
                <% end %>
             </tr>
             <tr>
+              <td colspan="5" class="warning">
             <% @disponibilites.each do |disponibilite| %>
             <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
-              <td colspan="5" class="warning">
                   <strong>Absence(s):</strong>
                     , <strong><em><%= disponibilite.nom %></em></strong>
+              <% end %>
+              <% end %>
                 </td>
-              <% end %>
-              <% end %>
             </tr>
               <% end %>
             <% else %>

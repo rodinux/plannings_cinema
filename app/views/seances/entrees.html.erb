@@ -1,17 +1,17 @@
     <center><h1><strong>Nombre de séances et d'entrées</strong></h1></center>
-</div>
+
 <div class="container">
   <div class="row">
   <h2>On choisit ici combien les jours à prendre en compte pour les séances</h2>
   <h3>en gardant bien ce format <strong>"Année-Mois-Date"</strong></h3>
     <div class="pull_right range_query">
-    <%= form_tag entrees_path, method: :get do %>
+     <%= form_tag entrees_path, method: :get do %>
      <%= text_field_tag 'search[date_from]', @search.date_from %>
      <%= text_field_tag 'search[date_to]',  @search.date_to %>
      <%= submit_tag 'Chercher', class: 'btn search-button' %>
     <% end %>
     </div>
-  </div>
+</div>
 
 <center><h1><strong>Résultats</strong></h1></center>
 <h3><strong>Calcul des séances en tenant compte de ces dates :</strong></h3>

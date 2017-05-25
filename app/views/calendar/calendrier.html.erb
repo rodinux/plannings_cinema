@@ -2,7 +2,7 @@
   <center><h1 class="text-center"><strong>Calendrier des Projections</strong></h1></center>
 </div>
   <h2 class="text-center"><strong><%= @lieu.upcase %></strong></h2>
-  <div class="actions">
+  <div class="actions hidden-xs">
     <%= link_to 'imprimer Séances en pdf', calendrier_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= @lieu.upcase %></strong>
     <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
   </div>

@@ -4,7 +4,7 @@
   <h2 class="text-center"><strong><%= @lieu.upcase %></strong></h2>
 <p class="text-center">(Pour éditer, cliquez sur la séance)</p>
 <div class="container">
-  <div class="actions">
+  <div class="actions hidden-xs">
   <%= link_to 'calendrier pdf (imprimer)', edition_calendrier_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= @lieu.upcase %></strong>
   <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
   <%= link_to 'Accueil (calendrier sans édition)', root_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-warning" %>

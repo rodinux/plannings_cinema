@@ -29,6 +29,7 @@
     <h4><%= link_to 'Comment éditer le nombre de séances après une projection ?', aide_path(:anchor => "editer-entrees") %></h4>
     <h4><%= link_to 'Comment savoir où je suis inscrit ?', aide_path(:anchor => "mes_seances") %></h4>
     <h4><%= link_to 'Comment modifier mon mot de passe ou autre information me concernant ?', aide_path(:anchor => "me_modifier") %></h4>
+    <h4><%= link_to 'Comment inscrire une indisponibilité ou absence ?', aide_path(:anchor => "absences") %></h4>
     <h4><%= link_to 'Comment calculer le nombre d\'entrées ?', aide_path(:anchor => "calcul") %></h4>
 <% if can? :manage, Film %>
     <center><h3>Pour les administrateurs</h3></center>
@@ -101,6 +102,19 @@
 			<div class="container">
 				<center><%= image_tag("capture-modif-utilisateur.png", :alt => "résultat du choix des jours pour le calcul des entrées", :class => "capture") %></center>
 				<center><%= image_tag("capture-modif-manager-valid.png", :alt => "résultat du choix des jours pour le calcul des entrées", :class => "capture") %></center>
+			</div>
+	</div>
+	<center><h2 id="absences"><strong>Comment inscrire une indisponibilité ou absence ?</strong></h2></center>
+	<div class="description">
+		<h4>Dans l'onglet Disponibilités, vous verrez un calendrier avec la liste des Indisponibilités avec les noms en rouge et en dessous la liste des indisponibilités à venir ordonnées par dates. <br>
+		Pour créer, signaler une nouvelle indisponibilité, on clique sur le bouton en haut 'Créer une nouvelle Indisponibilité'. On arrive sur un formulaire avec la date de début et celle de la fin de notre absence à signaler et on valide notre choix.</h4>
+		    <div class="container">
+				<center><%= image_tag("indisponibilites3.png", :alt => "calendrier absences", :class => "capture") %></center>
+				<center><%= image_tag("indisponibilites2.png", :alt => "calendrier absences", :class => "capture") %></center>
+			</div>
+		<h4>Si on clique sur le nom en rouge on édite ou modifie l'indisponibilité en question ou bien dans la "Liste détaillée des absences en dessous du calendrier avec le bouton 'Modifier'.</h4>
+			<div class="container">
+				<center><%= image_tag("indisponibilites.png", :alt => "calendrier absences", :class => "capture") %></center>
 			</div>
 	</div>
 	<center><h2 id="calcul"><strong>Comment calculer le nombre d'entrées ?</strong></h2></center>

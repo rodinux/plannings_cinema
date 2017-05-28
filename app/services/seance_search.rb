@@ -3,12 +3,12 @@ class SeanceSearch
 
 	def initialize(params)
 		params ||= {}
-		@date_from = parsed_date(params[:date_from], 7.days.ago.to_date.to_s)
-		@date_to = parsed_date(params[:date_to], Date.today.to_s)
+		@date_from = parsed_date(params[:date_from], 7.days.ago.to_date.strftime("%d/%m/%Y"))
+		@date_to = parsed_date(params[:date_to], Date.today.strftime("%d/%m/%Y"))
 	end
 
 	def scope
-	   Seance.where('horaire BETWEEN ? and ?', @date_from, @date_to)
+	   Seance.where('horaire BETWEEN ? and ?', @date_from.to_date, @date_to.to_date)
 	end
 
 private

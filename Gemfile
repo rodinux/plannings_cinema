@@ -48,6 +48,7 @@ gem 'ransack'
 gem 'httparty'
 gem 'listen', '~> 3.0.5'
 gem "simple_calendar", "~> 2.0"
+gem 'bootstrap-datepicker-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -12,11 +12,13 @@
  *= require bootstrap.min
  *= require simple_calendar
  *= require bootstrap-datepicker3
+ *= require bootstrap-datetimepicker
  *= require_self
  *= require_tree .
  */
 @import "font-awesome";
 @import "bootstrap.min.css";
+@import 'bootstrap-datetimepicker';
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url(asset_path('glyphicons-halflings-regular.eot'));

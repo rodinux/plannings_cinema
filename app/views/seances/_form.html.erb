@@ -1,3 +1,4 @@
+@import 'bootstrap-datetimepicker'
 <%= form_for(@seance) do |f| %>
   <% if @seance.errors.any? %>
     <div id="error_explanation">
@@ -30,14 +31,23 @@
     <% end %>
   </div>
 
-  <div class="field">
-      <% if can? :manage, Seance %>
-        <span class="glyphicon glyphicon-time"></span> <%= f.label :horaire, :value => 'Date et horaire' %><br>
-        <%= f.datetime_select :horaire %>
-      <% else %>
-      <h3><span class="glyphicon glyphicon-time"></span> <%= l @seance.horaire, format: :very_long %></h3>
-      <% end %>
-  </div>
+  <% if can? :manage, Seance %>
+    <div style="overflow:hidden;">
+      <div class="form-group">
+        <div class="row">
+            <div class='col-md-8'>
+              <span class="glyphicon glyphicon-time"></span> <%= f.label :horaire, :value => 'Date et horaire' %>
+                <div class="input-group date" id="datetimepicker1">
+                  <%= f.text_field :horaire, :class => 'form-control' %>
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  <% else %>
+    <h3><span class="glyphicon glyphicon-time"></span> <%= l @seance.horaire, format: :very_long %></h3>
+  <% end %>
 
   <div class="field">
         <% if can? :manage, Seance %>
@@ -106,5 +116,14 @@
     <input type="submit" class="btn btn-lg btn-warning" value="Valider" />
   </div>
   <% end %>
-
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datetimepicker1').datetimepicker({
+          inline: true,
+          sideBySide: true,
+          format: 'DD/MM/YYYY HH:mm',
+          locale: 'fr'
+        });
+      });
+  </script>

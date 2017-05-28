@@ -49,6 +49,8 @@ gem 'httparty'
 gem 'listen', '~> 3.0.5'
 gem "simple_calendar", "~> 2.0"
 gem 'bootstrap-datepicker-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -66,7 +68,7 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+#gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
   gem 'rails_12factor'

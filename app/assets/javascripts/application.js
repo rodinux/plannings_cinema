@@ -17,4 +17,7 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
 //= require bootstrap.min
+//= require moment
+//= require moment/fr.js
+//= require bootstrap-datetimepicker
 //= require_tree .

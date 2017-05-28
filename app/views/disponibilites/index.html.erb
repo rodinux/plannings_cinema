@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<center><h2>Liste détaillée des absences</h2></center>
+<center><h2>Liste détaillée des absences à venir</h2></center>
 <table class="table table-responsive table-hover table-striped">
   <thead>
     <tr>
@@ -38,13 +38,17 @@
   </thead>
   <tbody>
     <% @disponibilites.order(start_time: :asc).each do |disponibilite| %>
+    <% if disponibilite.end_time.future? %>
       <tr>
         <td><%= disponibilite.nom %></td>
         <td><%= l disponibilite.start_time, format: :middle_long %></td>
         <td><%= l disponibilite.end_time, format: :middle_long %></td>
         <td><%= link_to 'Voir', disponibilite, :class => "btn btn-primary" %></td>
         <td><%= link_to 'Modifier', edit_disponibilite_path(disponibilite), :class => "btn btn-warning" %></td>
-        <td><%= link_to 'Suprimer', disponibilite, method: :delete, data: { confirm: 'En êtes-vous sûr ?' }, :class => "btn btn-danger" %>
+        <td><%= link_to 'Suprimer', disponibilite, method: :delete, data: { confirm: 'En êtes-vous sûr ?' }, :class => "btn btn-danger" %></td>
+      </tr>
+    </tbody>
+    <% end %>
     <% end %>
   </tbody>
 </table>

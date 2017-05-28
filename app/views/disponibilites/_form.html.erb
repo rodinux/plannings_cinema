@@ -17,6 +17,7 @@
     <%= f.label :nom, :value => 'Choisissez votre Prénom' %><br>
     <%= f.select :nom, users %>
   </div>
+  <h3>En cliquant sur les dates, vous aurez un calendrier pour le choix</h3>
 <h2>Je serai absent</h2>
   <div class="field">
     <%= f.label :start_time, :value => 'Du:' %>
@@ -37,8 +38,10 @@
 
   $(document).ready(function(){
     $('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    language: 'FR'
+    format: "dd/mm/yyyy",
+    todayBtn: true,
+    language: "fr",
+    todayHighlight: true
     });
   });
 </script>

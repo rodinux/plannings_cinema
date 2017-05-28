@@ -3,10 +3,12 @@
 <div class="container">
   <div class="row">
   <h2>On choisit ici combien les jours à prendre en compte pour les séances</h2>
-  <h3>en gardant bien ce format <strong>"Année-Mois-Date"</strong></h3>
+  <h3>En cliquant sur les dates, vous aurez un calendrier pour le choix</h3>
     <div class="pull_right range_query">
      <%= form_tag entrees_path, method: :get do %>
+     <%= label_tag('search[date_from]', 'Du:') %>
      <%= text_field_tag 'search[date_from]', @search.date_from, :class => 'datepicker' %>
+     <%= label_tag('search[date_to]', 'Au:') %>
      <%= text_field_tag 'search[date_to]',  @search.date_to, :class => 'datepicker' %>
      <%= submit_tag 'Chercher', class: 'btn search-button' %>
     <% end %>
@@ -15,8 +17,10 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    language: 'FR'
+    format: "dd/mm/yyyy",
+    todayBtn: true,
+    language: "fr",
+    todayHighlight: true
     });
   });
 </script>

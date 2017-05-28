@@ -32,6 +32,7 @@
   </div>
 
   <% if can? :manage, Seance %>
+    <h3>Pour éditer, cliquez l'icône avec le calendrier.</h3>
     <div style="overflow:hidden;">
       <div class="form-group">
         <div class="row">
@@ -69,14 +70,14 @@
     </div>
 
     <div class="field">
-            <% annulation = ["Annulée"] %>
-            <% if can? :manage, Seance %>
-              <span class="glyphicon glyphicon-warning-sign"></span> <%= f.label :annulee, :value => 'Annulation' %><br>
-              <%= f.select :annulee, annulation, include_blank: true %>
-            <% else %>
-              <h3><span class="glyphicon glyphicon-warning-sign"></span> <%= @seance.annulee %></h3>
-            <% end %>
-        </div>
+        <% annulation = ["Annulée"] %>
+        <% if can? :manage, Seance %>
+          <span class="glyphicon glyphicon-warning-sign"></span> <%= f.label :annulee, :value => 'Annulation' %><br>
+          <%= f.select :annulee, annulation, include_blank: true %>
+        <% else %>
+            <h3><span class="glyphicon glyphicon-warning-sign"></span> <%= @seance.annulee %></h3>
+        <% end %>
+    </div>
 
     <% users = User.all.users_alphabet.map{|user| user.prenom } %>
 

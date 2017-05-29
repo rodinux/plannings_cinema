@@ -33,7 +33,7 @@
 
   <% if can? :manage, Seance %>
     <h3>Pour éditer, cliquez l'icône avec le calendrier.</h3>
-    <div style="overflow:hidden;">
+   
       <div class="form-group">
         <div class="row">
             <div class='col-md-8'>
@@ -45,7 +45,7 @@
               </div>
           </div>
       </div>
-    </div>
+
   <% else %>
     <h3><span class="glyphicon glyphicon-time"></span> <%= l @seance.horaire, format: :very_long %></h3>
   <% end %>
@@ -123,6 +123,7 @@
         $('#datetimepicker1').datetimepicker({
           inline: true,
           sideBySide: true,
+          defaultDate: "#{}",
           format: 'DD/MM/YYYY HH:mm',
           locale: 'fr'
         });

@@ -1,10 +1,11 @@
 <center><h1><strong>Films</strong></h1></center>
 <div class="container">
     <div class="actions">
-        <%= link_to 'Retour à la page Films par défaut', films_a_venir_path, :class => "btn btn-default btn-lg"  %>
+        <%= link_to 'Retour à la page Films à venir', films_a_venir_path, :class => "btn btn-default btn-lg"  %>
     </div>
 </div>
 <br>
+<% if can? :manage, @films %>
 <div class="container">
     <div class="actions">
         <%= link_to 'Créer une nouvelle seance', new_seance_path, :class => "btn btn-primary btn-lg" %>
@@ -12,6 +13,7 @@
         <%= link_to 'Ajouter les nouveaux films à venir', ecranvillage_path, :class => "btn btn-danger btn-lg" %>
     </div>
 </div>
+<% end %>
 <div class="container">
 <center>
 <fieldset class="search-field">
@@ -52,7 +54,11 @@
 
 
   <table class="table table-responsive table-hover table-striped">
-    <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong> <%= link_to 'Modifier', edit_film_path(film), class: "btn btn-warning" %></h3></center>
+    <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong>
+    <% if can? :manage, @films %>
+     <%= link_to 'Modifier', edit_film_path(film), class: "btn btn-warning" %>
+    <% end %>
+     </h3></center>
     <% if film.classifications.present? %>
     <center>classé <%= film.classifications.map(&:nom_classification) %></center>
     <% end %>

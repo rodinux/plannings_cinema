@@ -17,11 +17,13 @@
         <%= link_to 'Créer une nouveau lieu', new_village_path, :class => "btn btn-primary btn-lg" %>
         <%= link_to 'Ajouter les nouveaux films à venir', ecranvillage_path, :class => "btn btn-danger btn-lg" %>
     </div>
-    <div class="actions">
-        <%= link_to 'Chercher un film pour édition', films_path, :class => "btn btn-warning btn-lg" %>
-    </div>
 </div>
 <% end %>
+<div class="container">
+    <div class="actions">
+        <%= link_to 'Rechercher un film', films_path, :class => "btn btn-warning btn-lg" %>
+    </div>
+</div>    
 <br>
 <div class="film-seances">
     <% @films.films_3_semaines.each do |film| %>

@@ -19,11 +19,13 @@
     </div>
 </div>
 <% end %>
+<% if can? :update, Seance %>
 <div class="container">
     <div class="actions">
         <%= link_to 'Rechercher un film', films_path, :class => "btn btn-warning btn-lg" %>
     </div>
-</div>    
+</div>
+<% end %>
 <br>
 <div class="film-seances">
     <% @films.films_3_semaines.each do |film| %>

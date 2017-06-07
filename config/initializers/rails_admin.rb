@@ -74,9 +74,6 @@ RailsAdmin.config do |config|
       field :seances do
         inverse_of :village
       end
-      field :films do
-        inverse_of :villages
-      end
         field :commune
         field :id
         field :salle

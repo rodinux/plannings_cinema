@@ -4,7 +4,7 @@ class Film < ApplicationRecord
 		has_many :villages, :through => :seances
 		has_and_belongs_to_many :classifications
 		validates :id, :uniqueness => true, :case_sensitive => false
-	    validates :titrefilm,:uniqueness => true, :case_sensitive => false
+	    validates :titrefilm, :uniqueness => true, :case_sensitive => false
 
 
 	    def self.films_3_semaines

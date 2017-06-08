@@ -29,7 +29,7 @@ class DisponibilitesController < ApplicationController
 
     respond_to do |format|
       if @disponibilite.save
-        format.html { redirect_to @disponibilite, notice: 'Disponibilite was successfully created.' }
+        format.html { redirect_to @disponibilite, notice: 'Disponibilité créée avec succés.' }
         format.json { render :show, status: :created, location: @disponibilite }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class DisponibilitesController < ApplicationController
   def update
     respond_to do |format|
       if @disponibilite.update(disponibilite_params)
-        format.html { redirect_to @disponibilite, notice: 'Disponibilite was successfully updated.' }
+        format.html { redirect_to @disponibilite, notice: 'Disponibilité bien mise à jour.' }
         format.json { render :show, status: :ok, location: @disponibilite }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class DisponibilitesController < ApplicationController
   def destroy
     @disponibilite.destroy
     respond_to do |format|
-      format.html { redirect_to disponibilites_url, notice: 'Disponibilite was successfully destroyed.' }
+      format.html { redirect_to disponibilites_url, notice: 'Disponibilité bien supprimée.' }
       format.json { head :no_content }
     end
   end

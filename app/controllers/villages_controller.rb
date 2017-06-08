@@ -31,10 +31,8 @@ class VillagesController < ApplicationController
     respond_to do |format|
       if @village.save
         format.html { redirect_to @village, notice: 'Le lieu a bien été créé.' }
-        format.json { render :show, status: :created, location: @village }
       else
         format.html { render :new }
-        format.json { render json: @village.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,7 +42,7 @@ class VillagesController < ApplicationController
   def update
     respond_to do |format|
       if @village.update(village_params)
-        format.html { redirect_to @village, notice: 'La modification est bien pris en compte.' }
+        format.html { redirect_to @village, notice: 'La modification est bien prise en compte.' }
         format.json { render :show, status: :ok, location: @village }
       else
         format.html { render :edit }

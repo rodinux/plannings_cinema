@@ -233,8 +233,8 @@ fr:
       long: ! '%d %B %Y %H:%M %p'
       short: ! '%a %d %b'
       only_day: ! '%e'
-      only_hour: ! '%Hh %M'
-      very_long: '%A %d %B %Y %Hh %M'
+      only_hour: ! '%Hh:%M'
+      very_long: '%A %d %B %Y %Hh:%M'
       middle: ! '%e %B %Y'
       middle_long: ! '%A %e %B %Y'
       day_names: [lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche]

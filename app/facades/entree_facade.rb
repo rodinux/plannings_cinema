@@ -46,7 +46,7 @@ class EntreeFacade
     end
 
     def films_seances_classees_order_total
-        films_seances_classees.joins(:seances).merge(@seances.where(annulee: [nil, ""]).order("sum(total_billets) DESC"))
+        films_seances_classees.merge(@seances.where(annulee: [nil, ""]).order("sum(total_billets) DESC"))
     end
 
     def films_seances_adrc_order

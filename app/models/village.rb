@@ -4,4 +4,5 @@ class Village < ApplicationRecord
 		has_many :films, :through => :seances
 		validates :id, :uniqueness => true, :case_sensitive => false
 	    validates :commune, :presence => true, :case_sensitive => false
+	    validates :salle, :presence => true, :case_sensitive => false
 end

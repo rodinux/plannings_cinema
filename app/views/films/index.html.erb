@@ -56,7 +56,7 @@
   <table class="table table-responsive table-hover table-striped">
     <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong>
     <% if can? :manage, @films %>
-     <%= link_to 'Modifier', edit_film_path(film), class: "btn btn-warning" %>
+     <%= link_to 'Modifier', edit_film_path(film), class: "btn btn-warning" %>  <%= link_to 'Supprimer', film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
     <% end %>
      </h3></center>
     <% if film.classifications.present? %>

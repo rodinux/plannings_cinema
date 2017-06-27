@@ -22,7 +22,7 @@ RailsAdmin.config do |config|
 
   Rails.application.eager_load!
 
- config.included_models = ["Film", "Village", "Seance", "User", "Classification"]
+ config.included_models = ["Film", "Village", "Seance", "User", "Classification", "Disponibilite"]
 
 
   ActiveRecord::Base.descendants.each do |model|
@@ -220,6 +220,27 @@ RailsAdmin.config do |config|
       list do
         field :nom_classification
         field :film_ids
+      end
+    end
+
+    config.model 'Disponibilite' do
+     configure :start_time do
+        label "Début: "
+      end
+      configure :end_time do
+        label "Fin: "
+      end
+      configure :nom do
+        label "Nom: "
+      end
+      list do
+        field :start_time
+        field :end_time
+        field :nom
+      end
+      import do
+        include_all_fields
+        default_excluded_fields [:created_at, :updated_at]
       end
     end
   end

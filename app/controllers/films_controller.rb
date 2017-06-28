@@ -8,7 +8,7 @@ class FilmsController < ApplicationController
   # GET /ecranvillage.json
   def ecranvillage
        @films = Film.all
-       response = HTTParty.get('https://www.ecranvillage.net/wp-json/ecranvillage-api/v2/export')
+       response = HTTParty.get('https://www.ecranvillage.net/wp-json/ecranvillage-api/v2/export?nocache')
        puts response.body, response.code, response.message, response.headers.inspect
        JSON.parse(response.body).each do |item|
        nouveaux_films = Film.new( :id => item["id"], :titrefilm => item["titrefilm"], :description => item["description"], :affiche => item["affiche"] )

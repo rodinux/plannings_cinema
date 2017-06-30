@@ -1,4 +1,4 @@
-<% response = HTTParty.get('https://www.ecranvillage.net/wp-json/ecranvillage-api/v2/export?nocache')%>
+<% response = HTTParty.get('https://www.ecranvillage.net/wp-json/ecranvillage-api/v2/export/?nocache')%>
        <% puts response.body %>
 <div class="container">
     <center><h1>Importer les nouveaux Films</h1>

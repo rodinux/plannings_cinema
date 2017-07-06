@@ -10,5 +10,5 @@ class Disponibilite < ApplicationRecord
 	    if self.end_time.blank?
 	        self.end_time = Date.today
 	    end
-	end    
+	end
 end

@@ -37,8 +37,8 @@
     </tr>
   </thead>
   <tbody>
-    <% @disponibilites.order(start_time: :asc).each do |disponibilite| %>
-    <% if disponibilite.end_time.future? || disponibilite.end_time = Date.today %>
+    <% @disponibilites.order(start_time: :desc).each do |disponibilite| %>
+    <% if disponibilite.end_time.future? %>
       <tr>
         <td><%= disponibilite.nom %></td>
         <td><%= l disponibilite.start_time, format: :middle_long %></td>

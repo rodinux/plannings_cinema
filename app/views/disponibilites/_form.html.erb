@@ -17,7 +17,8 @@
     <%= f.label :nom, :value => 'Choisissez votre Prénom' %><br>
     <%= f.select :nom, users %>
   </div>
-  <h3>En cliquant sur les dates, vous aurez un calendrier pour le choix</h3>
+  <h3>En cliquant sur les dates, vous aurez un calendrier pour le choix des dates</h3>
+  <h3> surtout remplissez bien ces champs avnat de valider !!</h3>
 <h2>Je serai absent</h2>
   <div class="field">
     <%= f.label :start_time, :value => 'Du:' %>
@@ -35,7 +36,6 @@
 <% end %>
 </div>
 <script type="text/javascript">
-
   $(document).ready(function(){
     $('.datepicker').datepicker({
     format: "dd/mm/yyyy",

@@ -237,6 +237,7 @@ fr:
       very_long: '%A %d %B %Y %Hh:%M'
       middle: ! '%e %B %Y'
       middle_long: ! '%A %e %B %Y'
+      calendar: ! '%d/%m/%Y %Hh:%M'
       day_names: [lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche]
       abbr_day_names: [lun, mar, mer, jeu, ven, sam, dim]
       month_names: [~, janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre]

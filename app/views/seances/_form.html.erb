@@ -1,4 +1,3 @@
-@import 'bootstrap-datetimepicker'
 <%= form_for(@seance) do |f| %>
   <% if @seance.errors.any? %>
     <div id="error_explanation">
@@ -30,32 +29,40 @@
       <h3><%= @seance.version %></h3>
     <% end %>
   </div>
+
+  <div class="field">
   <% if @seance.horaire.present? %>
     <h3><span class="glyphicon glyphicon-time"></span> <%= l @seance.horaire, format: :very_long %></h3>
+    <% if can? :manage, Film %>
+    Pour rééditer la date suivez ce lien <a href="/admin/seance/<%=@seance.id %>/edit">'Édition séance via Admin'</a>
+    <% end %>
   <% else %>
-  <% if can? :manage, Seance %>
-    <h3>Pour éditer, cliquez l'icône avec le calendrier.</h3>
-      <div class="form-group">
-        <div class="row">
-            <div class='col-md-8'>
-              <span class="glyphicon glyphicon-time"></span> <%= f.label :horaire, :value => 'Date et horaire' %>
-                <div class="input-group date" id="datetimepicker1">
-                  <%= f.text_field :horaire, :class => 'form-control' %>
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    <% if can? :manage, Seance %>
+      <h3>Pour éditer, cliquez l'icône avec le calendrier.</h3>
+        <div class="form-group">
+          <div class="row">
+              <div class='col-md-8'>
+                <span class="glyphicon glyphicon-time"></span> <%= f.label :horaire, :value => 'Date et horaire' %>
+                  <div class="input-group date" id="datetimepicker1">
+                    <%= f.text_field :horaire, :class => 'form-control' %>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                  </div>
                 </div>
-              </div>
-          </div>
-      </div>
+            </div>
+        </div>
+    <% end %>
   <% end %>
-  <% end %>
+  </div>
+
+
   <div class="field">
-        <% if can? :manage, Seance %>
-          <span class="glyphicon glyphicon-home"></span> <%= f.label :village_id, :value => 'Lieu' %><br>
-          <%= f.select :village_id, Village.all.order(id: :asc).collect {|village| [ village.commune + " " + village.salle, village.id ] } %>
-        <% else %>
-          <h3><span class="glyphicon glyphicon-home"></span> <%= @seance.village.commune.upcase %> <%= @seance.village.salle %></h3>
-        <% end %>
-    </div>
+    <% if can? :manage, Seance %>
+      <span class="glyphicon glyphicon-home"></span> <%= f.label :village_id, :value => 'Lieu' %><br>
+      <%= f.select :village_id, Village.all.order(id: :asc).collect {|village| [ village.commune + " " + village.salle, village.id ] } %>
+    <% else %>
+      <h3><span class="glyphicon glyphicon-home"></span> <%= @seance.village.commune.upcase %> <%= @seance.village.salle %></h3>
+    <% end %>
+  </div>
 
     <div class="field">
         <% extras = ["Séance scolaire","Ciné-Débat", "Ciné-Goûter", "Annulée", "Atelier"] %>
@@ -116,13 +123,3 @@
   </div>
   <% end %>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#datetimepicker1').datetimepicker({
-          inline: true,
-          sideBySide: true,
-          format: 'DD/MM/YYYY HH:mm',
-          locale: 'fr'
-        });
-      });
-  </script>

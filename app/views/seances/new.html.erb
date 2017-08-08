@@ -7,3 +7,15 @@
 </center>
 </div>
 <br>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datetimepicker1').datetimepicker({
+        	initialDate: '<%= l @seance.horaire %>',
+        	hide: true,
+            inline: true,
+            sideBySide: true,
+            format: 'DD/MM/YYYY HH:mm',
+            locale: 'fr'
+        });
+    });
+</script>

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :disponibilites
-  get 'entrees/calcul_entrees'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount RailsAdminImport::Engine => '/rails_admin_import', :as => 'rails_admin_import'
@@ -16,6 +14,8 @@ Rails.application.routes.draw do
   resources :classifications
   resources :users
   resources :user_sessions, only: [:new, :create, :destroy]
+  resources :disponibilites
+  #get 'entrees/calcul_entrees'
   get 'aide' => 'calendar#aide'
   get 'calendrier' => 'calendar#calendrier'
   get 'a_completer' => 'seances#a_completer'

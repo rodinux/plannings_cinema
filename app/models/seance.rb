@@ -37,12 +37,16 @@ class Seance < ApplicationRecord
         seances_1_mois_avant_apres = Seance.where({horaire: (1.month.ago..(Date.today + 30))}).order(horaire: :asc)
     end
 
+    def self.seances_1_semaine_avant_2_mois_apres
+        seances_1_semaine_avant_1_mois_apres = Seance.where({horaire: (1.week.ago..(Date.today + 60))}).order(horaire: :asc)
+    end
+
     def self.seances_calendrier
     	seances_calendrier = Seance.order(horaire: :asc)
     end
 
     def self.seances_a_completer_projection
-    	where(projection: "").order(horaire: :asc)
+    	seances_a_completer_projection = Seance.where(projection: "").order(horaire: :asc)
     end
 
     def self.seances_a_completer_caisse

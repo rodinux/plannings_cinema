@@ -29,7 +29,7 @@
 <br>
 <div class="film-seances">
     <% @films.films_3_semaines.each do |film| %>
-    <% if film.seances.present? %>
+    <% if film.seances.seances_1_semaine_avant_2_mois_apres.present? %>
     <div class="film description">
         <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
         <% if can? :manage, @film %>

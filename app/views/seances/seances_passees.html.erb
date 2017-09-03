@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="actions">
   <%= link_to 'Séances passées en pdf (imprimer)', seances_passees_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= @lieu.upcase %></strong>
@@ -6,9 +7,10 @@
  <div class="actions">
   <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-success btn-lg" %> <strong>pour <%= @lieu.upcase %></strong>
  </div>
-<% seances_annulees = @seances.seances_passees_1_mois.where(annulee: "Annulée") %>
+
   <center><h1 id="liste"><strong>Séances passées pour <%= @lieu.upcase %> </strong></h1></center>
-          <p>Il y a eu <strong><%=  @seances.seances_passees_1_mois.lieuxtest[@lieu].length - seances_annulees.length %></strong> séances et <strong><%= seances_annulees.length %></strong> annulée(s) ce mois-ci pour <strong><%= @lieu %></strong></p>
+
+          <p>Il y a eu <strong><%=  @seances.seances_passees_1_mois.lieuxtest[@lieu].compact.count %></strong> séances dont <strong><%= @seances.seances_passees_1_mois.where(annulee: "Annulée").lieuxtest[@lieu].compact.count %></strong> annulée(s) ce mois-ci pour <strong><%= @lieu.upcase %></strong>. Entre le <%=l 30.days.ago.to_date %> et le <%=l Date.today %></p>
 
 
   <div class="row">

@@ -26,7 +26,7 @@ class Seance < ApplicationRecord
 	end
 
 	def self.seances_passees_1_mois
-         seances_mois = Seance.where({horaire: (30.days.ago..Date.today)}).order(horaire: :desc)
+         seances_passees_1_mois = Seance.where({horaire: (30.days.ago..Date.today)}).order(horaire: :desc)
 	end
 
 	def self.seances_semaine

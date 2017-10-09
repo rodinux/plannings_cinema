@@ -65,7 +65,7 @@
   </div>
 
     <div class="field">
-        <% extras = ["Séance scolaire","Ciné-Débat", "Ciné-Goûter", "Annulée", "Atelier"] %>
+        <% extras = ["Séance scolaire","Ciné-Débat", "Ciné-Goûter", "Apéro pitchoun", "Atelier", "Séance gratuite", "Annulée"] %>
         <% if can? :manage, Seance %>
           <span class="glyphicon glyphicon-info-sign"></span> <%= f.label :extras, :value => 'extras' %><br>
           <%= f.select :extras, extras, include_blank: true %>

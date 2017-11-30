@@ -1,14 +1,14 @@
 # config valid for current version and patch releases of Capistrano
 #lock "~> 3.10.0"
 
-set :application, "plannings_cinema/code"
+set :application, "plannings_cinema"
 set :repo_url, "https://github.com/rodinux/plannings_cinema.git"
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/plannings_cinema/code"
+set :deploy_to, "/var/www/plannings_cinema"
 
 # Default value for :format is :airbrussh.
 set :format, :airbrussh
@@ -76,7 +76,7 @@ namespace :deploy do
 
 set :stage, :production
 set :branch, "master"
-set :deploy_to, '/var/www/plannings_cinema/code'
+set :deploy_to, '/var/www/plannings_cinema'
 
 server '', user: 'plannings_cinema', roles: %w{web app db}
 

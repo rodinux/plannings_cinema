@@ -71,7 +71,6 @@ namespace :deploy do
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 
-end
 
 # config/deploy/production.rb
 
@@ -90,3 +89,4 @@ server '', user: 'plannings_cinema', roles: %w{web app db}
        end
     end
   end
+

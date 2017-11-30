@@ -1,14 +1,14 @@
 # config valid for current version and patch releases of Capistrano
 #lock "~> 3.10.0"
 
-set :application, "plannings_cinema/"
+set :application, "plannings_cinema/code"
 set :repo_url, "https://github.com/rodinux/plannings_cinema.git"
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/plannings_cinema/"
+set :deploy_to, "/var/www/plannings_cinema/code"
 
 # Default value for :format is :airbrussh.
 set :format, :airbrussh
@@ -32,7 +32,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 set :default_env, { path: "/home/deploy/.rvm/bin/rvm:$PATH" }
 set :rvm_ruby_version, '2.3.5'
 
-set :passenger_in_gemfile true
+#set :passenger_in_gemfile true
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
@@ -77,7 +77,7 @@ end
 
 set :stage, :production
 set :branch, "master"
-set :deploy_to, '/var/www/plannings_cinema/'
+set :deploy_to, '/var/www/plannings_cinema/code'
 
 server '', user: 'plannings_cinema', roles: %w{web app db}
 

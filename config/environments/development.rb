@@ -25,7 +25,7 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
-  
+
   config.i18n.available_locales = :fr
 
   # Don't care if the mailer can't send.

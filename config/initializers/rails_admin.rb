@@ -22,7 +22,7 @@ RailsAdmin.config do |config|
 
   Rails.application.eager_load!
 
- config.included_models = ["Film", "Village", "Seance", "User", "Classification", "Disponibilite"]
+ config.included_models = ["Film", "Village", "Seance", "User", "Classification"]
 
 
   ActiveRecord::Base.descendants.each do |model|
@@ -109,10 +109,10 @@ RailsAdmin.config do |config|
       field :village do
         inverse_of :seances
       end
-        field :horaire
-        configure :horaire, :date do
-          strftime_format '%d/%m/%Y %H:%M'
-        end
+      field :horaire
+      configure :horaire, :date do
+        strftime_format '%d/%m/%Y %H:%M'
+      end
         field :total_billets
         field :billets_adultes
         field :billets_enfants
@@ -178,6 +178,16 @@ RailsAdmin.config do |config|
     end
 
     config.model 'User' do
+      list do
+        field :prenom
+        field :nom
+        field :email
+        field :role
+        field :telephone
+        field :created_at
+        field :updated_at
+        field :id
+      end
       configure :prenom do
         label "Prénom: "
       end
@@ -197,19 +207,13 @@ RailsAdmin.config do |config|
         include_all_fields
         exclude_fields [:created_at, :updated_at, :password, :password_confirmation]
       end
-      list do
-        field :prenom
-        field :nom
-        field :email
-        field :role
-        field :telephone
-        field :created_at
-        field :updated_at
-        field :id
-      end
     end
 
     config.model 'Classification' do
+      list do
+        field :nom_classification
+        field :film_ids
+      end
       configure :nom_classification do
         label "Classification: "
       end
@@ -217,32 +221,8 @@ RailsAdmin.config do |config|
         include_all_fields
         exclude_fields [:created_at, :updated_at]
       end
-      list do
-        field :nom_classification
-        field :film_ids
-      end
     end
 
-    config.model 'Disponibilite' do
-     configure :start_time do
-        label "Début: "
-      end
-      configure :end_time do
-        label "Fin: "
-      end
-      configure :nom do
-        label "Nom: "
-      end
-      list do
-        field :start_time
-        field :end_time
-        field :nom
-      end
-      import do
-        include_all_fields
-        default_excluded_fields [:created_at, :updated_at]
-      end
-    end
   end
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
@@ -281,6 +261,10 @@ RailsAdminImport.config do |config|
 
       config.model 'User: ' do
         label :user
+      end
+
+      config.model 'Disponibilite: ' do
+        label :disponibilite
       end
   end
 end

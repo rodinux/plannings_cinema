@@ -62,7 +62,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      execute 'passenger-config restart-app'
+      set :passenger_restart_with_touch, false
     end
   end
 

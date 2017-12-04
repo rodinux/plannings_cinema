@@ -30,6 +30,8 @@ role :db,  %w{plannings_cinema@http://programme.ecranvillage.deploiement.ovh/}
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
+set :rvm_ruby_version, '2.3.5p376'      # Defaults to: 'default'
+set :rvm_custom_path, '/home/deploy/.rvm'  # only needed if not detected
 
 
 

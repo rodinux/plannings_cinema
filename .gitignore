@@ -22,8 +22,10 @@
 
 # Ignore secret key
 /config/secrets.yml
+# Ignore logs
 /app/passenger.3000.log
 /app/passenger.3000.pid.lock
 /vendor/bundle/
+# essai
 
 

@@ -41,7 +41,7 @@ role :db,  %w{plannings_cinema@http://programme.ecranvillage.deploiement.ovh/}
 #
 # Global options
 # --------------
-#  set :ssh_options, {
+#set :ssh_options, {
 #    keys: %w(/home/rlisowski/.ssh/id_rsa),
 #    forward_agent: false,
 #    auth_methods: %w(password)

@@ -19,8 +19,8 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 
 # Default value for :pty is false
 # set :pty, true
-#set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
-#set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", "config/secrets.yml"

@@ -70,7 +70,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
   gem 'capistrano-passenger'
-  gem 'capistrano-rails-collection'
+  #gem 'capistrano-rails-collection'
   gem 'capistrano-faster-assets'
   gem 'capistrano-postgresql'
 end

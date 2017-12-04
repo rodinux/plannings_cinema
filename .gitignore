@@ -21,10 +21,11 @@
 .byebug_history
 
 # Ignore secret key
-secrets.yml
+/config/secrets.yml
 # Ignore logs
 /app/passenger.3000.log
 /app/passenger.3000.pid.lock
 /vendor/bundle/
+
 
 

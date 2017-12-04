@@ -21,11 +21,10 @@
 .byebug_history
 
 # Ignore secret key
-/config/secrets.yml
+secrets.yml
 # Ignore logs
 /app/passenger.3000.log
 /app/passenger.3000.pid.lock
 /vendor/bundle/
-# essai
 
 

@@ -43,7 +43,7 @@
        <%= f.label :password_confirmation, :value => 'confirmation du mot de passe' %><br />
        <%= f.password_field :password_confirmation, autofocus: true %>
     </div>
-  <% if can? :manage, User %>
+ 
     <div class="field">
      <%= f.label :role, :value => 'Permissions' %><br>
      <%= f.select :role, User::ROLES %>
@@ -52,5 +52,5 @@
    <div class="actions">
      <input type="submit" class="btn btn-lg btn-warning" value="Valider" />
    </div>
-
+  <% end %>
  </center>

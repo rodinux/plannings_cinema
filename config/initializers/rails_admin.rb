@@ -22,21 +22,20 @@ RailsAdmin.config do |config|
 
   Rails.application.eager_load!
 
- config.included_models = ["Film", "Village", "Seance", "User", "Classification"]
-
+ config.included_models = ["Film", "Village", "Seance", "User", "Classification", "Disponibilite"]
 
   ActiveRecord::Base.descendants.each do |model|
 
     config.model 'Film' do
     list do
-    field :seances do
-        inverse_of :film
-    end
-    field :villages do
-        inverse_of :films
-    end
       field :titrefilm
       field :id
+      field :seances do
+          inverse_of :film
+      end
+      field :villages do
+          inverse_of :films
+      end
       field :classification_ids
       field :distribution
       field :description
@@ -49,6 +48,13 @@ RailsAdmin.config do |config|
     configure :id do
       label "ID du film: "
     end
+    configure :seances do
+      label "ID des séances: "
+    end
+    configure :villages do
+      label "ID des lieux: "
+    end
+
     configure :description do
       label "Résumé du Film: "
     end
@@ -60,7 +66,7 @@ RailsAdmin.config do |config|
     end
     import do
       include_all_fields
-      default_excluded_fields [:created_at]
+      default_excluded_fields [:created_at, :seances, :villages]
     end
     edit do
         field :classifications do
@@ -71,30 +77,36 @@ RailsAdmin.config do |config|
 
     config.model 'Village' do
       list do
-      field :seances do
-        inverse_of :village
-      end
-      field :films do
-        inverse_of :villages
-      end
-        field :commune
         field :id
+        field :commune
         field :salle
+        field :seances do
+          inverse_of :village
+        end
+        field :films do
+          inverse_of :villages
+        end
         field :created_at
         field :updated_at
-      end
-      configure :commune do
-        label "commune: "
       end
       configure :id do
         label "ID du lieu: "
       end
+      configure :commune do
+        label "commune: "
+      end
       configure :salle do
         label "salle: "
       end
+      configure :seances do
+        label "ID des séances: "
+      end
+      configure :films do
+        label "ID des films: "
+      end
       import do
         include_all_fields
-        default_excluded_fields [:created_at, :updated_at]
+        default_excluded_fields [:created_at, :updated_at, :seances, :films]
       end
     end
 
@@ -103,24 +115,24 @@ RailsAdmin.config do |config|
         strftime_format '%d/%m/%Y %H:%M'
       end
       list do
-      field :film do
-        inverse_of :seances
-      end
-      field :village do
-        inverse_of :seances
-      end
-      field :horaire
-      configure :horaire, :date do
-        strftime_format '%d/%m/%Y %H:%M'
-      end
+        field :horaire
+        configure :horaire, :date do
+          strftime_format '%d/%m/%Y %H:%M'
+        end
+        field :film do
+          inverse_of :seances
+        end
+        field :village do
+          inverse_of :seances
+        end
+        field :projection
+        field :caisse
         field :total_billets
         field :billets_adultes
         field :billets_enfants
         field :billets_scolaires
         field :extras
         field :version
-        field :projection
-        field :caisse
         field :annulee
         field :updated_at
         field :created_at
@@ -128,6 +140,18 @@ RailsAdmin.config do |config|
       end
       configure :horaire do
         label "Date et heure: "
+      end
+      configure :film do
+        label "ID du film: "
+      end
+      configure :village do
+        label "ID du lieu: "
+      end
+      configure :projection do
+        label "Projection: "
+      end
+      configure :caisse do
+        label "Caisse: "
       end
       configure :total_billets do
         label "Total Billets: "
@@ -146,12 +170,6 @@ RailsAdmin.config do |config|
       end
       configure :extras do
         label "extras: "
-      end
-      configure :projection do
-        label "Projection: "
-      end
-      configure :caisse do
-        label "Caisse: "
       end
       configure :annulee do
         label "Annulation: "
@@ -205,7 +223,7 @@ RailsAdmin.config do |config|
       end
       import do
         include_all_fields
-        exclude_fields [:created_at, :updated_at, :password, :password_confirmation]
+        exclude_fields [:created_at, :updated_at]
       end
     end
 
@@ -216,6 +234,27 @@ RailsAdmin.config do |config|
       end
       configure :nom_classification do
         label "Classification: "
+      end
+      import do
+        include_all_fields
+        exclude_fields [:created_at, :updated_at]
+      end
+    end
+
+    config.model 'Disponibilite' do
+      list do
+        field :nom
+        field :start_time
+        field :end_time
+      end
+      configure :nom do
+        label "Nom: "
+      end
+      configure :start_time do
+        label "Du: "
+      end
+      configure :end_time do
+        label "Au: "
       end
       import do
         include_all_fields
@@ -243,13 +282,15 @@ end
 RailsAdminImport.config do |config|
 
   ActiveRecord::Base.descendants.each do |model|
-      config.model 'Seance: ' do
-        label :seance
-      end
 
       config.model 'Film: ' do
         label :film
       end
+
+      config.model 'Seance: ' do
+        label :seance
+      end
+
 
       config.model 'Classification: ' do
         label :classification

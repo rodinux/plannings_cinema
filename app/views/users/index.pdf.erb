@@ -2,16 +2,14 @@
 <% if can? :update, User %>
     <h2>Liste des Bénévoles (inscrits sur le plannings)</h2>
 <table class="table table-responsive table-hover table-striped">
-  <thead>
-    <tr>
-      <th>Prénom</th>
-      <th>Nom</th>
-      <th>Email</th>
-      <th>Téléphone</th>
-    </tr>
-  </thead>
-<% @users.users_alphabet.each do |user| %>
   <tbody>
+    <tr>
+      <th><strong>PRÉNOM</strong></th>
+      <th><strong>NOM</strong></th>
+      <th><strong>EMAIL</strong></th>
+      <th><strong>TÉLÉPHONE</strong></th>
+    </tr>
+<% @users.users_alphabet.each do |user| %>
     <tr>
         <td><%= user.prenom.capitalize %></td>
         <td><%= user.nom.capitalize %></td>

@@ -1,7 +1,12 @@
 </center>
 <div class="container">
+<% if can? :update, User %>
   <center><h1><strong>Liste des utilisateurs</strong></h1></center>
   <br>
+  <div class="container">
+  <div class="actions hidden-xs">
+  <%= link_to 'Bénévoles pdf (imprimer)', users_path(:format => :pdf), :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %>
+ </div>
   <div class="row">
     <div class="col-md-12">
       <table class="table table-responsive table-hover table-striped">
@@ -46,3 +51,4 @@
     </div>
   </div>
 </div>
+<% end %>

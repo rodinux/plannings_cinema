@@ -1,0 +1,24 @@
+<meta charset='utf-8' />
+<% if can? :update, User %>
+    <h2>Liste des Bénévoles (inscrits sur le plannings)</h2>
+<table class="table table-responsive table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Téléphone</th>
+    </tr>
+  </thead>
+<% @users.users_alphabet.each do |user| %>
+  <tbody>
+    <tr>
+        <td><%= user.prenom.capitalize %></td>
+        <td><%= user.nom.capitalize %></td>
+         <td><%= user.email %></td>
+         <td><%= user.telephone %></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>
+<% end %>

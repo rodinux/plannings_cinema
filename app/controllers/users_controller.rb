@@ -7,6 +7,15 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    respond_to do |format|
+        format.pdf do
+        render :pdf => "users.pdf",
+          :layout => "layouts/pdf.html",
+          :disable_javascript => false,
+          show_as_html: params[:debug].present?
+        end
+      format.html
+      end
   end
 
   # GET /users/1

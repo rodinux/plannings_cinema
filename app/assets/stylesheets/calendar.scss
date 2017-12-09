@@ -66,21 +66,24 @@ li {
 tbody tr:nth-of-type(2n) {
 background-color: #f0f0f0;
 }
-table.table.table-responsive th, table.table.table-responsive td {
+.table.table.table-responsive th, table.table.table-responsive td {
   text-align: center;
 }
 div.datepicker {
   width: 30%;
 }
 @media screen and (max-width: 800px) {
-thead, th {display:none}
-table {width:100%;}
-tr:nth-of-type(2n) {background-color: inherit;}
-tr td:first-child {background: #f0f0f0;}
-tbody td {display: block;  text-align:center;}
-tbody td:before {
+  .table-croped thead, th {display:none}
+  .table-croped table {width:100%;}
+  .table-croped tr:nth-of-type(2n) {background-color: inherit;}
+  .table-croped tr td:first-child {background: #f0f0f0;}
+  .table-croped tbody td {display: block;  text-align:center;}
+  .table-croped tbody td:before {
     content: attr(data-th);
     display: block;
     text-align:center;
+  }
+  div.datepicker {
+  width: 100%;
   }
 }

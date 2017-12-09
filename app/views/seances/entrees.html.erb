@@ -73,6 +73,7 @@
        <% end %>
 <h2>Pour les 2 résumés ci-dessous, le calcul ne prend pas encore en compte la séléction des dates, référez-vous aux tableaux par titre du Film en dessous (utilsez les touches Ctl + f pour une recherche sur la page si besoin)</h2>
     <center><h2><strong>Résumé Classifications par ordre du Total des entrées</strong></h2></center>
+    <div class="table-croped">
     <table class="table table-responsive table-hover table-striped">
       <thead>
         <tr>
@@ -97,8 +98,9 @@
          <% end %>
       </tbody>
     </table>
-
+    </div>
 <center><h2><strong>Résumé Distribution ADRC par ordre du Total des entrées</strong></h2></center>
+    <div class="table-croped">
     <table class="table table-responsive table-hover table-striped">
       <thead>
         <tr>
@@ -125,10 +127,10 @@
         <% end %>
       </tbody>
     </table>
+    </div>
 </div>
-
       <center><h1><strong>Totaux par Lieux</strong></h1></center>
-<div class="container">
+<div class="container table-croped">
   <table class="table table-responsive table-hover table-striped">
     <thead>
       <th>
@@ -197,15 +199,13 @@
 </div>
 
     <center><h1><strong>Par Film et ordonné par Total des entrées</strong></h1></center>
-<div class="container">
+<div class="container table-croped">
       <% @stats.films_order_total.each do |film| %>
       <% if film.seances.where(horaire: date_range).present? %>
        <% film_seances_semaine = film.seances.where(horaire: date_range, annulee: [nil, ""]) %>
       <% film_vernoux= film_seances_semaine.where(village_id: 1) %>
       <% film_lamastre = film_seances_semaine.where(village_id: 6) %>
       <% film_chalencon = film_seances_semaine.where(village_id: 3) %>
-
-
   <table class="table table-responsive table-hover table-striped">
     <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
     <% if film.classifications.present? %>
@@ -282,7 +282,7 @@
 </div>
 <br>
 <center><h2>Les Séances prises en compte</h2></center>
-<div class="container">
+<div class="container table-croped">
   <%  @stats.seances_range.each do |seance| %>
   <table class="table table-responsive table-hover table-striped">
     <tbody>

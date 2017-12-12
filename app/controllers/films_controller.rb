@@ -32,6 +32,12 @@ class FilmsController < ApplicationController
     @films = Film.all
   end
 
+# GET /films
+# GET /films.json
+  def tous_les_films
+    @films = Film.all
+  end
+
   # GET /films/1
   # GET /films/1.json
   def show

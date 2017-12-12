@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   get 'entrees' => 'seances#entrees'
   get 'ecranvillage' => 'films#ecranvillage'
   get 'films_a_venir' => 'films#films_a_venir'
+  get 'tous_les_films' => 'films#tous_les_films'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

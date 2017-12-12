@@ -27,13 +27,14 @@
     <% if @seance.village.commune.downcase == "vernoux" || @seance.village.commune.downcase == "lamastre" || @seance.village.commune.downcase == "chalencon"%>
     <%= link_to 'Séances', seances_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-success active" %> de <strong><%= @seance.village.commune.upcase %></strong>
     <%= link_to 'Séances à compléter', a_completer_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-warning active" %> pour <strong><%= @seance.village.commune.upcase %></strong>
-    </div>
+  </div>
     <% else %>
      <%= link_to 'Séances à compléter', a_completer_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %> pour <strong>Tous les lieux</strong>
   <% end %>
   <div class="actions">
     <%= link_to 'Séances', seances_path(:lieu => "tous les lieux"), :class => "btn btn-success active" %> de <strong>Tous les lieux</strong>
     <%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %>
+  </div>
     <div class="actions">
     <%= link_to 'Séances passées', seances_passees_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %> de <strong>Tous les lieux</strong>
   </div>

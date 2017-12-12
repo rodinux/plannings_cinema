@@ -5,9 +5,11 @@
           <tr>
             <th>Film</th>
             <th>Créer</th>
-            <th>Mis à pour</th>
+            <th>Mis à jour</th>
+        <% if can? :update, @films %>
             <th>Modifier</th>
             <th>Supprimer</th>
+        <% end %>
           </tr>
         </thead>
     <% @films.each do |film| %>
@@ -16,11 +18,13 @@
               <td><%= film.titrefilm  %></td>
               <td><%= film.created_at.strftime("%d/%m/%Y") %></td>
               <td><%= film.updated_at.strftime("%d/%m/%Y") %></td>
+        <% if can? :update, @films %>
               <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Me modifier', edit_film_path(film), data: { confirm: 'En êtes-vous sûr ?' }, :class => "btn btn-warning" %></td>
               <td class="danger"><span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer', film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %> <br>
+        <% end %>
           </tr>
+          <% end %>
         </tbody>
-    <% end %>
       </table>
     </div>
   </div>

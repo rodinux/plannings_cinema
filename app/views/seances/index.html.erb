@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @seances.seances_calendrier.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today %>
+          <% @seances.seances_a_venir.lieuxtest[@lieu].compact.each do |seance| %>
           <% if seance.annulee != "Annulée" %>
             <tr>
               <% if seance.extras.present? %>
@@ -92,7 +92,6 @@
             <tr>
               <td colspan="5" class="separation"></td>
             </tr>
-          <% end %>
           <% end %>
         </tbody>
         <tfoot>

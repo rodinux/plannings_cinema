@@ -21,6 +21,10 @@ class Seance < ApplicationRecord
 		]
 	end
 
+	def self.seances_a_venir
+        seances_a_venir = Seance.where({horaire: (Date.today..Date.today + 30)})
+	end
+
 	def self.seances_passees_3_semaines
 		seances_passees_3_semaines = Seance.where({horaire: (3.week.ago..(Date.today + 1))}).order(horaire: :asc)
 	end

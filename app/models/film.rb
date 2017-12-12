@@ -12,7 +12,7 @@ class Film < ApplicationRecord
 	    end
 
 	    def self.films_2_mois_avant
-	        films_2_mois_avant = Film.where({ updated_at: (2.month.ago.midnight..(Date.today + 1))}).order(created_at: :desc)
+	        films_2_mois_avant = Film.where({ updated_at: (2.month.ago.midnight..(Date.today + 1))})
 	    end
 
 	    def self.films_mois

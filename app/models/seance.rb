@@ -21,6 +21,10 @@ class Seance < ApplicationRecord
 		]
 	end
 
+	def self.seances_calendrier
+		seances_calendrier = Seance.where({horaire: ((Date.today - 6.day)..(Date.today + 6.day))})
+	end
+
 	def self.seances_a_venir
         seances_a_venir = Seance.where({horaire: (Date.today..Date.today + 30)})
 	end
@@ -45,8 +49,8 @@ class Seance < ApplicationRecord
 	    seances_1_semaine_avant_1_mois_apres = Seance.where({horaire: (1.week.ago..(Date.today + 60))}).order(horaire: :asc)
 	end
 
-	def self.seances_calendrier
-		seances_calendrier = Seance.order(horaire: :asc)
+	def self.seances_asc
+		seances_asc = Seance.order(horaire: :asc)
 	end
 
 	def self.seances_a_completer_projection

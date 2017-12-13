@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <table class="table table-responsive table-hover table-striped">
         <tbody>
-          <% @seances.seances_calendrier.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today %>
+          <% @seances.seances_a_venir.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today %>
           <% if seance.annulee != "Annulée" %>
             <tr>
               <td class="active"> <%= l seance.horaire, format: :very_long %></td>

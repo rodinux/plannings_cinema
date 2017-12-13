@@ -8,12 +8,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width">
   </head>
-
   <body>
-  <%= render "layouts/nav" %>
-  <%= render "layouts/connexion" %>
-    <p id="notice"><%= flash[:notice] %></p>
-    <p id="error"><%= flash[:error] %></p>
+    <%= render "layouts/nav" %>
+    <%= render "layouts/connexion" %>
+      <p id="notice"><%= flash[:notice] %></p>
+      <p id="error"><%= flash[:error] %></p>
     <div class="container">
       <%= yield %>
     </div>

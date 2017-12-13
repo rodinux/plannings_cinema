@@ -11,7 +11,7 @@
             <th>Caisse</th>
           </tr>
         </thead>
-<% @seances.seances_calendrier.each do |seance| if Date.today < seance.horaire && if current_user.prenom == seance.projection || current_user.prenom == seance.caisse %>
+<% @seances.seances_asc.each do |seance| if Date.today < seance.horaire && if current_user.prenom == seance.projection || current_user.prenom == seance.caisse %>
 <% if seance.annulee != "Annulée" %>
         <tbody>
             <tr>

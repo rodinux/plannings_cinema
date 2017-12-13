@@ -33,7 +33,7 @@
       <%= calendar @date do |date| %>
         <p><center><%= l date, format: :short %></center></p>
         <ul class="list-unstyled calendrier">
-          <% @seances.seances_calendrier.lieuxtest[@lieu].compact.each do |seance| %>
+          <% @seances.where({horaire: ((date - 6.day)..(date + 6.day))}).lieuxtest[@lieu].compact.each do |seance| %>
             <% if seance.horaire.midnight == date.midnight %>
               <% if seance.annulee != "Annulée" %>
                 <li>

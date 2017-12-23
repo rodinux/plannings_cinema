@@ -131,8 +131,6 @@ class SeancesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_seance
       @seance = Seance.find(params[:id])
-      @films = Film.all
-      @villages = Village.all
     end
 
     def get_lieu

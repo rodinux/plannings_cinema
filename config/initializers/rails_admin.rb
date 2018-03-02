@@ -2,6 +2,7 @@ require 'i18n'
 I18n.default_locale = :fr
 
 RailsAdmin.config do |config|
+
   config.main_app_name = ["Calendriers Ecran Village", "Gestion avancée"]
   # or something more dynamic
   config.main_app_name = Proc.new { |controller| [ "Calendriers Ecran Village", "Gestion avancée - #{controller.params[:action].try(:titleize)}" ] }
@@ -24,8 +25,8 @@ RailsAdmin.config do |config|
 
  config.included_models = ["Film", "Village", "Seance", "User", "Classification", "Disponibilite"]
 
-  ActiveRecord::Base.descendants.each do |model|
 
+ ActiveRecord::Base.descendants.each do |model|
     config.model 'Film' do
     list do
       field :titrefilm
@@ -65,7 +66,6 @@ RailsAdmin.config do |config|
       label "Distribution: "
     end
     import do
-      include_all_fields
       default_excluded_fields [:created_at, :seances, :villages]
     end
     edit do
@@ -73,7 +73,7 @@ RailsAdmin.config do |config|
           orderable true
         end
       end
-  end
+    end
 
     config.model 'Village' do
       list do
@@ -105,7 +105,6 @@ RailsAdmin.config do |config|
         label "ID des films: "
       end
       import do
-        include_all_fields
         default_excluded_fields [:created_at, :updated_at, :seances, :films]
       end
     end
@@ -181,7 +180,6 @@ RailsAdmin.config do |config|
         label "Créée le: "
       end
       import do
-        include_all_fields
         default_excluded_fields [:created_at, :updated_at]
         configure :horaire, :date do
           strftime_format '%d/%m/%Y %H:%M'
@@ -222,7 +220,6 @@ RailsAdmin.config do |config|
         label "ID"
       end
       import do
-        include_all_fields
         exclude_fields [:created_at, :updated_at]
       end
     end
@@ -257,11 +254,9 @@ RailsAdmin.config do |config|
         label "Au: "
       end
       import do
-        include_all_fields
         exclude_fields [:created_at, :updated_at]
       end
     end
-
   end
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
@@ -280,6 +275,10 @@ RailsAdmin.config do |config|
 end
 
 RailsAdminImport.config do |config|
+
+      config.line_item_limit = 2000
+      config.update_if_exists = true
+      config.rollback_on_error = true
 
   ActiveRecord::Base.descendants.each do |model|
 

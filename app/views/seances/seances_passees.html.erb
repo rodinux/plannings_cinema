@@ -1,11 +1,11 @@
 
 <div class="container">
   <div class="actions">
-  <%= link_to 'Séances passées en pdf (imprimer)', seances_passees_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary btn-lg", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= @lieu.upcase %></strong>
+  <%= link_to 'Séances passées en pdf (imprimer)', seances_passees_path(:lieu => params[:lieu], date: @date, :format => :pdf), :format => :pdf, :class => "btn btn-primary hidden-xs", :target => "_blank", :rel => "noopener noreferrer" %> <strong>pour <%= @lieu.upcase %></strong>
   <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
  </div>
  <div class="actions">
-  <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-success btn-lg" %> <strong>pour <%= @lieu.upcase %></strong>
+  <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-success" %> <strong>pour <%= @lieu.upcase %></strong>
  </div>
 
   <center><h1 id="liste"><strong>Séances passées pour <%= @lieu.upcase %> </strong></h1></center>
@@ -43,7 +43,8 @@
               <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
               <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <%= seance.projection %> - <span class="glyphicon glyphicon-briefcase"></span> <%= seance.caisse %></td>
               <td class="warning">Adultes = <strong><%= seance.billets_adultes.to_i %></strong> / Enfants = <strong><%= seance.billets_enfants.to_i %></strong>
-              <br>Scolaires = <strong><%= seance.billets_scolaires.to_i %></strong> / <strong> TOTAL = <%= seance.total_billets.to_i %></strong> <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+              <br>Scolaires = <strong><%= seance.billets_scolaires.to_i %></strong> / <strong> TOTAL = <%= seance.total_billets.to_i %></strong><br>
+              <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
             </tr>
             <% end %>
             <tr>

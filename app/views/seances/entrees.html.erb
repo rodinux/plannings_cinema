@@ -292,8 +292,7 @@
         <td class="warning"><%= seance.extras %> <%= seance.version %> <%= seance.film.classifications.map(&:nom_classification) %> <%= seance.film.distribution %></td>
         <td class="active"><%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
         <td class="info">Projection : <%= seance.projection %> - Caisse : <%= seance.caisse %></td>
-        <td class="warning">Adultes = <strong><%= seance.billets_adultes.to_i %></strong> / Enfants = <strong><%= seance.billets_enfants.to_i %></strong><br>
-        Scolaires = <strong><%= seance.billets_scolaires.to_i %></strong> / <strong> TOTAL = <%= seance.total_billets.to_i %></strong></td>
+        <td class="warning">Adultes = <strong><%= seance.billets_adultes.to_i %></strong> <br> Enfants = <strong><%= seance.billets_enfants.to_i %></strong> <br> Scolaires = <strong><%= seance.billets_scolaires.to_i %></strong> <br> <strong> TOTAL = <%= seance.total_billets.to_i %></strong></td>
       </tr>
     </tbody>
   </table>

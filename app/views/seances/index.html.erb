@@ -3,7 +3,20 @@
   <br>Attention, pensez à imprimer en "Orientation = Paysage" dans l'onglet : "Mise ne page" avant l'impression.
   </div>
   <div class="actions">
-  <%= link_to 'Séances où il manque des inscriptions', a_completer_path(:lieu => @lieu), :class => "btn btn-warning" %> <strong>pour <%= @lieu.upcase %></strong> <%= link_to 'Séances passées', seances_passees_path(:lieu => @lieu), :class => "btn btn-success" %> <strong>pour <%= @lieu.upcase %></strong> <%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %>
+    <div class="btn-group">
+    <button type="button" class="btn btn-danger">Plus de choix</button>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <center>pour <%= @lieu.upcase %></center>
+            <li><%= link_to 'Séances où il manque des inscriptions', a_completer_path(:lieu => @lieu), :class => "btn btn-warning active" %></li>
+            <li><%= link_to 'Séances passées', seances_passees_path(:lieu => @lieu), :class => "btn btn-primary active" %></li>
+            <li class="divider"></li>
+            <li><%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-success active" %></li>
+        </ul>
+    </div>
   </div>
   <center><h1 id="liste"><strong>Séances à venir pour <%= @lieu.upcase %></strong></h1></center>
   <div class="row">

@@ -1,7 +1,9 @@
 # RailsAdminImport.config do |config|
 
+
+
 #   ActiveRecord::Base.descendants.each do |model|
-      
+
 #       config.model 'Film: ' do
 #         label :film
 #         import do
@@ -9,7 +11,7 @@
 #           default_excluded_fields [:created_at, :seances, :villages]
 #         end
 #       end
-      
+
 #       config.model 'Seance: ' do
 #         label :seance
 #         import do

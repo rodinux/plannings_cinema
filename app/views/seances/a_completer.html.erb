@@ -1,5 +1,5 @@
   <div class="actions">
-  <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-primary btn-lg" %> <strong>pour <%= @lieu.upcase %></strong>
+  <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-primary active" %> <strong>pour <%= @lieu.upcase %></strong>
   </div>
   <center><h3 id="liste"><strong>Séances à venir pour <%= @lieu.upcase %> sans personne inscrit pour la projection :</strong></h3></center>
   <div class="row">

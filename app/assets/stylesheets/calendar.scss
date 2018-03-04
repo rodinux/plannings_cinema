@@ -87,17 +87,16 @@ div.datepicker {
   .table-croped2 table {width:100%;}
   .table-croped2 tr:nth-of-type(2n) {background-color: inherit;}
   .table-croped2 tr td:first-child {background: #f0f0f0;}
-  .table-croped2 tbody td .active, .table-croped2 tbody td .info, .table-croped2 tbody td .warning {display: block !important;  text-align:center;}
-  .table-croped2 tbody td .active, .table-croped2 tbody td .info, .table-croped2 tbody td .warning {
-    content: attr(data-th) !important;
-    display: block !important;
+  .table-croped2 tbody td .active {display: block;  text-align:center;}
+  .table-croped2 tbody td .active {
+    content: attr(data-th);
+    display: block;
     text-align:center;
   }
   div.datepicker {
   width: 50%;
   }
 }
-
 @media screen and (max-width: 440px) {
   div.datepicker {
     width: 80%;

@@ -207,13 +207,22 @@
       <% film_lamastre = film_seances_semaine.where(village_id: 6) %>
       <% film_chalencon = film_seances_semaine.where(village_id: 3) %>
   <table class="table table-responsive table-hover table-striped">
-    <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
-    <% if film.classifications.present? %>
-    <center>classé <%= film.classifications.map(&:nom_classification) %></center>
-    <% end %>
-    <% if film.distribution.present? %>
-    <center>distribué par <%= film.distribution %></center>
-    <% end %>
+      <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3>
+      <% if can? :manage, @film %>
+            <%= link_to edit_film_path(film), class: "btn btn-warning", :title =>"Modifier" do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+            <% end %>
+            <%= link_to film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
+                <i class="glyphicon glyphicon-trash"></i>
+            <% end %>
+      <%end %>
+      <% if film.classifications.present? %>
+        <p>classé <%= film.classifications.map(&:nom_classification) %></p>
+      <% end %>
+      <% if film.distribution.present? %>
+        <p>distribué par <%= film.distribution %></p>
+      <% end %>
+      </center>
     <thead>
       <th>
          <tr>

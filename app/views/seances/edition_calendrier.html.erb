@@ -18,7 +18,6 @@
     <%= link_to 'Calendrier Général', edition_calendrier_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-default btn-lg", :title => "Séances de tous les lieux" %>
   </div>
 </div>
-<div class="container">
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="well controls">
@@ -33,7 +32,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 table-croped">
+    <div class="col-md-12">
       <%= calendar @date do |date| %>
         <p><%= l date, format: :short %></p>
         <ul class="list-unstyled calendrier">
@@ -87,5 +86,5 @@
       <% end %>
     </div>
   </div>
-</div>
+
 

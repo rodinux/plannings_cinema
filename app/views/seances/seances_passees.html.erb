@@ -42,9 +42,13 @@
               <%= seance.version if seance.version.present? %> <%= seance.version if seance.version.present? %></td>
               <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
               <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <%= seance.projection %> - <span class="glyphicon glyphicon-briefcase"></span> <%= seance.caisse %></td>
-              <td class="warning">Adultes = <strong><%= seance.billets_adultes.to_i %></strong> / Enfants = <strong><%= seance.billets_enfants.to_i %></strong>
-              <br>Scolaires = <strong><%= seance.billets_scolaires.to_i %></strong> / <strong> TOTAL = <%= seance.total_billets.to_i %></strong><br>
-              <span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+              <td class="warning">Adultes = <strong><%= seance.billets_adultes.to_i %></strong><br> Enfants = <strong><%= seance.billets_enfants.to_i %></strong>
+              <br>
+              Scolaires = <strong><%= seance.billets_scolaires.to_i %></strong><br>
+              <strong> TOTAL = <%= seance.total_billets.to_i %></strong><br>
+              <%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
+                    <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
             </tr>
             <% end %>
             <tr>

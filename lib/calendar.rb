@@ -1,7 +1,7 @@
 class Calendar < Struct.new(:view, :date, :callback)
 
 	def table(lieu)
-		content_tag :table, class: "calendar table table-bordered table-striped" do
+		content_tag :table, class: "calendar table table-bordered table-striped table-responsive table-croped" do
 			header + week_rows
 		end
 	end
@@ -10,7 +10,7 @@ class Calendar < Struct.new(:view, :date, :callback)
 	START_DAY = :wednesday
 
 	def header
-		content_tag :tr do
+		content_tag :thead do
 			HEADER.map { |day| content_tag :th, day }.join.html_safe
 		end
 	end

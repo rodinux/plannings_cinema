@@ -27,9 +27,8 @@
       </div>
     </div>
   </div>
-  <div class="table-responsive">
   <div class="table-row">
-    <div class="col-md-12 table-croped">
+    <div class="col-md-12">
       <%= calendar @date do |date| %>
         <p><center><%= l date, format: :short %></center></p>
         <ul class="list-unstyled calendrier">
@@ -89,6 +88,6 @@
           <% end %>
               </ul>
       <% end %>
-      </div>
     </div>
   </div>
+

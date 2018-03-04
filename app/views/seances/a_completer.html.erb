@@ -31,16 +31,15 @@
                 <% if can? :update, Seance %>
                   <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection %></em></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse %></em></strong></td>
                 <% end %>
-                  <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+                  <td class="warning"><%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
+                    <i class="glyphicon glyphicon-pencil"></i>
+                  <% end %>
+                  </td>
                 </tr>
                 <tr>
                   <td colspan="2" class="active"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
                 <% if can? :update, Seance %>
-                  <td colspan="2" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
-                <% end %>
-                <% if can? :manage, @seance %>
-                  <td class="danger"><span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-                  </td>
+                  <td colspan="3" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
                 <% end %>
                 </tr>
                 <tr>
@@ -60,7 +59,7 @@
                   <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
                   <td class="info"><span class="glyphicon glyphicon-warning-sign"></span> <strong><%= seance.annulee %></strong></td>
                   <% if can? :manage, @seance %>
-                  <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %> <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></td>
+                  <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
                   <% else %>
                   <td></td>
                   <% end %>
@@ -117,16 +116,15 @@
                 <% if can? :update, Seance %>
                   <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection %></em></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse %></em></strong></td>
                 <% end %>
-                  <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+                  <td class="warning"><%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    <% end %>
+                  </td>
                 </tr>
                 <tr>
                   <td colspan="2"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
                 <% if can? :update, Seance %>
-                  <td colspan="2" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
-                <% end %>
-                <% if can? :manage, @seance %>
-                  <td class="danger"><span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %>
-                  </td>
+                  <td colspan="3" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
                 <% end %>
                 </tr>
                <tr>

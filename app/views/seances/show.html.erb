@@ -1,5 +1,5 @@
 <div class="container">
- <center>
+  <center>
     <h1><span class="glyphicon glyphicon-film"></span> <strong>Film : </strong><%= @seance.film.titrefilm %> <%= @seance.version %></h1>
     <h3><strong><span class="glyphicon glyphicon-time"></span> Date : </strong><%= l @seance.horaire, format: :very_long %></h3>
     <h2><span class="glyphicon glyphicon-home"></span> <strong>Lieu : </strong><%= @seance.village.commune.upcase %></h2>
@@ -19,25 +19,37 @@
     <p><%=simple_format h @seance.commentaire %></p>
     <h3>Entrées</h3>
     <h4>Billets Adultes: <%= @seance.billets_adultes %>, Billets Enfants:<%= @seance.billets_enfants %>, Billets Scolaires: <%= @seance.billets_scolaires %> </h4>
-  <div class="actions">
-    <%= link_to 'Modifier', edit_seance_path(@seance), :class => "btn btn-danger" %>
-    <%= link_to 'Films', films_a_venir_path, :class => "btn btn-primary" %>
-  </div>
-  <div class="actions">
-    <% if @seance.village.commune.downcase == "vernoux" || @seance.village.commune.downcase == "lamastre" || @seance.village.commune.downcase == "chalencon"%>
-    <%= link_to 'Séances', seances_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-success active" %> de <strong><%= @seance.village.commune.upcase %></strong>
-    <%= link_to 'Séances à compléter', a_completer_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-warning active" %> pour <strong><%= @seance.village.commune.upcase %></strong>
-  </div>
-    <% else %>
-     <%= link_to 'Séances à compléter', a_completer_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %> pour <strong>Tous les lieux</strong>
-  <% end %>
-  <div class="actions">
-    <%= link_to 'Séances', seances_path(:lieu => "tous les lieux"), :class => "btn btn-success active" %> de <strong>Tous les lieux</strong>
-    <%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %>
-  </div>
     <div class="actions">
-    <%= link_to 'Séances passées', seances_passees_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %> de <strong>Tous les lieux</strong>
-  </div>
+      <%= link_to 'Modifier ?', edit_seance_path(@seance), :class => "btn btn-warning active" %>
+    </div>
   </center>
+  <div class="container">
+   <div class="btn-group">
+    <button type="button" class="btn btn-danger">Choix</button>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <% if @seance.village.commune.downcase == "vernoux" || @seance.village.commune.downcase == "lamastre" || @seance.village.commune.downcase == "chalencon"%>
+            pour <strong><%= @seance.village.commune.upcase %></strong>
+            <li><%= link_to 'Séances', seances_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-success active" %></li>
+            <li><%= link_to 'Séances à compléter', a_completer_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-warning active" %></li>
+            <li><%= link_to 'Séances passées', seances_passees_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-warning active" %></li>
+            <li class="divider"></li>
+          <% else %>
+            <li></li>
+         <% end %>
+            pour <strong>Tous les lieux</strong>
+            <li><%= link_to 'Séances', seances_path(:lieu => "tous les lieux"), :class => "btn btn-success active" %></li>
+            <li><%= link_to 'Séances à compléter', a_completer_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %></li>
+            <li><%= link_to 'Séances passées', seances_passees_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %></li>
+            <li class="divider"></li>
+            <li><%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %></li>
+            <li><%= link_to 'Films à venir', films_a_venir_path, :class => "btn btn-success active" %></li>
+        </ul>
+    </div>
+  </div>
 </div>
-<br>
+
+

@@ -73,7 +73,7 @@ div.datepicker {
   width: 30%;
 }
 @media screen and (max-width: 800px) {
-  .table-croped thead, th {display:none}
+  .table-croped thead, .table-cproped th {display:none}
   .table-croped table {width:100%;}
   .table-croped tr:nth-of-type(2n) {background-color: inherit;}
   .table-croped tr td:first-child {background: #f0f0f0;}
@@ -84,6 +84,12 @@ div.datepicker {
     text-align:center;
   }
   div.datepicker {
-  width: 100%;
+  width: 50%;
   }
+}
+@media screen and (max-width: 440px) {
+  div.datepicker {
+    width: 80%;
+  }
+
 }

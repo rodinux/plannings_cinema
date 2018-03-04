@@ -49,7 +49,7 @@
 <br>
 <div class="container">
 
-    <h3>Il y a pour cette recherche :<strong><%= @search.result.length %></strong> film(s)</strong>: </h3>
+    <h3>Il y a pour cette recherche : <strong><%= @search.result.length %></strong> film(s)</strong>: </h3>
     <%= paginate @films %>
 
     <% @films.order(updated_at: :desc).each do |film| %>
@@ -58,14 +58,14 @@
       <% film_lamastre = film_seances_semaine.where(village_id: 6) %>
       <% film_chalencon = film_seances_semaine.where(village_id: 3) %>
 
-<div class="table-croped">
-  <table class="table table-responsive table-hover table-striped">
+<div class="row">
+  <table class="table table-responsive table-hover table-striped table-croped">
     <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong>
     <% if can? :manage, @films %></h3>
       <div class="btn-group">
         <button type="button"
         class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-        Action <span class="caret"></span>
+        Actions <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
           <li><%= link_to 'Modifier', edit_film_path(film), class: "btn btn-warning active" %></li>
@@ -145,5 +145,5 @@
     </tbody>
   <% end %>
   </table>
-</div>
+ </div>
 </div>

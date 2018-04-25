@@ -92,11 +92,11 @@
                         <% end %>
                     <% if can? :update, Seance %>
                         <p><span class="glyphicon glyphicon-facetime-video"></span> <strong><%= seance.projection %></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><%= seance.caisse %></strong></p>
-                        <%= link_to edit_film_path(film), class: "btn btn-warning", :title =>"Modifier" do %>
+                        <%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
                         <i class="glyphicon glyphicon-pencil"></i>
                         <% end %>
                     <% if can? :manage, @seance %>
-                         <%= link_to film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
+                         <%= link_to seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
                         <i class="glyphicon glyphicon-trash"></i>
                         <% end %>
                       <% end %>
@@ -114,10 +114,10 @@
                         <p><span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></p>
                         <% end %>
                     <% if can? :manage, seance %>
-                        <%= link_to edit_film_path(film), class: "btn btn-warning", :title =>"Modifier" do %>
+                        <%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
                         <i class="glyphicon glyphicon-pencil"></i>
                         <% end %>
-                        <%= link_to film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
+                        <%= link_to seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
                         <i class="glyphicon glyphicon-trash"></i>
                         <% end %>
                     <% end %>
@@ -142,11 +142,11 @@
             <% end %>
               <% if can? :update, Seance %>
                         <p><span class="glyphicon glyphicon-facetime-video"></span> <strong><%= seance.projection %></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><%= seance.caisse %></strong></p>
-                        <%= link_to edit_film_path(film), class: "btn btn-warning", :title =>"Modifier" do %>
+                        <%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
                         <i class="glyphicon glyphicon-pencil"></i>
                         <% end %>
                     <% if can? :manage, @seance %>
-                         <%= link_to film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
+                         <%= link_to seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
                         <i class="glyphicon glyphicon-trash"></i>
                         <% end %>
                       <% end %>

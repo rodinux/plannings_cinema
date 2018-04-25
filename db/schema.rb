@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20170406102111) do
   end
 
   create_table "classifications_films", id: false, force: :cascade do |t|
-    t.bigint "classification_id", null: false
-    t.bigint "film_id", null: false
+    t.integer "classification_id", null: false
+    t.integer "film_id", null: false
   end
 
   create_table "disponibilites", id: :serial, force: :cascade do |t|

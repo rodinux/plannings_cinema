@@ -39,22 +39,29 @@
 <div class="film-seances">
     <% @films.films_3_semaines.each do |film| %>
     <% if film.seances.seances_1_semaine_avant_2_mois_apres.present? %>
-    <div class="film description">
+    <div class="seance description">
+    <div class="container">
         <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
-        <% if can? :manage, @film %>
-            <%= link_to edit_film_path(film), class: "btn btn-warning", :title =>"Modifier" do %>
-                <i class="glyphicon glyphicon-pencil"></i>
+    </div>
+        <div class="container">
+            <center>
+            <% if can? :manage, @film %>
+                <%= link_to edit_film_path(film), class: "btn btn-warning", :title =>"Modifier" do %>
+                    <i class="glyphicon glyphicon-pencil"></i>
+                <% end %>
+                <%= link_to film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
+                    <i class="glyphicon glyphicon-trash"></i>
+                <% end %>
+                <% if film.distribution.present? %>
+                    <%= film.distribution %>,
+                <% end %>
             <% end %>
-            <%= link_to film, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger", :title =>"Supprimer" do %>
-                <i class="glyphicon glyphicon-trash"></i>
+            <% if film.classifications.present? %>
+                <%= film.classifications.map(&:nom_classification).sort.join(", ") %>
             <% end %>
-            <% if film.distribution.present? %>
-                <%= film.distribution %>,
-            <% end %>
-        <% end %>
-        <% if film.classifications.present? %>
-            <%= film.classifications.map(&:nom_classification).sort.join(", ") %>
-        <% end %>
+            </center>
+        </div>
+    <div class="description">
         <% if film.affiche.present? %>
         <div class="row">
             <div class=".col-xs-6 .col-md-4">
@@ -62,7 +69,7 @@
             <div class="apropos">
                 <div class="content-heading text-center"><h3>A propos :</h3></div>
                     <div class="text-center italic">
-                        <p><%=simple_format h film.description.html_safe %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{film.id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></p>
+                        <p><%=simple_format h film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{film.id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></p>
                     </div>
                 </div>
             </div>
@@ -75,8 +82,6 @@
             </div>
         <% end %>
     </div>
-    <div class="seance description">
-        <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
         <h4><strong>Séances à venir :</strong></h4>
         <% futures_seances = film.seances.seances_asc.each.map do |seance| if Date.today < seance.horaire %>
           <%=  content_tag :film_id, futures_seances do %>
@@ -175,7 +180,9 @@
         <% end %>
         <%end %>
     </div>
+    <center><span class="glyphicon glyphicon-facetime-video"></span> <span class="glyphicon glyphicon-film"></span> <span class="glyphicon glyphicon-facetime-video"></span> <span class="glyphicon glyphicon-film"></span> <span class="glyphicon glyphicon-facetime-video"></span> <span class="glyphicon glyphicon-film"></span> <span class="glyphicon glyphicon-facetime-video"></span> <span class="glyphicon glyphicon-film"></span> <span class="glyphicon glyphicon-facetime-video"></span></center>
    <% end %>
   <% end %>
 </div>
+</br>
 <%= link_to '', films_a_venir_path, :class => "back-to-top", :title => 'Retour haut de page' %>

@@ -1,74 +1,162 @@
-  <div class="actions">
-  <%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-primary active" %> <strong>pour <%= @lieu.upcase %></strong>
-  </div>
-  <center><h3 id="liste"><strong>Séances à venir pour <%= @lieu.upcase %> sans personne inscrit pour la projection :</strong></h3></center>
-  <div class="row">
-    <div class="col-md-12">
-        <table class="table table-responsive table-hover table-striped table-croped2">
-          <thead>
-            <tr>
-              <th>Date et heure</th>
-              <th>FILM</th>
-              <th>Lieu</th>
-              <% if can? :update, Seance %>
-              <th>Projection/Caisse</th>
-              <th>Edition</th>
+<div class="actions">
+<%= link_to 'Séances à venir', seances_path(:lieu => params[:lieu]), :class => "btn btn-primary active" %> <strong>pour <%= @lieu.upcase %></strong>
+</div>
+<h4><%= link_to 'Pour les projections', a_completer_path(:lieu => @lieu, :anchor => "liste_projection") %></h4>
+<h4><%= link_to 'Pour la caisse', a_completer_path(:lieu => @lieu, :anchor => "liste_caisse") %></h4>
+
+<center><h3 id="liste_projection"><strong>Séances à venir pour <%= @lieu.upcase %> sans personne inscrit pour la projection :</strong></h3></center>
+<div class="row">
+  <div class="col-md-12">
+      <table class="table table-responsive table-hover table-striped table-croped2">
+        <thead>
+          <tr>
+            <th>Date et heure</th>
+            <th>FILM</th>
+            <th>Lieu</th>
+            <% if can? :update, Seance %>
+            <th>Projection/Caisse</th>
+            <th>Edition</th>
+            <% end %>
+          </tr>
+        </thead>
+      <% seances = @seances.seances_a_completer_projection.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today %>
+          <tbody>
+            <% if seance.annulee != "Annulée" %>
+              <tr>
+              <% if seance.extras.present? %>
+                <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %><br>
+                <span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></td>
+              <% else %>
+                <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %> </td>
               <% end %>
-            </tr>
-          </thead>
-        <% seances = @seances.seances_a_completer_projection.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today   %>
-            <tbody>
-              <% if seance.annulee != "Annulée" %>
-                <tr>
+                <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+                <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+              <% if can? :update, Seance %>
+                <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection %></em></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse %></em></strong></td>
+              <% end %>
+                <td class="warning"><%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
+                  <i class="glyphicon glyphicon-pencil"></i>
+                <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="active"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description.html_safe %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
+              <% if can? :update, Seance %>
+                <td colspan="3" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
+              <% end %>
+              </tr>
+              <tr>
+                <td colspan="5" class="warning">
+                  <strong>Absence(s):</strong>
+                  <% @disponibilites.each do |disponibilite| %>
+                  <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
+                    , <%= disponibilite.nom %>
+                  <% end %>
+                  <% end %>
+                </td>
+              </tr>
+              <% else %>
+               <tr>
+                <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+                <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
+                <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+                <td class="info"><span class="glyphicon glyphicon-warning-sign"></span> <strong><%= seance.annulee %></strong></td>
+                <% if can? :manage, @seance %>
+                <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+                <% else %>
+                <td></td>
+                <% end %>
+              </tr>
+              <% end %>
+              <tr>
+                <td colspan="5" class="separation"></td>
+              </tr>
+          </tbody>
+        <% end %>
+      <% end %>
+        <tfoot>
+          <tr>
+            <th>Date et heure</th>
+            <th>FILM</th>
+            <th>Lieu</th>
+            <% if can? :update, Seance %>
+            <th>Projection/Caisse</th>
+            <th>Édition</th>
+            <% end %>
+          </tr>
+        </tfoot>
+      </table>
+  </div>
+</div>
+ <br>
+<center><h3 id="liste_caisse"><strong>Séances à venir pour <%= @lieu.upcase %> sans personne inscrit pour la caisse :</strong></h3></center>
+<div class="row">
+  <div class="col-md-12">
+      <table class="calendar table table-bordered table-striped table-croped2">
+        <thead>
+          <tr>
+            <th>Date et heure</th>
+            <th>FILM</th>
+            <th>Lieu</th>
+            <% if can? :update, Seance %>
+            <th>Projection/Caisse</th>
+            <th>Edition</th>
+            <% end %>
+          </tr>
+        </thead>
+      <% seances = @seances.seances_a_completer_caisse.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today %>
+          <tbody>
+            <% if seance.annulee != "Annulée" %>
+              <tr>
                 <% if seance.extras.present? %>
-                  <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %><br>
-                  <span class="glyphicon glyphicon-info-sign"></span> <%= seance.extras %></td>
-                <% else %>
-                  <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %> </td>
-                <% end %>
-                  <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
-                  <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
-                <% if can? :update, Seance %>
-                  <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection %></em></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse %></em></strong></td>
-                <% end %>
-                  <td class="warning"><%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
-                    <i class="glyphicon glyphicon-pencil"></i>
+                <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %><br>
+                <span class="glyphicon glyphicon-warning-sign"></span> <%= seance.extras %></td>
+              <% else %>
+                <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %> </td>
+              <% end %>
+                <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version%></td>
+                <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %></td>
+              <% if can? :update, Seance %>
+                <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection %></em></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse %></em></strong></td>
+              <% end %>
+                <td class="warning"><%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
+                  <i class="glyphicon glyphicon-pencil"></i>
                   <% end %>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2" class="active"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
-                <% if can? :update, Seance %>
-                  <td colspan="3" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
-                <% end %>
-                </tr>
-                <tr>
-                  <td colspan="5" class="warning">
-                    <strong>Absence(s):</strong>
-                    <% @disponibilites.each do |disponibilite| %>
-                    <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
-                      , <%= disponibilite.nom %>
-                    <% end %>
-                    <% end %>
-                  </td>
-                </tr>
-                <% else %>
-                 <tr>
-                  <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
-                  <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
-                  <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
-                  <td class="info"><span class="glyphicon glyphicon-warning-sign"></span> <strong><%= seance.annulee %></strong></td>
-                  <% if can? :manage, @seance %>
-                  <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
-                  <% else %>
-                  <td></td>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description.html_safe %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
+              <% if can? :update, Seance %>
+                <td colspan="3" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
+              <% end %>
+              </tr>
+             <tr>
+                <td colspan="5" class="warning">
+                  <strong>Absence(s):</strong>
+                  <% @disponibilites.each do |disponibilite| %>
+                  <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
+                    , <%= disponibilite.nom %>
                   <% end %>
-                </tr>
+                  <% end %>
+                </td>
+              </tr>
+              <% else %>
+               <tr>
+                <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+                <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
+                <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+                <td class="info"><span class="glyphicon glyphicon-warning-sign"></span> <strong><%= seance.annulee %></strong></td>
+                <% if can? :manage, @seance %>
+                <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %> <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></td>
+                <% else %>
+                <td></td>
                 <% end %>
-                <tr>
-                  <td colspan="5" class="separation"></td>
-                </tr>
-            </tbody>
+              </tr>
+              <% end %>
+              <tr>
+                <td colspan="5" class="separation"></td>
+              </tr>
+          </tbody>
           <% end %>
         <% end %>
           <tfoot>
@@ -82,93 +170,8 @@
               <% end %>
             </tr>
           </tfoot>
-        </table>
-    </div>
+      </table>
   </div>
-   <br>
-  <center><h3 id="liste"><strong>Séances à venir pour <%= @lieu.upcase %> sans personne inscrit pour la caisse :</strong></h3></center>
-  <div class="row">
-    <div class="col-md-12">
-        <table class="calendar table table-bordered table-striped table-croped2">
-          <thead>
-            <tr>
-              <th>Date et heure</th>
-              <th>FILM</th>
-              <th>Lieu</th>
-              <% if can? :update, Seance %>
-              <th>Projection/Caisse</th>
-              <th>Edition</th>
-              <% end %>
-            </tr>
-          </thead>
-        <% seances = @seances.seances_a_completer_caisse.lieuxtest[@lieu].compact.each do |seance| if seance.horaire > Date.today   %>
-            <tbody>
-              <% if seance.annulee != "Annulée" %>
-                <tr>
-                  <% if seance.extras.present? %>
-                  <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %><br>
-                  <span class="glyphicon glyphicon-warning-sign"></span> <%= seance.extras %></td>
-                <% else %>
-                  <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %> </td>
-                <% end %>
-                  <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version%></td>
-                  <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %></td>
-                <% if can? :update, Seance %>
-                  <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection %></em></strong> - <span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse %></em></strong></td>
-                <% end %>
-                  <td class="warning"><%= link_to edit_seance_path(seance), class: "btn btn-warning", :title =>"Modifier" do %>
-                    <i class="glyphicon glyphicon-pencil"></i>
-                    <% end %>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
-                <% if can? :update, Seance %>
-                  <td colspan="3" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
-                <% end %>
-                </tr>
-               <tr>
-                  <td colspan="5" class="warning">
-                    <strong>Absence(s):</strong>
-                    <% @disponibilites.each do |disponibilite| %>
-                    <% if seance.horaire.midnight.between?(disponibilite.start_time, disponibilite.end_time) == true %>
-                      , <%= disponibilite.nom %>
-                    <% end %>
-                    <% end %>
-                  </td>
-                </tr>
-                <% else %>
-                 <tr>
-                  <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
-                  <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
-                  <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
-                  <td class="info"><span class="glyphicon glyphicon-warning-sign"></span> <strong><%= seance.annulee %></strong></td>
-                  <% if can? :manage, @seance %>
-                  <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %> <span class="glyphicon glyphicon-trash"></span> <%= link_to 'Supprimer', seance, method: :delete, data: { confirm: 'En êtes vous sûr ?'}, :class => "btn btn-danger" %></td>
-                  <% else %>
-                  <td></td>
-                  <% end %>
-                </tr>
-                <% end %>
-                <tr>
-                  <td colspan="5" class="separation"></td>
-                </tr>
-            </tbody>
-            <% end %>
-          <% end %>
-            <tfoot>
-              <tr>
-                <th>Date et heure</th>
-                <th>FILM</th>
-                <th>Lieu</th>
-                <% if can? :update, Seance %>
-                <th>Projection/Caisse</th>
-                <th>Édition</th>
-                <% end %>
-              </tr>
-            </tfoot>
-        </table>
-    </div>
-  </div>
+</div>
 
-  <br>
+<br>

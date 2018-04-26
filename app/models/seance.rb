@@ -54,11 +54,11 @@ class Seance < ApplicationRecord
 	end
 
 	def self.seances_a_completer_projection
-		seances_a_completer_projection = Seance.where(projection: "").order(horaire: :asc)
+		seances_a_completer_projection = Seance.where(projection: [nil, ""]).order(horaire: :asc)
 	end
 
 	def self.seances_a_completer_caisse
-		seances_a_completer_caisse = Seance.where(caisse: "").order(horaire: :asc)
+		seances_a_completer_caisse = Seance.where(caisse: [nil, ""]).order(horaire: :asc)
 	end
 
 	def self.seances_date_range

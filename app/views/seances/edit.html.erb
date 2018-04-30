@@ -3,12 +3,33 @@
 <div class="container">
 	<%= render 'form' %>
 	<div class="actions">
-	<%= link_to 'Voir', @seance, :class => "btn btn-primary active" %>
-  <%= link_to 'Retour à la liste des Séances', seances_path(:lieu => "tous les lieux"), :class => "btn btn-success active" %> <strong>pour Tous les lieux</strong>
-  </div>
-	<% if @seance.village.salle.downcase == "vernoux" || @seance.village.salle.downcase == "lamastre" || @seance.village.salle.downcase == "chalencon "%>
-  <%= link_to 'Retour à la liste des Séances', seances_path(:lieu => @seance.village.salle.downcase), :class => "btn btn-success active" %> de <strong><%= @seance.village.salle.upcase %></strong>
-  <% end %>
+	    <div class="btn-group">
+	    <button type="button" class="btn btn-danger">Choix de retour</button>
+	        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+	        <span class="caret"></span>
+	        <span class="sr-only">Toggle Dropdown</span>
+	        </button>
+	        <ul class="dropdown-menu" role="menu">
+	          <% if @seance.village.commune.downcase == "vernoux" || @seance.village.commune.downcase == "lamastre" || @seance.village.commune.downcase == "chalencon"%>
+	            pour <strong><%= @seance.village.commune.upcase %></strong>
+	            <li><%= link_to 'Séances', seances_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-success active" %></li>
+	            <li><%= link_to 'Séances à compléter', a_completer_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-warning active" %></li>
+	            <li><%= link_to 'Séances passées', seances_passees_path(:lieu => @seance.village.commune.downcase), :class => "btn btn-warning active" %></li>
+	            <li class="divider"></li>
+	          <% else %>
+	            <li></li>
+	         <% end %>
+	            pour <strong>Tous les lieux</strong>
+	            <li><%= link_to 'Séances', seances_path(:lieu => "tous les lieux"), :class => "btn btn-success active" %></li>
+	            <li><%= link_to 'Séances à compléter', a_completer_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %></li>
+	            <li><%= link_to 'Séances passées', seances_passees_path(:lieu => "tous les lieux"), :class => "btn btn-warning active" %></li>
+	            <li class="divider"></li>
+	            <li><%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %></li>
+	            <li><%= link_to 'Films à venir', films_a_venir_path, :class => "btn btn-success active" %></li>
+	            <li class="divider"></li>
+	        </ul>
+	    </div>
+  	</div>
 </div>
 </center>
 <br>

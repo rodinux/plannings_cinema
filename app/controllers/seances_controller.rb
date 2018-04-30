@@ -89,6 +89,8 @@ class SeancesController < ApplicationController
 
   # GET /seances/1/edit
   def edit
+    @seances = Seance.all
+    @villages = Village.all
   end
 
   # POST /seances

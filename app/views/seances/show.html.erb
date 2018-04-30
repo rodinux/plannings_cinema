@@ -22,10 +22,9 @@
     <div class="actions">
       <%= link_to 'Modifier ?', edit_seance_path(@seance), :class => "btn btn-warning active" %>
     </div>
-  </center>
   <div class="container">
    <div class="btn-group">
-    <button type="button" class="btn btn-danger">Choix</button>
+    <button type="button" class="btn btn-danger">Choix de retour</button>
         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
         <span class="caret"></span>
         <span class="sr-only">Toggle Dropdown</span>
@@ -47,9 +46,11 @@
             <li class="divider"></li>
             <li><%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-primary active" %></li>
             <li><%= link_to 'Films à venir', films_a_venir_path, :class => "btn btn-success active" %></li>
+            <li class="divider"></li>
         </ul>
     </div>
   </div>
+  </center>
 </div>
 
 

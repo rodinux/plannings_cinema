@@ -61,10 +61,7 @@ $ gem install rails
 $ bundle install
 ```
 
-* You may also need to migrate the database
-To do this, if you don't want to use postgresql database, edit the file config/datbases.yml with this lines (delete the current lines)
-
-* You need also to create this file in the folder config:
+* IMPORTANT: You need also to create this file in the folder config (this file is include in .gitignore to hide the production environnement's secret key) :
 
 ### config/secrets.yml
 
@@ -98,7 +95,7 @@ production:
 
 ## Deployment instructions
 
-* It is possible you want to change the database, (I personnally use postgresql), if you want to use it without postgesql and without creating first a database, it is very easy. You need to make few changes, in the file config/database.yml, replace all by :
+* It is possible you want to change the database, (I personnally use postgresql), if you want to use it without Postgresql and without creating first a database, it is very easy. You need to make few changes, in the file config/database.yml, replace all by :
 
 ## config/database.yml
 
@@ -130,6 +127,7 @@ production:
 * You always need to migrate the database before running :
 
 ```
+$ rake db:create
 $ rake db:migrate
 ```
 

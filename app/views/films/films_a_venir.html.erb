@@ -41,7 +41,7 @@
     <% if film.seances.seances_1_semaine_avant_2_mois_apres.present? %>
     <div class="seance description">
     <div class="container">
-        <center><h3><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
+        <center><h3 id="<%= film.titrefilm.upcase %>"><span class="glyphicon glyphicon-film"></span> <strong><%= film.titrefilm.upcase %></strong></h3></center>
     </div>
         <div class="container">
             <center>

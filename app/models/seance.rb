@@ -1,13 +1,15 @@
 class Seance < ApplicationRecord
 
-	belongs_to :film, :inverse_of => :seances
-	belongs_to :village, :inverse_of => :seances
+	belongs_to :film, :inverse_of => :seances, optional: true
+	belongs_to :village, :inverse_of => :seances, optional: true
 	validates :film_id, :presence => true
 	validates :village_id, :presence => true
 	validates :horaire, :presence => true
 
 	before_create :setup_default_value_for_new_seances
+	#throw(:abort)
 	before_update :setup_default_value_for_updated_seances
+	#throw(:abort)
 
 	def self.lieuxtest
 		lieuxtest = Hash[
@@ -62,31 +64,31 @@ class Seance < ApplicationRecord
 	end
 
 	def self.seances_date_range
-	   seances_date_range = Seance.where({horaire: (range.to_i.days.ago..Date.today)})
+	   	seances_date_range = Seance.where({horaire: (range.to_i.days.ago..Date.today)})
 	end
 
 	def self.seances_annulee
-	   seances_annulee = Seance.where(annulee: "Annulée")
+	   	seances_annulee = Seance.where(annulee: "Annulée")
 	end
 
 	private
 
 	def setup_default_value_for_new_seances
-	  if self.billets_adultes.blank?
+	  	if self.billets_adultes.blank?
 	      self.billets_adultes = 0
-    end
-	  if self.billets_enfants.blank?
+     	end
+	  	if self.billets_enfants.blank?
 	      self.billets_enfants = 0
-	  end
-	  if self.billets_scolaires.blank?
+	  	end
+	  	if self.billets_scolaires.blank?
 	      self.billets_scolaires = 0
-	  end
-	  if self.total_billets.blank?
+	  	end
+	  	if self.total_billets.blank?
 	      self.total_billets = 0
-	  end
+	  	end
 	end
 
 	def setup_default_value_for_updated_seances
-	   self.total_billets = self.billets_adultes + self.billets_enfants + self.billets_scolaires
+	   	self.total_billets = self.billets_adultes + self.billets_enfants + self.billets_scolaires
 	end
 end

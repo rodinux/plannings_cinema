@@ -17,14 +17,12 @@
 !/log/.keep
 !/tmp/.keep
 
-# Ignore secret keys
-/config/locales/secrets.yml
-
 # Ignore Byebug command history file.
 .byebug_history
 
 # Ignore secret key
 /config/secrets.yml
+
 # Ignore logs
 /app/passenger.3000.log
 /app/passenger.3000.pid.lock

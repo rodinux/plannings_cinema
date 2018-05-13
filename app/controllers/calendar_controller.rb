@@ -4,7 +4,7 @@
    before_action :get_lieu
 
   def calendrier
-  	  @seances = Seance.all
+      @seances = Seance.all
   	  @films = Film.all
   	  @villages = Village.all
   	  @date = params[:date] ? Date.parse(params[:date]) : Date.today

@@ -80,7 +80,7 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Permit an embedded iframe for ecranvillage.net
-  # config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOW-FROM https://calendrierecranvillage.deploiement.ovh/'}
+  #config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOW-FROM https://calendrierecranvillage.deploiement.ovh/'}
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'

@@ -20,7 +20,7 @@ module PlanningsCinema
     config.beginning_of_week = :wednesday
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :fr
-    config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOW-FROM https://ecranvillage-dev.vivarais.net/ https://www.lamastreassociationrad.fr/ https://calendrierecranvillage.deploiement.ovh/'}
+    config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOW-FROM https://ecranvillage-dev.vivarais.net/, https://www.lamastreassociationrad.fr/, https://calendrierecranvillage.deploiement.ovh/'}
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

@@ -2,9 +2,9 @@
 
    skip_before_action :require_login
    before_action :get_lieu
+   after_filter :allow_iframe, only: :calendrier
 
   def calendrier
-      response.headers.delete "X-Frame-Options"
       @seances = Seance.all
   	  @films = Film.all
   	  @villages = Village.all

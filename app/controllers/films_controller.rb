@@ -2,6 +2,7 @@ class FilmsController < ApplicationController
 
   skip_before_action :require_login, only: [:index, :films_a_venir, :ecranvillage, :show, :tous_les_films]
   before_action :set_film, only: [:show, :edit, :update, :destroy]
+  after_filter :allow_iframe, only: :films_a_venir
 
   require 'httparty'
 
@@ -28,6 +29,7 @@ class FilmsController < ApplicationController
   # GET /films
   # GET /films.json
   def films_a_venir
+    response.headers.delete "X-Frame-Options"
     @seances = Seance.all
     @films = Film.all
   end

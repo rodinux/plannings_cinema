@@ -29,7 +29,6 @@ class FilmsController < ApplicationController
   # GET /films
   # GET /films.json
   def films_a_venir
-    response.headers.delete "X-Frame-Options"
     @seances = Seance.all
     @films = Film.all
   end

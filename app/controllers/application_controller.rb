@@ -27,4 +27,8 @@ before_action :require_login
       # Make sure that we reference the route from the main app.
       redirect_to main_app.log_in_path
     end
+
+    def allow_iframe
+      response.headers.delete "X-Frame-Options"
+    end
 end

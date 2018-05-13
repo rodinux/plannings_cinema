@@ -4,6 +4,7 @@
    before_action :get_lieu
 
   def calendrier
+      response.headers.delete "X-Frame-Options"
       @seances = Seance.all
   	  @films = Film.all
   	  @villages = Village.all

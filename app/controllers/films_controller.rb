@@ -2,7 +2,7 @@ class FilmsController < ApplicationController
 
   skip_before_action :require_login, only: [:index, :films_a_venir, :ecranvillage, :show, :tous_les_films]
   before_action :set_film, only: [:show, :edit, :update, :destroy]
-  after_filter :allow_iframe, only: :films_a_venir
+  after_action :allow_iframe, only: :films_a_venir
 
   require 'httparty'
 

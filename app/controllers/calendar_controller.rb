@@ -2,7 +2,7 @@
 
    skip_before_action :require_login
    before_action :get_lieu
-   after_filter :allow_iframe, only: :calendrier
+   after_action :allow_iframe, only: :calendrier
 
   def calendrier
       @seances = Seance.all

@@ -1,23 +1,23 @@
-<div class="cine">
-  <center><h1 class="text-center"><strong>Calendrier des Projections</strong></h1></center>
-</div>
-  <h2 class="text-center"><strong><%= @lieu.upcase %></strong></h2>
+
+  <center><h1 class="text-center"><strong>Projections</strong></h1></center>
+
+  <h2 class="text-center">pour <strong><%= @lieu.upcase %></strong></h2>
   <br>
   <div class="actions">
-    <%= link_to 'Calendrier Vernoux', calendrier_iframe_path(:lieu => "vernoux", date: @date), :class => "btn btn-default btn-lg vernoux", :title => "Que les séances de Vernoux" %>
-    <%= link_to 'Calendrier Lamastre', calendrier_iframe_path(:lieu => "lamastre", date: @date), :class => "btn btn-default btn-lg lamastre", :title => "Que les séances de Lamastre" %>
-    <%= link_to 'Calendrier Chalencon', calendrier_iframe_path(:lieu => "chalencon", date: @date), :class => "btn btn-default btn-lg chalencon", :title => "Que les séances de Chalencon" %>
-    <%= link_to 'Calendrier Itinérance', calendrier_iframe_path(:lieu => "itinerance", date: @date), :class => "btn btn-default btn-lg itinerance", :title => "Que les séances de Itinérantes" %>
-    <%= link_to 'Calendrier tous les lieux', root_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-default btn-lg", :title => "Séances de tous les lieux" %>
+    <%= link_to 'Calendrier Vernoux', calendrier_iframe_path(:lieu => "vernoux", date: @date), :class => "btn btn-default vernoux", :title => "Que les séances de Vernoux" %>
+    <%= link_to 'Calendrier Lamastre', calendrier_iframe_path(:lieu => "lamastre", date: @date), :class => "btn btn-default lamastre", :title => "Que les séances de Lamastre" %>
+    <%= link_to 'Calendrier Chalencon', calendrier_iframe_path(:lieu => "chalencon", date: @date), :class => "btn btn-default chalencon", :title => "Que les séances de Chalencon" %>
+    <%= link_to 'Calendrier Itinérance', calendrier_iframe_path(:lieu => "itinerance", date: @date), :class => "btn btn-default itinerance", :title => "Que les séances de Itinérantes" %>
+    <%= link_to 'Calendrier tous les lieux', calendrier_iframe_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-default", :title => "Séances de tous les lieux" %>
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="well controls">
-        <%= link_to calendrier_iframe_path(:lieu => params[:lieu], date: @date - 1.weeks), class: "btn btn-default" do %>
+        <%= link_to calendrier_iframe_path(:lieu => params[:lieu], date: @date - 1.weeks), class: "btn btn-default btn-xs" do %>
           <div class="glyphicon glyphicon-backward"><p>Semaine précédente</p></div>
         <% end %>
          <%= "#{l @date, format: :middle}, #{@date.strftime("semaine N°%W")}" %>
-        <%= link_to calendrier_iframe_path(:lieu => params[:lieu], date: @date + 1.weeks), class: "btn btn-default" do %>
+        <%= link_to calendrier_iframe_path(:lieu => params[:lieu], date: @date + 1.weeks), class: "btn btn-default btn-xs" do %>
           <div class="glyphicon glyphicon-forward"><p>Semaine suivante</p></div>
         <% end %>
       </div>
@@ -33,7 +33,7 @@
               <% if seance.annulee != "Annulée" %>
                 <li>
                 <% if seance.film.affiche.present? %>
-                  <%= link_to "https://www.ecranvillage.net/?p=#{seance.film_id}", :class => seance.village.commune.downcase, :title => "article sur le site Ecran Village", :target => "_blank", :rel => "noopener noreferrer" do %>
+                  <%= link_to "https://www.ecranvillage.net/?p=#{seance.film_id}", :class => seance.village.commune.downcase, :title => "En savoir plus", :target => "_blank", :rel => "noopener noreferrer" do %>
                        <p><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
                        <p><span class='glyphicon glyphicon-film'></span> <%= seance.film.titrefilm %></p>
                        <% if seance.version.present? %>

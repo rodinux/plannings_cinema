@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 	resources :users
 	resources :user_sessions, only: [:new, :create, :destroy]
 	resources :disponibilites
-	get 'calendrier_iframe' => 'iframe#calendrier_iframe', :lieu => "tous les lieux"
+	get 'calendrier_iframe' => 'iframe#calendrier_iframe'
 	get 'aide' => 'calendar#aide'
 	get 'calendrier' => 'calendar#calendrier'
 	get 'a_completer' => 'seances#a_completer'

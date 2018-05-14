@@ -30,5 +30,6 @@ before_action :require_login
 
     def allow_iframe
       response.headers.delete "X-Frame-Options"
+      response.headers["Access-Control-Allow-Origin"] = "*"
     end
 end

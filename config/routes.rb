@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 	post 'log_out' => 'user_sessions#destroy', :as => :log_out
 
 	resource :calendar, only: [:calendrier, :aide], controller: :calendar
+	resource :iframe, only: [:calendrier_iframe], controller: :iframe
 	resources :seances
 	resources :villages
 	resources :films
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
 	resources :users
 	resources :user_sessions, only: [:new, :create, :destroy]
 	resources :disponibilites
-	#get 'entrees/calcul_entrees'
+	get 'calendrier_iframe' => 'iframe#calendrier_iframe', :lieu => "tous les lieux"
 	get 'aide' => 'calendar#aide'
 	get 'calendrier' => 'calendar#calendrier'
 	get 'a_completer' => 'seances#a_completer'

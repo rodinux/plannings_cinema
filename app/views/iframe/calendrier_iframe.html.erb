@@ -1,8 +1,6 @@
 
-  <center><h1 class="text-center"><strong>Projections</strong></h1></center>
-
-  <h2 class="text-center">pour <strong><%= @lieu.upcase %></strong></h2>
-  <br>
+  <center><p class="text-center">Projections pour <strong><%= @lieu.upcase %></strong></p></center>
+ <br>
   <div class="actions">
     <%= link_to 'Calendrier Vernoux', calendrier_iframe_path(:lieu => "vernoux", date: @date), :class => "btn btn-default vernoux", :title => "Que les séances de Vernoux" %>
     <%= link_to 'Calendrier Lamastre', calendrier_iframe_path(:lieu => "lamastre", date: @date), :class => "btn btn-default lamastre", :title => "Que les séances de Lamastre" %>
@@ -12,7 +10,7 @@
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <div class="well controls">
+      <div class="well well-sm controls">
         <%= link_to calendrier_iframe_path(:lieu => params[:lieu], date: @date - 1.weeks), class: "btn btn-default btn-xs" do %>
           <div class="glyphicon glyphicon-backward"><p>Semaine précédente</p></div>
         <% end %>

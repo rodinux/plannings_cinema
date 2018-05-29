@@ -28,7 +28,7 @@
         </li>
         <li><%= link_to 'Utilisateurs', users_path, :class => "btn btn-lg navbar-btn hidden-xs" %></li>
         <li><%= link_to 'Entrees', entrees_path, :class => "btn btn-lg navbar-btn" %></li>
-        <li><%= link_to 'Disponibilités', disponibilites_path, :class => "btn btn-lg navbar-btn hidden-xs"  %></li>
+        <li><%= link_to 'Disponibilités', disponibilites_path, :class => "btn btn-lg navbar-btn"  %></li>
       <% end %>
     <% if can? :manage, Village %>
       <li><%= link_to 'Villages', villages_path, :class => "btn btn-lg navbar-btn hidden-xs" %></li>

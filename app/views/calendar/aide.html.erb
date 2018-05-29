@@ -119,7 +119,7 @@
 	</div>
 	<center><h2 id="calcul"><strong>Comment calculer le nombre d'entrées ?</strong></h2></center>
 	<div class="description">
-		<h4>Dans l'onglet Entrées, en début de page, il y a un champ à remplir avec la date de début puis un champ avec la date de fin pour définir la période choisie pour le calcul de nombre d'entrées. Par défaut, il y a un calcul d'une semaine jusqu'à aujourd'hui. On choisit les dates, celles que l'on veut, <strong>en respectant le format écrit "Année-Mois-Date"</strong> (exemple = 2017-01-28 et 2017-02-04), puis on clique sur le bouton 'Chercher".</h4>
+		<h4>Dans l'onglet Entrées, en début de page, il y a un champ à remplir avec la date de début puis un champ avec la date de fin pour définir la période choisie pour le calcul de nombre d'entrées. Par défaut, il y a un calcul d'une semaine jusqu'à aujourd'hui. On choisit les dates, celles que l'on veut.</h4>
 		<h4>On voit ensuite en-dessous le choix qui sera pris en compte pour les calculs.</h4>
 		<h4>On aura ensuite le calcul des séances,des films pour cette période, dont celle(s) annulée(s). Puis par classifications (Jeune Public, Patrimoine et Répertoire, Recherche et Découvertes, Toutes les classifications). Par distibition ADRC. Puis les totaux par lieux, puis enfin par film et par lieux. Et la liste des séances prises en compte.</h4>
 			<div class="container">
@@ -130,34 +130,43 @@
 				<center><%= image_tag("resultat-film.png", :alt => "résultat par film", :class => "capture") %></center>
 			</div>
 	</div>
-<% if can? :manage, Film %>
-	<center><h2 id="ajout-film"><strong>Comment ajouter un film ?</strong></h2></center>
-	<div class="description">
-		<h4>Pour ajouter un film sur l'application, il vaut mieux passer par le site Wordpress et systématiquement <strong>toujours vérifier si le film n'existe pas déjà</strong> sur le site et/ou sur l'application ! Pourquoi ? Par ce que l'on risque d'avoir des problèmes avec la base de données si on mélange des IDs des Films qui viennent du site et d'autres de l'application. Donc, le mieux sera de procéder comme suit :</h4>
-		<h4>Si le film a déjà été éditer sur le site, il suffit de <strong>cocher de nouveau la catégorie 'Export'</strong> sur l'article et de l'importer ensuite sur l'application avec le bouton <strong>'Importer des nouveaux films'</strong>. Sinon, il faut éditer le film sur le site Écran Village en Wordpress, même si il ne doit pas être visible par les visiteurs. Dans le cas où il ne doit apparaître que sur l'application, il faudra bien songer à <strong>cocher la catégorie 'Export'</strong> et à l'<strong>exclure du XML sitemap "Exclude from XML Sitemap"</strong> pour pas que google le recherche dans les métas du site, surtout si on le supprime par la suite, c'est aussi une case à cocher.</h4>
-			<div class="container">
-				<center><%= image_tag("cat-export-wp-ev.png", :alt => "cocher catégorie export", :class => "capture") %></center>
-				<center><%= image_tag("excude-sitemap-wp-ev.png", :alt => "exclure du sitemap", :class => "capture") %></center>
+		<% if can? :manage, Film %>
+			<center><h2 id="ajout-film"><strong>Comment ajouter un film ?</strong></h2></center>
+			<div class="description">
+				<h4>Pour ajouter un film sur l'application, il vaut mieux passer par le site Wordpress et systématiquement <strong>toujours vérifier si le film n'existe pas déjà</strong> sur le site et/ou sur l'application ! Pourquoi ? Par ce que l'on risque d'avoir des problèmes avec la base de données si on mélange des IDs des Films qui viennent du site et d'autres de l'application. Donc, le mieux sera de procéder comme suit :</h4>
+				<h4>Si le film a déjà été éditer sur le site, il suffit de <strong>cocher de nouveau la catégorie 'Export'</strong> sur l'article et de l'importer ensuite sur l'application avec le bouton <strong>'Importer des nouveaux films'</strong>. Sinon, il faut éditer le film sur le site Écran Village en Wordpress, même si il ne doit pas être visible par les visiteurs. Dans le cas où il ne doit apparaître que sur l'application, il faudra bien songer à <strong>cocher la catégorie 'Export'</strong> et à l'<strong>exclure du XML sitemap "Exclude from XML Sitemap"</strong> pour pas que google le recherche dans les métas du site, surtout si on le supprime par la suite, c'est aussi une case à cocher.</h4>
+					<div class="container">
+						<center><%= image_tag("cat-export-wp-ev.png", :alt => "cocher catégorie export", :class => "capture") %></center>
+						<center><%= image_tag("excude-sitemap-wp-ev.png", :alt => "exclure du sitemap", :class => "capture") %></center>
+					</div>
+				<h4>Puis il ne restera plus qu'à importer le film avec le bouton d'import de l'appication dans la page Films.</h4>	<div class="container">
+						<center><%= image_tag("ajout-films.png", :alt => "cocher catégorie export", :class => "capture") %></center>
+					</div>
 			</div>
-		<h4>Puis il ne restera plus qu'à importer le film avec le bouton d'import de l'appication dans la page Films.</h4>	<div class="container">
-				<center><%= image_tag("ajout-films.png", :alt => "cocher catégorie export", :class => "capture") %></center>
+			<center><h2 id="vue-film"><strong>Comment faire remonter un film anciennement édité dans la page Films ?</strong></h2></center>
+			<div class="description">
+				<h4>Si on veut refaire apparaître un film anciennement enregistré, il suffit de changer sa date de mise à jour, les films visibles sur la page Films sont ceux qui ont été <strong>'Mis à jour'</strong> depuis 3 semaines jusqu'à aujourd'hui. Il suffit donc de <strong>'Modifier'</strong> le film et de mettre une date qui est précisée au-dessus du champ, par exemple celle du jour même pour qu'il reste 3 semaine dans la vue.</h4>
+					<div class="container">
+						<center><%= image_tag("updated-film.png", :alt => "cocher catégorie export", :class => "capture") %></center>
+					</div>
 			</div>
-	</div>
-	<center><h2 id="vue-film"><strong>Comment faire remonter un film anciennement édité dans la page Films ?</strong></h2></center>
-	<div class="description">
-		<h4>Si on veut refaire apparaître un film anciennement enregistré, il suffit de changer sa date de mise à jour, les films visibles sur la page Films sont ceux qui ont été <strong>'Mis à jour'</strong> depuis 3 semaines jusqu'à aujourd'hui. Il suffit donc de <strong>'Modifier'</strong> le film et de mettre une date qui est précisée au-dessus du champ, par exemple celle du jour même pour qu'il reste 3 semaine dans la vue.</h4>
-			<div class="container">
-				<center><%= image_tag("updated-film.png", :alt => "cocher catégorie export", :class => "capture") %></center>
-			</div>
-	</div>
-	<center><h2 id="permissions-utilisateur"><strong>Comment ouvrir les permissions pour un bénévole récemment inscrit ?</strong></h2></center>
-	<div class="description">
-		<h4>Quand un bénévole s'inscrit pour la première fois, il n'a accès à rien, il faut lui ouvrir des droits. Il y a trois rôles (permissions) : guest, manager et admin. En s'inscrivant, l'utilisateur a par défaut à un rôle <strong>guest</strong> (invité). Pour qu'il puisse éditer des séances, il faut <strong>'Éditer'</strong> l'utilisateur en tant qu'<strong>admin</strong> dans l'onglet <strong>'Utilisateurs'</strong> et lui donner un rôle de <strong>manager</strong>.</h4>
-			<div class="container">
-				<center><%= image_tag("edition-utilisateur.png", :alt => "cocher catégorie export", :class => "capture") %></center>
-				<center><%= image_tag("edition-permissions.png", :alt => "cocher catégorie export", :class => "capture") %></center>
-			</div>
-    </div>
-<% end %>
+		    <center><h2 id="inscrire-utilisateur"><strong>Comment inscrire un utilisateur ?</strong></h2></center>
+			<div class="description">
+				<h4>Pour inscrire un nouvel utilisateur, il faut d'abord être déconnecté de l'application et aller sur l'adresse https://programme.ecranvillage.deploiement.ovh/aide (il suffit d'ajouter /aide à l'adresse de l'application dans la barre de navigation du navigateur web). Puis cliquer sur le bouton 'S'enregitrer'</h4>
+					<div class="container">
+						<center><%= image_tag("page-aide.png", :alt => "page aide", :class => "capture") %></center>
+				<h4>Ensuite remplir les champs et cliquer sur Valider. Il faudra aussi penser à lui ouvrir les permissions nécessaires par la suite.</h4>
+						<center><%= image_tag("page-inscription.png", :alt => "page inscription", :class => "capture") %></center>
+					</div>
+		    </div>
+			<center><h2 id="permissions-utilisateur"><strong>Comment ouvrir les permissions pour un bénévole récemment inscrit ?</strong></h2></center>
+			<div class="description">
+				<h4>Quand un bénévole s'inscrit pour la première fois, il n'a accès à rien, il faut lui ouvrir des droits. Il y a trois rôles (permissions) : guest, manager et admin. En s'inscrivant, l'utilisateur a par défaut à un rôle <strong>guest</strong> (invité). Pour qu'il puisse éditer des séances, il faut <strong>'Éditer'</strong> l'utilisateur en tant qu'<strong>admin</strong> dans l'onglet <strong>'Utilisateurs'</strong> et lui donner un rôle de <strong>manager</strong>.</h4>
+					<div class="container">
+						<center><%= image_tag("edition-utilisateur.png", :alt => "cocher catégorie export", :class => "capture") %></center>
+						<center><%= image_tag("edition-permissions.png", :alt => "cocher catégorie export", :class => "capture") %></center>
+					</div>
+		    </div>
+		<% end %>
 	<% end %>
 	<%= link_to '', aide_path, :class => "back-to-top", :title => 'Retour haut de page' %>

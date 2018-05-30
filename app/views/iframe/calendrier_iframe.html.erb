@@ -1,5 +1,13 @@
 <center><p class="text-center">Projections pour <strong><%= @lieu.upcase %></strong></p></center>
  <br>
+  <div class="actions">
+    <p>Choix par lieux:</p>
+    <%= link_to 'Calendrier Vernoux', calendrier_iframe_path(:lieu => "vernoux", date: @date), :class => "btn btn-default vernoux", :title => "Que les séances de Vernoux" %>
+    <%= link_to 'Calendrier Lamastre', calendrier_iframe_path(:lieu => "lamastre", date: @date), :class => "btn btn-default lamastre", :title => "Que les séances de Lamastre" %>
+    <%= link_to 'Calendrier Chalencon', calendrier_iframe_path(:lieu => "chalencon", date: @date), :class => "btn btn-default chalencon", :title => "Que les séances de Chalencon" %>
+    <%= link_to 'Calendrier Itinérance', calendrier_iframe_path(:lieu => "itinerance", date: @date), :class => "btn btn-default itinerance", :title => "Que les séances de Itinérantes" %>
+    <%= link_to 'Calendrier tous les lieux', calendrier_iframe_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-default", :title => "Séances de tous les lieux" %>
+  </div>
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="well well-sm controls">
@@ -75,13 +83,5 @@
               </ul>
       <% end %>
     </div>
-  </div>
-  <div class="actions">
-    <p>Choix par lieux:</p>
-    <%= link_to 'Calendrier Vernoux', calendrier_iframe_path(:lieu => "vernoux", date: @date), :class => "btn btn-default vernoux", :title => "Que les séances de Vernoux" %>
-    <%= link_to 'Calendrier Lamastre', calendrier_iframe_path(:lieu => "lamastre", date: @date), :class => "btn btn-default lamastre", :title => "Que les séances de Lamastre" %>
-    <%= link_to 'Calendrier Chalencon', calendrier_iframe_path(:lieu => "chalencon", date: @date), :class => "btn btn-default chalencon", :title => "Que les séances de Chalencon" %>
-    <%= link_to 'Calendrier Itinérance', calendrier_iframe_path(:lieu => "itinerance", date: @date), :class => "btn btn-default itinerance", :title => "Que les séances de Itinérantes" %>
-    <%= link_to 'Calendrier tous les lieux', calendrier_iframe_path(:lieu => "tous les lieux", date: @date), :class => "btn btn-default", :title => "Séances de tous les lieux" %>
   </div>
 <br>

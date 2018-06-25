@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'no-reply@programme.ecranvillage.deploiement.ovh'
   layout 'mailer'
 end

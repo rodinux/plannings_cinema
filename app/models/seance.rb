@@ -28,7 +28,7 @@ class Seance < ApplicationRecord
 	end
 
 	def self.seances_a_venir
-        seances_a_venir = Seance.where({horaire: (Date.today..Date.today + 30)})
+        seances_a_venir = Seance.where({horaire: (Date.today..Date.today + 60)})
 	end
 
 	def self.seances_passees_3_semaines

@@ -22,8 +22,12 @@
               <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
               <% end %>
               <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+              <% if seance.projection.present? %>
               <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+              <% end %>
+              <% if seance.caisse.present? %>
               <td class="info"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+              <% end %>
             </tr>
             <tr>
               <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description %></td>
@@ -38,8 +42,12 @@
               <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
               <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
               <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+              <% if seance.projection.present? %>
               <td class="info annule"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+              <% end %>
+              <% if seance.caisse.present? %>
               <td class="info annule"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+              <% end %>
             </tr>
             <tr>
               <td colspan="5" class="active"><strong><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></strong></td>

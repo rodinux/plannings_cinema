@@ -8,7 +8,7 @@ class Film < ApplicationRecord
 
 
 	    def self.films_3_semaines
-	        films_3_semaines = Film.where({ updated_at: (3.week.ago.midnight..(Date.today + 1))}).order(created_at: :desc)
+	        films_3_semaines = Film.where({ updated_at: (3.week.ago.midnight..(Date.today + 1))}).order(updated_at: :desc)
 	    end
 
 	    def self.films_2_mois_avant

@@ -51,7 +51,7 @@ or fork it , as you want.
 
 * To use ruby 2.4.1, don't forget doing this in your project :
 ```bash
-$ cd plannings_ecranvillage
+$ cd plannings_cinema
 $ rvm use 2.4.1
 $ gem install rails
 ```
@@ -157,7 +157,7 @@ $ rvm install 2.4.1
 * To use ruby 2.4.1 don't forget doing this in your project :
 
 ```
-$ cd plannings_ecranvillage
+$ cd plannings_cinema
 $ rvm use 2.4.1
 $ gem install rails
 ```

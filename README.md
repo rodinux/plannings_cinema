@@ -139,8 +139,8 @@ That's all :)
 
 ## More Information
 
-* You can found this application on [Framagit](https://git.framasoft.org/rodinux/plannings_ecranvillage) or on [Github](https://github.com/rodinux/plannings_cinema).
-I have added a [Wiki](https://git.framasoft.org/rodinux/plannings_ecranvillage/wikis/home) on Framagit to get documentation if you want to adapt this project.
+* You can found this application on [Framagit](https://git.framasoft.org/rodinux/plannings_cinema) or on [Github](https://github.com/rodinux/plannings_cinema).
+I have added a [Wiki](https://git.framasoft.org/rodinux/plannings_cinema/wikis/home) on Framagit to get documentation if you want to adapt this project.
 
 ## Deploying on heroku
 

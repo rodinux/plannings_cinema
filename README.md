@@ -5,8 +5,8 @@ This is a refactoring application of plannings_ecranvillage.
 * Le but en de faire un outil de plannification à travers un agenda avec des tâches configurable et éditable pour les utilisateurs.
 * Sentez-vous libre d'adapter ce projet si il vous intéresse.
 
-* Vous pouvez aussi trouver cette application sur [Framagit](https://git.framasoft.org/rodinux/plannings_ecranvillage).
-J'y ai ajouté un [Wiki](https://git.framasoft.org/rodinux/plannings_ecranvillage/wikis/home) pour bien documenter cette application et comprendre ainsi comment l'adapter, si vous le désirez, à un de vos projets.
+* Vous pouvez aussi trouver cette application sur [Framagit](https://git.framasoft.org/rodinux/plannings_cinema).
+J'y ai aussi ajouté un [Wiki](https://git.framasoft.org/rodinux/plannings_cinema_/wikis/home) pour bien documenter cette application et comprendre ainsi comment l'adapter, si vous le désirez, à un de vos projets.
 
 ## Plannings for a mobile cinema with voluntary workers.
 * This application have been developed for an mobile cinema to organise the voluntary workers for the showings and the cashier for each shows. Since we've got numeric projectors, the activity have consequently increase and we needed a tool to make easier the task of the plannings.

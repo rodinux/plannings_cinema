@@ -1,5 +1,3 @@
-# plannings_cinema
-This is a refactoring application of plannings_ecranvillage.
 ## Plannings projections et caisse pour un cinéma itinérant.
 * Planning pour organiser les séances de bénévoles (projectionnistes, caisse) dans un cinéma itinérant d'Arts et d'Essais avec plusieurs lieux de diffusion éditable en Ruby on Rails.
 * Le but en de faire un outil de plannification à travers un agenda avec des tâches configurable et éditable pour les utilisateurs.
@@ -45,7 +43,7 @@ $ sudo apt-get install libpq-dev
 
 * To configure the application, you can clone it, run
 ```bash
-$ git clone https://github.com/rodinux/plannings_ecranvillage.git
+$ git clone https://github.com/rodinux/plannings_cinema.git
 ```
 or fork it , as you want.
 

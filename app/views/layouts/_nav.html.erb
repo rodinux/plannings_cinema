@@ -18,12 +18,12 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle btn btn-lg navbar-btn" data-toggle="dropdown">Séances <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><%= link_to 'Toutes les séances', seances_path(:lieu => "tous les lieux") %></li>
-            <li><%= link_to 'Séances Vernoux', seances_path(:lieu => "vernoux") %></li>
-            <li><%= link_to 'Séances Lamastre', seances_path(:lieu => "lamastre") %></li>
-            <li><%= link_to 'Séances Chalencon', seances_path(:lieu => "chalencon") %></li>
-            <li><%= link_to 'Séances Itinérance', seances_path(:lieu => "itinerance") %></li>
-            <li><%= link_to 'Mes Séances', mes_seances_path %></li>
+            <li><%= link_to 'Toutes les séances', seances_path(:lieu => "tous les lieux"), :class => "btn btn-lg" %></li>
+            <li><%= link_to 'Séances Vernoux', seances_path(:lieu => "vernoux"), :class => "btn btn-lg" %></li>
+            <li><%= link_to 'Séances Lamastre', seances_path(:lieu => "lamastre"), :class => "btn btn-lg" %></li>
+            <li><%= link_to 'Séances Chalencon', seances_path(:lieu => "chalencon"), :class => "btn btn-lg" %></li>
+            <li><%= link_to 'Séances Itinérance', seances_path(:lieu => "itinerance"), :class => "btn btn-lg" %></li>
+            <li><%= link_to 'Mes Séances', mes_seances_path, :class => "btn btn-lg" %></li>
           </ul>
         </li>
         <li><%= link_to 'Utilisateurs', users_path, :class => "btn btn-lg navbar-btn hidden-xs" %></li>

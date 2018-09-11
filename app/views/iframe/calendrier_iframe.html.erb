@@ -31,7 +31,9 @@
               <% if seance.annulee != "Annulée" %>
                 <li>
                 <% if seance.film.affiche.present? %>
-                  <%= link_to "https://www.ecranvillage.net/?p=#{seance.film_id}", :class => seance.village.commune.downcase, :title => "En savoir plus", :target => "_blank", :rel => "noopener noreferrer" do %>
+                    <%= link_to "https://www.ecranvillage.net/?p=#{seance.film_id}", :class => seance.village.commune.downcase, :title => "En savoir plus", :target => "_blank", :rel => "noopener noreferrer" do %>
+                       <div><img style="width:90%;" src="<%= seance.film.affiche %>" /></div>
+                       <br>
                        <p><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
                        <p><span class='glyphicon glyphicon-film'></span> <%= seance.film.titrefilm %></p>
                        <% if seance.version.present? %>

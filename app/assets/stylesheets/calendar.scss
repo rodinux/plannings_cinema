@@ -7,21 +7,23 @@
 }
 li {
     list-style-position: inherit !important;
+    list-style-type:none;
 }
 .itinerance {
-  color: #9b8d26;
+  color: #9b8d26 !important;
 }
 .vernoux {
-  color: #3232dd;
+  color: #3232dd !important;
 }
 .lamastre {
-  color: #c1272d;
+  color: #c1272d !important;
 }
 .chalencon {
-  color: #990099;
+  color: #990099 !important;
 }
 .calendrier li {
     list-style-position: inherit !important;
+    list-style-type:none;
   }.calendrier a {
   color: #9b8d26;
 
@@ -57,6 +59,10 @@ li {
     color: #449d44;
     text-decoration: none;
     }
+}
+li hr {
+  color:firebrick;
+  background-color:firebrick; height:3px;
 }
 tbody tr:nth-of-type(2n) {
 background-color: #f0f0f0;
@@ -96,5 +102,4 @@ div.datepicker {
   div.datepicker {
     width: 80%;
   }
-
 }

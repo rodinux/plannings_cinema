@@ -40,7 +40,7 @@
                 </td>
               </tr>
               <tr>
-                <td colspan="2" class="active"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description.html_safe %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
+                <td colspan="2" class="active"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description.to_s. %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
               <% if can? :update, Seance %>
                 <td colspan="3" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
               <% end %>
@@ -125,7 +125,7 @@
                 </td>
               </tr>
               <tr>
-                <td colspan="2"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description.html_safe %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
+                <td colspan="2"><strong>Info: </strong><%= seance.extras %> <%= seance.film.description.to_s.html_safe %> <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %></td>
               <% if can? :update, Seance %>
                 <td colspan="3" class="info"><strong>Commentaire:</strong> <%= seance.commentaire %></td>
               <% end %>

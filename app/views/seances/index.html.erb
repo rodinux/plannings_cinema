@@ -53,7 +53,7 @@
               <% end %>
             </tr>
             <tr>
-              <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description.html_safe %>
+              <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description.to_s.html_safe%>
               <% if seance.film.affiche.present? %>
               <%= link_to 'en savoir plus', "http://www.ecranvillage.net/?p=#{seance.film_id}", :title => "article sur le site d'Ecran Village", :target => "_blank", :rel => "noopener noreferrer" %>
               <% end %>

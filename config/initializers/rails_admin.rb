@@ -13,7 +13,7 @@ RailsAdmin.config do |config|
   end
 
   ## == Cancan ==
-  config.authorize_with :cancan
+  config.authorize_with :cancancan
 
   config.current_user_method(&:current_user)
 

@@ -66,6 +66,7 @@ RailsAdmin.config do |config|
       label "Distribution: "
     end
     import do
+      mapping_key :id
       default_excluded_fields [:created_at, :seances, :villages]
     end
     edit do
@@ -105,6 +106,7 @@ RailsAdmin.config do |config|
         label "ID des films: "
       end
       import do
+        mapping_key :id
         default_excluded_fields [:created_at, :updated_at, :seances, :films]
       end
     end
@@ -180,6 +182,7 @@ RailsAdmin.config do |config|
         label "Créée le: "
       end
       import do
+        mapping_key :id
         default_excluded_fields [:created_at, :updated_at]
         configure :horaire, :date do
           strftime_format '%d/%m/%Y %H:%M'
@@ -220,6 +223,7 @@ RailsAdmin.config do |config|
         label "ID"
       end
       import do
+        mapping_key :id
         exclude_fields [:created_at, :updated_at]
       end
     end
@@ -233,6 +237,7 @@ RailsAdmin.config do |config|
         label "Classification: "
       end
       import do
+        mapping_key :film_ids
         include_all_fields
         exclude_fields [:created_at, :updated_at]
       end
@@ -254,6 +259,7 @@ RailsAdmin.config do |config|
         label "Au: "
       end
       import do
+        mapping_key :nom
         exclude_fields [:created_at, :updated_at]
       end
     end
@@ -289,7 +295,6 @@ RailsAdminImport.config do |config|
       config.model 'Seance: ' do
         label :seance
       end
-
 
       config.model 'Classification: ' do
         label :classification

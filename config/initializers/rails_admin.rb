@@ -276,7 +276,7 @@ end
 
 RailsAdminImport.config do |config|
 
-      config.line_item_limit = 2000
+      config.line_item_limit = 4000
       config.update_if_exists = true
       config.rollback_on_error = true
 

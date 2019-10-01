@@ -50,6 +50,8 @@ gem "simple_calendar"
 gem 'bootstrap-datepicker-rails'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
+gem 'will_paginate'
+gem 'charlock_holmes'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

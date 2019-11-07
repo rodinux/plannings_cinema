@@ -1,4 +1,5 @@
 require 'i18n'
+
 I18n.default_locale = :fr
 
 RailsAdmin.config do |config|

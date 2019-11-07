@@ -1,0 +1,21 @@
+/* line 5, app/assets/stylesheets/seances.scss */
+#seance_commentaire {
+  width: 80%;
+  height: 100px;
+  border-radius: 5px;
+}
+
+/* line 10, app/assets/stylesheets/seances.scss */
+.separation {
+  background-color: #E9B3D9 !important;
+}
+
+/* line 13, app/assets/stylesheets/seances.scss */
+li {
+  list-style-position: inside;
+}
+
+/* line 16, app/assets/stylesheets/seances.scss */
+.annule {
+  text-decoration: line-through;
+}

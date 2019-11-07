@@ -1,0 +1,181 @@
+/* line 5, app/assets/stylesheets/calendar.scss */
+.today {
+  background: #AB9A9A;
+}
+
+/* line 8, app/assets/stylesheets/calendar.scss */
+li {
+  list-style-position: inherit !important;
+  list-style-type: none;
+}
+
+/* line 12, app/assets/stylesheets/calendar.scss */
+.itinerance {
+  color: #9b8d26 !important;
+}
+
+/* line 15, app/assets/stylesheets/calendar.scss */
+.vernoux {
+  color: #3232dd !important;
+}
+
+/* line 18, app/assets/stylesheets/calendar.scss */
+.lamastre {
+  color: #c1272d !important;
+}
+
+/* line 21, app/assets/stylesheets/calendar.scss */
+.chalencon {
+  color: #990099 !important;
+}
+
+/* line 24, app/assets/stylesheets/calendar.scss */
+.calendrier li {
+  list-style-position: inherit !important;
+  list-style-type: none;
+}
+
+/* line 27, app/assets/stylesheets/calendar.scss */
+.calendrier a {
+  color: #9b8d26;
+}
+
+/* line 30, app/assets/stylesheets/calendar.scss */
+.calendrier a:hover {
+  color: #449d44;
+  text-decoration: none;
+}
+
+/* line 34, app/assets/stylesheets/calendar.scss */
+a.vernoux {
+  color: #3232dd;
+}
+
+/* line 37, app/assets/stylesheets/calendar.scss */
+a.vernoux:hover {
+  color: #449d44;
+  text-decoration: none;
+}
+
+/* line 41, app/assets/stylesheets/calendar.scss */
+a.lamastre {
+  color: #c1272d;
+}
+
+/* line 44, app/assets/stylesheets/calendar.scss */
+a.lamastre:hover {
+  color: #449d44;
+  text-decoration: none;
+}
+
+/* line 48, app/assets/stylesheets/calendar.scss */
+a.chalencon {
+  color: #990099;
+}
+
+/* line 51, app/assets/stylesheets/calendar.scss */
+a.chalencon:hover {
+  color: #449d44;
+  text-decoration: none;
+}
+
+/* line 55, app/assets/stylesheets/calendar.scss */
+a.itinerance {
+  color: #9b8d26;
+}
+
+/* line 58, app/assets/stylesheets/calendar.scss */
+a.itinerance:hover {
+  color: #449d44;
+  text-decoration: none;
+}
+
+/* line 63, app/assets/stylesheets/calendar.scss */
+li hr {
+  color: firebrick;
+  background-color: firebrick;
+  height: 3px;
+}
+
+/* line 67, app/assets/stylesheets/calendar.scss */
+tbody tr:nth-of-type(2n) {
+  background-color: #f0f0f0;
+}
+
+/* line 70, app/assets/stylesheets/calendar.scss */
+.table.table.table-responsive th, table.table.table-responsive td {
+  text-align: center;
+}
+
+/* line 73, app/assets/stylesheets/calendar.scss */
+div.datepicker {
+  width: 30%;
+}
+
+@media screen and (max-width: 800px) {
+  /* line 77, app/assets/stylesheets/calendar.scss */
+  .table-croped thead, .table-cproped th {
+    display: none;
+  }
+  /* line 78, app/assets/stylesheets/calendar.scss */
+  .table-croped table {
+    width: 100%;
+  }
+  /* line 79, app/assets/stylesheets/calendar.scss */
+  .table-croped tr:nth-of-type(2n) {
+    background-color: inherit;
+  }
+  /* line 80, app/assets/stylesheets/calendar.scss */
+  .table-croped tr td:first-child {
+    background: #f0f0f0;
+  }
+  /* line 81, app/assets/stylesheets/calendar.scss */
+  .table-croped tbody td {
+    display: block;
+    text-align: center;
+  }
+  /* line 82, app/assets/stylesheets/calendar.scss */
+  .table-croped tbody td:before {
+    content: attr(data-th);
+    display: block;
+    text-align: center;
+  }
+  /* line 87, app/assets/stylesheets/calendar.scss */
+  .table-croped2 thead, .table-croped2 tfoot, .table-cproped2 th {
+    display: none;
+  }
+  /* line 88, app/assets/stylesheets/calendar.scss */
+  .table-croped2 table {
+    width: 100%;
+  }
+  /* line 89, app/assets/stylesheets/calendar.scss */
+  .table-croped2 tr:nth-of-type(2n) {
+    background-color: inherit;
+  }
+  /* line 90, app/assets/stylesheets/calendar.scss */
+  .table-croped2 tr td:first-child {
+    background: #f0f0f0;
+  }
+  /* line 91, app/assets/stylesheets/calendar.scss */
+  .table-croped2 tbody td .active {
+    display: block;
+    text-align: center;
+  }
+  /* line 92, app/assets/stylesheets/calendar.scss */
+  .table-croped2 tbody td .active {
+    content: attr(data-th);
+    display: block;
+    text-align: center;
+  }
+  /* line 97, app/assets/stylesheets/calendar.scss */
+  div.datepicker {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  /* line 102, app/assets/stylesheets/calendar.scss */
+  div.datepicker {
+    width: 80%;
+  }
+}

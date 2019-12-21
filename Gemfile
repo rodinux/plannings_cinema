@@ -36,9 +36,9 @@ gem 'cancancan'
 gem 'rails_admin_import'
 gem 'rails_admin', '~> 2.0', git: 'https://github.com/sferik/rails_admin.git', ref: '03baf7281cfbe1ca9aeef9648a7d763107dc8f30'
 gem "font-awesome-sass"
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'kaminari'
-gem "rack-pjax"
+gem 'rack-pjax'
 gem 'nokogiri'
 gem 'rchardet'
 gem 'simple_xlsx_reader'

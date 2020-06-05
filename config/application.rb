@@ -20,7 +20,7 @@ module PlanningsCinema
     config.time_zone = 'Paris'
     config.beginning_of_week = :wednesday
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.fallbacks = true
+    config.i18n.fallbacks = [I18n.default_locale]
     config.i18n.default_locale = :fr
     #config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL'}
 

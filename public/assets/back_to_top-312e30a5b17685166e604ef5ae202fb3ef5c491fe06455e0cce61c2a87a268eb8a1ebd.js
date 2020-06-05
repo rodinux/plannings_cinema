@@ -1,0 +1,1 @@
+var amountScrolled=300;$(window).scroll(function(){$(window).scrollTop()>amountScrolled?$("a.back-to-top").fadeIn("slow"):$("a.back-to-top").fadeOut("slow")}),$("a.back-to-top").click(function(){return $("html, body").animate({scrollTop:0},700),!1});

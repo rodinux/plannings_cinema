@@ -20,7 +20,7 @@ class SeancesController < ApplicationController
   end
 
   def seances_passees
-    @seances = Seance.all
+    @seances =  Seance.all.order('horaire DESC').paginate(:page => params[:page])
     respond_to do |format|
         format.pdf do
         render :pdf => "seances_passees.pdf",
@@ -34,6 +34,12 @@ class SeancesController < ApplicationController
   end
 
   def mes_seances
+    @seances = Seance.seances_a_venir
+    @users = User.all
+    user = current_user
+  end
+
+  def toutes_mes_seances
     @seances = Seance.all
     @users = User.all
     user = current_user
@@ -73,6 +79,42 @@ class SeancesController < ApplicationController
         end
       format.html
       end
+  end
+
+  def export_csv
+    @seances = Seance.seances_1_mois_avant_apres
+    @films = Film.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @seances.to_csv, filename: "seances-#{Date.today}.csv" }
+    end
+  end
+
+  def export_nodon_csv
+    @seances = Seance.seances_1_mois_avant_apres
+    @films = Film.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @seances.where(:village_id => 86).to_csv, filename: "seances-nodon-#{Date.today}.csv" }
+    end
+  end
+
+  def export_cc_csv
+    @seances = Seance.seances_1_mois_avant_apres
+    @films = Film.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @seances.where(:village_id => 82).to_csv, filename: "seances-cc-#{Date.today}.csv" }
+    end
+  end
+
+  def export_tournee_csv
+    @seances = Seance.seances_1_mois_avant_apres
+    @films = Film.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @seances.where.not(:village_id => 86).to_csv, filename: "seances-tournee-#{Date.today}.csv" }
+    end
   end
 
   # GET /seances/1
@@ -141,6 +183,6 @@ class SeancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seance_params
-      params.require(:seance).permit(:horaire, :film_id, :village_id, :version, :projection, :commentaire, :caisse, :extras, :annulee, :billets_adultes, :billets_scolaires, :billets_enfants, :total_billets )
+      params.require(:seance).permit(:horaire, :film_id, :village_id, :import_id, :version, :projection, :commentaire, :caisse, :extras, :annulee, :billets_adultes, :billets_scolaires, :billets_enfants, :total_billets )
     end
 end

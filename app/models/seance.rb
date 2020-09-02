@@ -5,11 +5,13 @@ class Seance < ApplicationRecord
 	validates :film_id, :presence => true
 	validates :village_id, :presence => true
 	validates :horaire, :presence => true
+	validates :import_id, :uniqueness => true, :case_sensitive => false
 
 	before_create :setup_default_value_for_new_seances
 	#throw(:abort)
 	before_update :setup_default_value_for_updated_seances
 	#throw(:abort)
+
 
 	def self.lieuxtest
 		lieuxtest = Hash[
@@ -28,7 +30,11 @@ class Seance < ApplicationRecord
 	end
 
 	def self.seances_a_venir
-        seances_a_venir = Seance.where({horaire: (Date.today..Date.today + 60)})
+        seances_a_venir = Seance.where({horaire: (Date.today.midnight..Date.today + 60)})
+	end
+
+	def self.seances_hier
+		seances_hier = Seance.where({horaire: (2.day.ago..Date.today)})
 	end
 
 	def self.seances_passees_3_semaines
@@ -55,6 +61,10 @@ class Seance < ApplicationRecord
 		seances_asc = Seance.order(horaire: :asc)
 	end
 
+	def	self.seances_desc
+		seances_asc = Seance.order(horaire: :desc)
+	end
+
 	def self.seances_a_completer_projection
 		seances_a_completer_projection = Seance.where(projection: [nil, ""]).order(horaire: :asc)
 	end
@@ -68,8 +78,20 @@ class Seance < ApplicationRecord
 	end
 
 	def self.seances_annulee
-	   	seances_annulee = Seance.where(annulee: "Annulée")
+	   	seances_annulee = Seance.where({annulee: ["Annulée", nil]})
 	end
+
+	def self.to_csv
+    attributes = %w{ Subject Start\ Date Start\ Time End\ Date End\ Time Location }
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      Seance.seances_1_mois_avant_apres.each do |seance|
+        csv << ["#{seance.film.titrefilm} #{seance.version}",seance.horaire.strftime('%d/%m/%Y'),seance.horaire.strftime('%I:%M %p'),seance.horaire.strftime('%d/%m/%Y'),(seance.horaire + 2.hours).strftime('%I:%M %p'),"#{seance.village.commune}, #{seance.village.salle}"]
+      end
+    end
+  end
 
 	private
 
@@ -85,6 +107,10 @@ class Seance < ApplicationRecord
 	  	end
 	  	if self.total_billets.blank?
 	      self.total_billets = 0
+	  	end
+	  	seance_import_last = Seance.order(:import_id).last
+	  	if self.import_id.blank?
+	  		self.import_id = seance_import_last.import_id + 1
 	  	end
 	end
 

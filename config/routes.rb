@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 	get 'calendrier' => 'calendar#calendrier'
 	get 'a_completer' => 'seances#a_completer'
 	get 'mes_seances' => 'seances#mes_seances'
+	get 'toutes_mes_seances' => 'seances#toutes_mes_seances'
 	get 'seances_passees' => 'seances#seances_passees'
 	get 'edition_calendrier' => 'seances#edition_calendrier'
 	get 'entrees' => 'seances#entrees'

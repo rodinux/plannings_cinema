@@ -1,65 +1,173 @@
-<center><h1><strong>Projections et/ou Caisses à venir pour <%= current_user.prenom %></strong></h1></center>
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-responsive table-hover table-striped table-croped2">
-        <thead>
-          <tr>
-            <th>Date et heure</th>
-            <th>FILM</th>
-            <th>Lieu</th>
-            <th>Projection</th>
-            <th>Caisse</th>
-          </tr>
-        </thead>
-<% @seances.seances_asc.each do |seance| if Date.today < seance.horaire && if current_user.prenom == seance.projection || current_user.prenom == seance.caisse %>
-<% if seance.annulee != "Annulée" %>
-        <tbody>
-            <tr>
-              <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
-              <% if seance.extras.present? %>
-              <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
-              <% else %>
-              <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
-              <% end %>
-              <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
-              <% if seance.projection.present? %>
-              <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
-              <% end %>
-              <% if seance.caisse.present? %>
-              <td class="info"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
-              <% end %>
-            </tr>
-            <tr>
-              <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description %></td>
-              <td colspan="2" class="info"><strong>Commentaire: </strong><%= seance.commentaire %></td>
-              <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
-            </tr>
-            <tr>
-              <td colspan="5" class="separation"></td>
-            </tr>
-      <% else %>
-            <tr>
-              <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
-              <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
-              <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
-              <% if seance.projection.present? %>
-              <td class="info annule"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
-              <% end %>
-              <% if seance.caisse.present? %>
-              <td class="info annule"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
-              <% end %>
-            </tr>
-            <tr>
-              <td colspan="5" class="active"><strong><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></strong></td>
-            </tr>
-            <tr>
-              <td colspan="5" class="separation"></td>
-            </tr>
-        </tbody>
-              <% end %>
+Voir <%= link_to 'Toutes mes séances', toutes_mes_seances_path, :class => "btn btn-primary active" %> pour voir vos séances passées où vous étiez inscrits...
+
+<center><h1><strong>Projections à venir pour <%= current_user.prenom %></strong></h1></center>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-responsive table-hover table-striped table-croped2">
+      <thead>
+        <tr>
+          <th>Date et heure</th>
+          <th>FILM</th>
+          <th>Lieu</th>
+          <th>Projection</th>
+          <th>Caisse</th>
+        </tr>
+      </thead>
+    <% @seances.seances_a_venir.each do |seance| if current_user.prenom == seance.projection %>
+    <% if seance.annulee != "Annulée" %>
+      <tbody>
+        <tr>
+          <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+          <% if seance.extras.present? %>
+          <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
+          <% else %>
+          <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+          <% end %>
+          <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+          <% if seance.projection.present? %>
+          <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+          <% end %>
+          <% if seance.caisse.present? %>
+          <td class="info"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description %></td>
+          <td colspan="2" class="info"><strong>Commentaire: </strong><%= seance.commentaire %></td>
+          <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="separation"></td>
+        </tr>
+    <% else %>
+        <tr>
+          <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+          <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+          <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+          <% if seance.projection.present? %>
+          <td class="info annule"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+          <% end %>
+          <% if seance.caisse.present? %>
+          <td class="info annule"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="5" class="active"><strong><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></strong></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="separation"></td>
+        </tr>
+      </tbody>
             <% end %>
-           <% end %>
-        <% end %>
-      </table>
-    </div>
+          <% end %>
+         <% end %>
+    </table>
   </div>
+</div>
+
+<center><h1><strong>Caisses à venir pour <%= current_user.prenom %></strong></h1></center>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-responsive table-hover table-striped table-croped2">
+      <thead>
+        <tr>
+          <th>Date et heure</th>
+          <th>FILM</th>
+          <th>Lieu</th>
+          <th>Projection</th>
+          <th>Caisse</th>
+        </tr>
+      </thead>
+    <% @seances.seances_a_venir.each do |seance| if current_user.prenom == seance.caisse %>
+    <% if seance.annulee != "Annulée" %>
+      <tbody>
+        <tr>
+          <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+          <% if seance.extras.present? %>
+          <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
+          <% else %>
+          <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+          <% end %>
+          <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+          <% if seance.projection.present? %>
+          <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+          <% end %>
+          <% if seance.caisse.present? %>
+          <td class="info"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="2" class="active"><strong>Info: </strong><%= seance.film.description %></td>
+          <td colspan="2" class="info"><strong>Commentaire: </strong><%= seance.commentaire %></td>
+          <td class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="separation"></td>
+        </tr>
+    <% else %>
+        <tr>
+          <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+          <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+          <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+          <% if seance.projection.present? %>
+          <td class="info annule"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+          <% end %>
+          <% if seance.caisse.present? %>
+          <td class="info annule"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="5" class="active"><strong><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></strong></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="separation"></td>
+        </tr>
+      </tbody>
+            <% end %>
+          <% end %>
+         <% end %>
+    </table>
+  </div>
+</div>
+
+<div>
+  <h2>Imports divers Agendas</h2>
+
+  <p>Des astuces pour importer ses séances dans divers Agendas. Sachez que vous pouvez toujours garder le fichier que vous allez créer <strong>import-mes-seances.csv</strong> et le ré-éditer à chaque fois avec les nouvelles séances en supprimant les anciennes.</p>
+  <h3>Importer mes séances dans un agenda Google Calendar</h3>
+  <p>1- Copier tout le texte créé ci-dessous et copier-le dans un fichier texte avec un éditeur de texte, puis renommez-le le <strong>import-mes-seances.csv</strong> et enregistrez ce fichier sur votre ordinateur</p>
+   <p>2- Vous pourrez ensuite ajouter ce fichier à votre calendrier <strong>Google Agenda</strong> en allant sur sur votre interface Agenda de Google (<strong>avec un  autre navigateur que Google Chrome</strong>, ça ne marche que avec <strong>Firefox</strong> ou <strong>Internet Explorer</strong>, ou autres navigateurs à tester...)</p>
+  <p>puis dans <strong>'Menu Paramètres'</strong> (une roue dentée en haut à droite), choisir <strong>Paramètres</strong>, sur la colonne de droite choisir <strong>Importer et exporter</strong>, cliquez sur <strong>Séléctionnez un fichier sur votre ordinateur</strong>, sélectionner le fichier <strong>import-mes-seances.csv</strong> que vous venez de créer, en dessous choisissez à quel agenda vous ajoutez ces dates, puis cliquez sur <strong>Importer</strong>. That's all ! 🙃</p>
+  <br>
+  <p>Le fichier à copier-coller dans votre éditeur de texte (celui ne sera que pour le <strong>Mes séances</strong> comprenant les séances à venir, de aujourd'hui à un mois après):</p>
+
+    <div>Subject,Start Date,Start Time,End Date,End Time,Description,Location<br>
+    <% @seances.each do |seance| if current_user.prenom == seance.projection or current_user.prenom == seance.caisse  %>
+    <%=raw seance.film.titrefilm %> <%= seance.version %>,<%= seance.horaire.strftime('%d/%m/%Y') %>,<%= seance.horaire.strftime('%I:%M %p') %>,<%= seance.horaire.strftime('%d/%m/%Y') %>,<%= (seance.horaire + 2.hours).strftime('%I:%M %p') %>,projection:<%= seance.projection %> caisse:<%= seance.caisse %>,"<%= seance.village.commune %>, <%= seance.village.salle %>"<br>
+      <% end %>
+    <% end %>
+    </div>
+</div>
+<div>
+  <h3>Importer mes séances dans un agenda Outlook (le format est différent pour Outlook)</h3>
+  <p>1- Copier tout le texte créé ci-dessous et copier-le dans un fichier texte avec un éditeur de texte, puis renommez-le le <strong>import-mes-seances.csv</strong> et enregistrez ce fichier sur votre ordinateur</p>
+   <p>2- Vous pourrez ensuite ajouter ce fichier à votre calendrier <strong>Outlook</strong> en allant sur sur votre interface calendrier de Outlook.</p>
+  <p>puis dans <strong>Menu Fichiers</strong> Sélectionnez <strong>Importer à partir d'un autre programme ou fichier</strong> et cliquez sur <strong>Suivant</strong>, Cliquez sur <strong>Parcourir</strong> et trouver le <strong>Calendrier Ajouter un .csv, séparé par des virgules.</strong> Cliquez sur <strong>Suivant</strong>. Sélectionnez <strong>import-mes-seances.csv</strong> comme dossier de destination et cliquez sur <strong>Suivant</strong>. Cochez la case à côté de <strong>'Ajouter' Import dossier: import-mes-seances.csv</strong>, puis cliquez sur <strong>Terminer</strong>. That's all ! 🙃</p>
+  <br>
+  <p>Le fichier à copier-coller dans votre éditeur de texte (celui ne sera que pour le <strong>Mes séances</strong> comprenant les séances un mois avant et un mois après):</p>
+
+    <div>"Subject","Start Date","Start Time","End Date","End Time","Description","Location"<br>
+    <% @seances.each do |seance| if current_user.prenom == seance.projection %>
+    "<%=raw seance.film.titrefilm %> <%= seance.version %>","<%= seance.horaire.strftime('%m/%d/%Y') %>","<%= seance.horaire.strftime('%I:%M:%S %p') %>","<%= seance.horaire.strftime('%m/%d/%Y') %>","<%= (seance.horaire + 2.hours).strftime('%I:%M %p') %>","projection:<%= seance.projection %> caisse:<%= seance.caisse %>","<%= seance.village.commune %>, <%= seance.village.salle %>"<br>
+      <% end %>
+    <% end %>
+    </div>
+
+  <h3>Importer mes séances dans un agenda Thunderbird</h3>
+    <p>le module complémentaire pour l' Agenda de Thunderbird est Lightning, on utilisera le même format que pour Outlook</p>
+    <p>1- Copier tout le texte créé ci-dessus (le même que pour importer dans un agenda Outlook) et copier-le dans un fichier texte avec un éditeur de texte, puis renommez-le <strong>import-mes-seances.csv</strong> et enregistrez ce fichier sur votre ordinateur</p>
+   <p>2- Vous pourrez ensuite ajouter ce fichier à votre calendrier <strong>Thunderbird (Lightning ou Agenda)</strong> en allant sur sur votre interface Agenda de Thunderbird.</p>
+   <p>3- Si vous avez bien la barre de Menus en haut de votre boîte aux lettres Thunderbird, vous verrez dans celle-ci <strong>Évenements et tâches</strong>, cliquez dessus (si vous n'avez pas cette barre de Menus, cliquez sur une icône carré avec trois traits en haut à droite, en survolant vous verrez <strong>Afficher le menu de Thunderbird</strong> et cliquez ensuite sur <strong>Évenements et tâches</strong>), puis sur <strong>Importer</strong>, en bas de la fenêtre de votre Gestionnaire de fichiers si vous voyez par défaut le type de fichiers <strong>iCalendar(*.ics)</strong>, cliquez dessus et choisissez <strong>Valeurs séparées par des virgiles Outlook(*.csv)</strong>, vous devez ensuite trouver votre fichier <strong>import-mes-seances.csv</strong> sur votre ordinateur, cliquez sur <strong>Ouvrir</strong>, ensuite choisissez <strong>dans quel Agenda vous voulez importer cet événement</strong>, puis cliquez sur <strong>OK</strong>. That's all ! 🙃</p>
+</div>
+
+

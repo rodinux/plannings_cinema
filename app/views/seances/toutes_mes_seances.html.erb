@@ -1,0 +1,134 @@
+Revenir à <%= link_to 'Mes séances', mes_seances_path, :class => "btn btn-primary active" %> à venir.
+
+
+<h3>Mes séances passées:</h3>
+<h4><%= link_to 'Pour les projections', toutes_mes_seances_path(:anchor => "liste_projection") %></h4>
+<h4><%= link_to 'Pour la caisse', toutes_mes_seances_path(:anchor => "liste_caisse") %></h4>
+
+<center><h1 id="liste_projection"><strong>Projections passées pour <%= current_user.prenom %></strong></h1></center>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-responsive table-hover table-striped table-croped2">
+      <thead>
+        <tr>
+          <th>Date et heure</th>
+          <th>FILM</th>
+          <th>Lieu</th>
+          <th>Projection</th>
+          <th>Caisse</th>
+        </tr>
+      </thead>
+    <% @seances.seances_desc.each do |seance| if Date.today > seance.horaire && if current_user.prenom == seance.projection %>
+    <% if seance.annulee != "Annulée" %>
+      <tbody>
+        <tr>
+          <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+          <% if seance.extras.present? %>
+          <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
+          <% else %>
+          <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+          <% end %>
+          <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+          <% if seance.projection.present? %>
+          <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+          <% end %>
+          <% if seance.caisse.present? %>
+          <td class="info"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="5" class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="separation"></td>
+        </tr>
+    <% else %>
+        <tr>
+          <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+          <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+          <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+          <% if seance.projection.present? %>
+          <td class="info annule"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+          <% end %>
+          <% if seance.caisse.present? %>
+          <td class="info annule"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="5" class="active"><strong><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></strong></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="separation"></td>
+        </tr>
+      </tbody>
+            <% end %>
+          <% end %>
+         <% end %>
+      <% end %>
+    </table>
+  </div>
+
+</div><center><h1 id="liste_caisse"><strong>Caisses passées pour <%= current_user.prenom %></strong></h1></center>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-responsive table-hover table-striped table-croped2">
+      <thead>
+        <tr>
+          <th>Date et heure</th>
+          <th>FILM</th>
+          <th>Lieu</th>
+          <th>Projection</th>
+          <th>Caisse</th>
+        </tr>
+      </thead>
+    <% @seances.seances_desc.each do |seance| if Date.today > seance.horaire && if current_user.prenom == seance.caisse %>
+    <% if seance.annulee != "Annulée" %>
+      <tbody>
+        <tr>
+          <td class="active"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+          <% if seance.extras.present? %>
+          <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %> <%= seance.extras %></td>
+          <% else %>
+          <td class="active"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+          <% end %>
+          <td class="active"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+          <% if seance.projection.present? %>
+          <td class="info"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+          <% end %>
+          <% if seance.caisse.present? %>
+          <td class="info"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="5" class="warning"><span class="glyphicon glyphicon-pencil"></span> <%= link_to 'Editer', edit_seance_path(seance), :class => "btn btn-warning" %></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="separation"></td>
+        </tr>
+    <% else %>
+        <tr>
+          <td class="active annule"><span class="glyphicon glyphicon-time"></span> <%= l seance.horaire, format: :very_long %></td>
+          <td class="active annule"><span class="glyphicon glyphicon-film"></span> <%= raw seance.film.titrefilm.upcase %> <%= seance.version %></td>
+          <td class="active annule"><span class="glyphicon glyphicon-home"></span> <%= seance.village.commune.upcase %> <%= seance.village.salle %></td>
+          <% if seance.projection.present? %>
+          <td class="info annule"><span class="glyphicon glyphicon-facetime-video"></span> <strong><em><%= seance.projection.capitalize %></em></strong></td>
+          <% end %>
+          <% if seance.caisse.present? %>
+          <td class="info annule"><span class="glyphicon glyphicon-briefcase"></span> <strong><em><%= seance.caisse.capitalize %></em></strong></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="5" class="active"><strong><span class="glyphicon glyphicon-warning-sign"></span> <%= seance.annulee %></strong></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="separation"></td>
+        </tr>
+      </tbody>
+            <% end %>
+          <% end %>
+         <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+

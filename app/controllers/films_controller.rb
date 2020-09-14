@@ -11,7 +11,7 @@ class FilmsController < ApplicationController
        response = HTTParty.get('https://ecranvillage.net/wp-json/ecranvillage-api/v2/export/?nocache')
        puts response.body, response.code, response.message, response.headers.inspect
        JSON.parse(response.body).each do |item|
-       nouveaux_films = Film.new( :id => item["id"], :titrefilm => item["titrefilm"], :description => item["description"], :affiche => item["affiche"] )
+       nouveaux_films = Film.new( :import_id => item["id"], :titrefilm => item["titrefilm"], :description => item["description"], :affiche => item["affiche"] )
        nouveaux_films.save
     end
   end

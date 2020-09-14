@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_163952) do
     t.integer "billets_enfants"
     t.integer "billets_scolaires"
     t.integer "total_billets"
+    t.integer "import_id"
   end
 
   create_table "users", force: :cascade do |t|

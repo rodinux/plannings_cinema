@@ -26,20 +26,20 @@
         </ul>
     </div>
   </div>
-</div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <div class="well controls">
-        <%= link_to edition_calendrier_path(:lieu => params[:lieu], date: @date.beginning_of_week - 1.weeks), class: "btn btn-default" do %>
-          <div class="glyphicon glyphicon-backward"><p>Semaine précédente</p></div>
-        <% end %>
-         <%= "du #{l @date.beginning_of_week, format: :default} au #{l @date.end_of_week, format: :default}, #{@date.beginning_of_week.strftime("semaine N°%W")}" %>
-        <%= link_to edition_calendrier_path(:lieu => params[:lieu], date: @date.beginning_of_week + 1.weeks), class: "btn btn-default" do %>
-          <div class="glyphicon glyphicon-forward"><p>Semaine suivante</p></div>
-        <% end %>
+  </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="well controls">
+          <%= link_to edition_calendrier_path(:lieu => params[:lieu], date: @date.beginning_of_week - 1.weeks), class: "btn btn-default" do %>
+            <div class="glyphicon glyphicon-backward"><p>Semaine précédente</p></div>
+          <% end %>
+           <%= "du #{l @date.beginning_of_week, format: :default} au #{l @date.end_of_week, format: :default}, #{@date.beginning_of_week.strftime("semaine N°%W")}" %>
+          <%= link_to edition_calendrier_path(:lieu => params[:lieu], date: @date.beginning_of_week + 1.weeks), class: "btn btn-default" do %>
+            <div class="glyphicon glyphicon-forward"><p>Semaine suivante</p></div>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
   <div class="row">
     <div class="col-md-12">
       <%= calendar @date do |date| %>
@@ -49,11 +49,13 @@
             <% if seance.horaire.midnight == date.midnight %>
               <% if seance.annulee != "Annulée" %>
                 <li>
-                  <%= link_to edit_seance_path(seance), :class => seance.village.commune.downcase, :title => "éditer, modifier cette séance" do %>
                     <% if seance.film.affiche.present? %>
-                       <div><img style="width:90%;" src="<%= seance.film.affiche %>" /></div>
-                       <br>
+                      <%= link_to "https://ecranvillage.net/?p=#{seance.film.import_id}",:title => "article sur le site Ecran Village", :target => "_blank", :rel => "noopener noreferrer" do %>
+                         <div><img style="width:90%;" src="<%= seance.film.affiche %>" /></div>
+                         <br>
+                      <% end %>
                     <% end %>
+                  <%= link_to edit_seance_path(seance), :class => seance.village.commune.downcase, :title => "éditer, modifier cette séance" do %>
                     <p><span class='glyphicon glyphicon-time'></span> <strong><%= seance.horaire.strftime("%Hh%M") %></strong></p>
                     <p><span class='glyphicon glyphicon-film'></span> <%=raw seance.film.titrefilm %></p>
                     <% if seance.version.present? %>
@@ -101,7 +103,8 @@
         </ul>
       <% end %>
     </div>
-    <div class="row">
+  </div>
+  <div class="row">
     <div class="col-md-12 text-center">
       <div class="well controls">
         <%= link_to edition_calendrier_path(:lieu => params[:lieu], date: @date.beginning_of_week - 1.weeks), class: "btn btn-default" do %>
@@ -114,4 +117,4 @@
       </div>
     </div>
   </div>
-  </div>
+</div>

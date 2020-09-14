@@ -17,10 +17,11 @@ module PlanningsCinema
     config.eager_load_paths += %W(#{config.root}/lib)
     config.assets.paths << Rails.root.join('vendor', 'assets', "*")
     config.assets.precompile += ['rails_admin/rails_admin.css', 'rails_admin/rails_admin.js','pdf.css', 'pdf.js', 'scroll.js']
+    config.assets.enabled = true
     config.time_zone = 'Paris'
     config.beginning_of_week = :wednesday
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.fallbacks = [I18n.default_locale]
+    config.i18n.fallbacks = true
     config.i18n.default_locale = :fr
     #config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL'}
 

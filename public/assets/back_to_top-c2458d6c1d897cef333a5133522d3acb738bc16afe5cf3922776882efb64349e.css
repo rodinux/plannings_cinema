@@ -1,0 +1,13 @@
+/* line 1, app/assets/stylesheets/back_to_top.scss.erb */
+a.back-to-top {
+  display: none;
+  width: 60px;
+  height: 60px;
+  text-indent: -9999px;
+  position: fixed;
+  z-index: 999;
+  right: 20px;
+  bottom: 20px;
+  background: #27AE61 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAM1JREFUeNrs12ELgyAQBuDcPx9OxIlrErGfeysQBs4r7zwJohfuo%2FdEqFcKAIYjchsOygVTcl9Ks1evm4tRGn55cHpwUAP%2FMb1hC3hsL9jBfpw07KE%2BXgoOQE9ohV%2FAz7iUosIqLWzNG8MxNIJcYgkvoVNlw0%2Bqmkw5nsNzZaM5NVLENSjMeXrKW2LDEdkstfuCBW8ej8qTQIZHwtUapODAmGC%2BFfbAm9drPbmwa0CxibYLWwG0NMM3YSOI5l8tKKw7oMXe6vqTOD38FWAAl8JSohyMtPcAAAAASUVORK5CYII%3D) no-repeat center 43%;
+  border-radius: 30px;
+}

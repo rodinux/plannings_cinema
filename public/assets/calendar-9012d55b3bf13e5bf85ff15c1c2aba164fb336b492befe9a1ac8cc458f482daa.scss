@@ -1,0 +1,105 @@
+// Place all the styles related to the Calendar controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.today {
+  background: #AB9A9A;
+}
+li {
+    list-style-position: inherit !important;
+    list-style-type:none;
+}
+.itinerance {
+  color: #9b8d26 !important;
+}
+.vernoux {
+  color: #3232dd !important;
+}
+.lamastre {
+  color: #c1272d !important;
+}
+.chalencon {
+  color: #990099 !important;
+}
+.calendrier li {
+    list-style-position: inherit !important;
+    list-style-type:none;
+  }.calendrier a {
+  color: #9b8d26;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+  }a.vernoux {
+  color: #3232dd;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+  }a.lamastre {
+  color: #c1272d;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+  }a.chalencon {
+  color: #990099;
+
+  &:hover {
+    color: #449d44;
+    text-decoration: none;
+  }
+  }a.itinerance {
+  color: #9b8d26;
+
+   &:hover {
+    color: #449d44;
+    text-decoration: none;
+    }
+}
+li hr {
+  color:firebrick;
+  background-color:firebrick; height:3px;
+}
+tbody tr:nth-of-type(2n) {
+background-color: #f0f0f0;
+}
+.table.table.table-responsive th, table.table.table-responsive td {
+  text-align: center;
+}
+div.datepicker {
+  width: 30%;
+}
+@media screen and (max-width: 800px) {
+  .table-croped thead, .table-cproped th {display:none}
+  .table-croped table {width:100%;}
+  .table-croped tr:nth-of-type(2n) {background-color: inherit;}
+  .table-croped tr td:first-child {background: #f0f0f0;}
+  .table-croped tbody td {display: block;  text-align:center;}
+  .table-croped tbody td:before {
+    content: attr(data-th);
+    display: block;
+    text-align:center;
+  }
+  .table-croped2 thead, .table-croped2 tfoot, .table-cproped2 th {display:none}
+  .table-croped2 table {width:100%;}
+  .table-croped2 tr:nth-of-type(2n) {background-color: inherit;}
+  .table-croped2 tr td:first-child {background: #f0f0f0;}
+  .table-croped2 tbody td .active {display: block;  text-align:center;}
+  .table-croped2 tbody td .active {
+    content: attr(data-th);
+    display: block;
+    text-align:center;
+  }
+  div.datepicker {
+  width: 50%;
+  }
+}
+@media screen and (max-width: 440px) {
+  div.datepicker {
+    width: 80%;
+  }
+}

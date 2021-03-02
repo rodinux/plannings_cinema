@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.0'
+ruby '3.0.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -18,7 +18,7 @@ gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'mini_racer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -26,6 +26,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
+gem 'popper_js'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -35,10 +36,10 @@ gem 'sorcery'
 gem 'cancancan'
 gem 'rails_admin_import'
 gem 'rails_admin'
+gem "font-awesome-rails"
 gem "font-awesome-sass"
-gem 'font-awesome-rails'
 gem 'kaminari'
-gem 'rack-pjax'
+gem "rack-pjax"
 gem 'nokogiri'
 gem 'rchardet'
 gem 'simple_xlsx_reader'
@@ -53,6 +54,13 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'will_paginate'
 gem 'charlock_holmes'
+# => gem 'webpack'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+gem 'sassc-rails', '>= 2.1.0'
+gem 'sprockets'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'figaro'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -62,7 +70,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'railroady'
   # Use sqlite3 as the database for Active Record
   #gem 'sqlite3'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -88,7 +95,6 @@ end
 #gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
-
   gem 'rails_12factor'
   gem 'pg'
 end

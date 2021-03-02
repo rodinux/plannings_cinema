@@ -5,7 +5,7 @@ class Seance < ApplicationRecord
 	validates :film_id, :presence => true
 	validates :village_id, :presence => true
 	validates :horaire, :presence => true
-	validates :import_id, :uniqueness => true, :case_sensitive => false
+	validates :import_id, :uniqueness => true
 
 	before_create :setup_default_value_for_new_seances
 	#throw(:abort)

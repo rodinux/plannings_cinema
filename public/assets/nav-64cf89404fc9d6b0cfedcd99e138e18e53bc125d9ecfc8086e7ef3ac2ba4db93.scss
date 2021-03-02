@@ -1,0 +1,83 @@
+/* Red */
+$bgDefault: #c1272d;
+$bgHighlight: #9b473f;
+$colDefault: #ecf0f1;
+$colHover: #9bd19b;
+
+.navbar-inverse {
+    background-color: $bgDefault !important;
+    border-color: $bgHighlight !important;
+    .navbar-brand {
+        color: $colDefault !important;
+        &:hover, &:focus {
+            color: $colHover !important; }}
+    .navbar-nav {
+        > li {
+            > a {
+                color: $colDefault !important;
+                &:hover, &:focus {
+                    color: $colHover !important;   }}}
+        .active {
+            > a, > a:hover, > a:focus {
+                color: $colHover !important;
+                background-color: $bgHighlight !important; }}
+        .open {
+            > a, > a:hover, > a:focus {
+                color: $colHover !important;
+                background-color: $bgHighlight !important;
+                .caret {
+                    border-top-color: $colHover !important;
+                    border-bottom-color: $colHover !important; }}}
+        > .dropdown {
+            > a {
+                .caret {
+                    border-top-color: $colDefault !important;
+                    border-bottom-color: $colDefault !important; }
+                &:hover, &:focus {
+                    .caret {
+                        border-top-color: $colHover !important;
+                        border-bottom-color: $colHover !important; }}}}}
+    .navbar-toggle {
+        border-color: $bgHighlight !important;
+        &:hover, &:focus {
+            background-color: $bgHighlight !important; }
+        .icon-bar {
+            background-color: $colDefault !important; }}}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: $colDefault !important;
+        &:hover, &:focus {
+            color: $colHover !important;
+            background-color: $bgHighlight !important; }}
+}
+
+.nav .connexion {
+	margin-left: 10px;
+}
+
+.navbar>a.btn:hover, navbar>a.btn:focus, navbar>a:focus {
+	color: #449d44;
+}
+
+.logo {
+	position: relative;
+	float: right;
+	margin-right: 15px;
+}
+
+.image-logo{
+  width: 100%;
+   -webkit-transition: 2s ease-in-out;
+    -moz-transition: 2s ease-in-out;
+     -o-transition: 2s ease-in-out;
+  transition: 3s ease-in-out;
+  perspective: 800px;
+  perspective-origin: 50% 100px;
+}
+
+.image-logo:hover{
+    transform:rotateY(60deg);
+}
+
+
+

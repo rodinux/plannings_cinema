@@ -4,13 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Bienvenue sur l'application Plannings Cinéma, <%= @user.name %></h1>
+    <strong>Bienvenue sur l'application Plannings Cinéma, <%= @user.prenom %></strong>
     <p>
-      Vous avez bien été enregistré à l'adresse programme.ecranvillage.deploiement.ovh,
+      Vous avez bien été enregistré à l'adresse programme.ecranvillage.net,
       votre identifiant de connexion sera: <%= @user.email %>.<br>
     </p>
     <p>
-      Pour vous connecter au site, suivez ce lien: <%= @url %>.
+      Pour vous connecter au site, suivez ce lien: <a href="https://programme.ecranvillage.net/log_in"><%= @url %></a>.
     </p>
     <p>Merci de nous rejoindre, bonne navigation !</p>
   </body>

@@ -1,0 +1,13 @@
+<div class="container">
+  <center>
+    <h1>Changer son mot de passe</h1>
+
+    <%= form_tag reset_passwords_path, method: :post do %>
+      <div class="form-group">
+        <%= label_tag :email, 'Mon adresse email' %>
+        <%= text_field_tag :email, nil, size: 20, :maxlength => 40, class: 'form-control', required: true %>
+      </div>
+
+      <%= submit_tag "M'envoyer des instructions afin de réinitailiser le mot de passe", class: 'btn btn-primary btn-lg' %>
+    <% end %>
+</center>

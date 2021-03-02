@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 	get 'log_in' => 'user_sessions#new', :as => :log_in
 	post 'log_out' => 'user_sessions#destroy', :as => :log_out
 
+	resources :reset_passwords, only: [:new, :create, :update, :edit]
 	resource :calendar, only: [:calendrier, :aide], controller: :calendar
 	resource :iframe, only: [:calendrier_iframe], controller: :iframe
 	resources :seances

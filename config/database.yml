@@ -10,8 +10,8 @@ development:
   encoding: unicode
   pool: 5
   timeout: 5000
-  username: plannings_cinema
-  password: ecran2017
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
   database: plannings_cinema_development
   host: 127.0.0.1
 
@@ -23,8 +23,8 @@ test:
   encoding: unicode
   pool: 5
   timeout: 5000
-  username: plannings_cinema
-  password: ecran2017
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
   database: plannings_cinema_test
   host: 127.0.0.1
 
@@ -33,7 +33,7 @@ production:
   encoding: unicode
   pool: 5
   timeout: 5000
-  username: plannings_cinema
-  password: ecran2017
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
   database: plannings_cinema_production
   host: 127.0.0.1

@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module PlanningsCinema
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.0
     config.autoload = :classic
 
     config.autoload_paths += %W(#{config.root}/lib)

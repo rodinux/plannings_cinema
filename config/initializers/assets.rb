@@ -18,8 +18,6 @@ Rails.application.config.assets.precompile += [
   Rails.root.join('vendor/assets/stylesheets/*').to_s
 ]
 
-
-
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.

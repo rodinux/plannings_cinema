@@ -67,7 +67,7 @@ RailsAdmin.config do |config|
       label "Distribution: "
     end
     import do
-      mapping_key :id
+      mapping_key :import_id
       default_excluded_fields [:created_at, :seances, :villages]
     end
     edit do
@@ -107,7 +107,7 @@ RailsAdmin.config do |config|
         label "ID des films: "
       end
       import do
-        mapping_key :id
+        mapping_key :import_id
         default_excluded_fields [:created_at, :updated_at, :seances, :films]
       end
     end
@@ -183,7 +183,7 @@ RailsAdmin.config do |config|
         label "Créée le: "
       end
       import do
-        mapping_key :id
+        mapping_key :import_id
         mapping_key_list [:id, :village_id, :film_id]
         default_excluded_fields [:created_at, :updated_at]
         configure :horaire, :date do

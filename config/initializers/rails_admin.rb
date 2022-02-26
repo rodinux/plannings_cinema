@@ -184,6 +184,7 @@ RailsAdmin.config do |config|
       end
       import do
         mapping_key :id
+        mapping_key_list [:id, :village_id, :film_id]
         default_excluded_fields [:created_at, :updated_at]
         configure :horaire, :date do
           strftime_format '%d/%m/%Y %H:%M'

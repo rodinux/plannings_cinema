@@ -59,7 +59,7 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'sprockets'
-gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'sprockets-rails'
 gem 'figaro'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

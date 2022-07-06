@@ -1,5 +1,4 @@
 require 'i18n'
-
 I18n.default_locale = :fr
 
 RailsAdmin.config do |config|
@@ -31,7 +30,7 @@ RailsAdmin.config do |config|
     config.model 'Film' do
     list do
       field :titrefilm
-      field :id
+      field :import_id
       field :seances do
           inverse_of :film
       end
@@ -47,8 +46,8 @@ RailsAdmin.config do |config|
     configure :titrefilm do
       label "Nom du Film: "
      end
-    configure :id do
-      label "ID du film: "
+    configure :import_id do
+      label "Import ID du film: "
     end
     configure :seances do
       label "ID des séances: "
@@ -80,6 +79,7 @@ RailsAdmin.config do |config|
     config.model 'Village' do
       list do
         field :id
+        field :import_id
         field :commune
         field :salle
         field :seances do
@@ -88,11 +88,12 @@ RailsAdmin.config do |config|
         field :films do
           inverse_of :villages
         end
+        field :id
         field :created_at
         field :updated_at
       end
-      configure :id do
-        label "ID du lieu: "
+      configure :import_id do
+        label "import ID du lieu: "
       end
       configure :commune do
         label "commune: "
@@ -113,10 +114,9 @@ RailsAdmin.config do |config|
     end
 
     config.model 'Seance' do
-      configure :horaire, :date do
-        strftime_format '%d/%m/%Y %H:%M'
-      end
       list do
+        field :id
+        field :import_id
         field :horaire
         configure :horaire, :date do
           strftime_format '%d/%m/%Y %H:%M'
@@ -138,13 +138,15 @@ RailsAdmin.config do |config|
         field :annulee
         field :updated_at
         field :created_at
-        field :id
       end
-      configure :horaire do
-        label "Date et heure: "
+      configure :horaire, :date do
+        strftime_format '%d/%m/%Y %H:%M'
       end
       configure :film do
         label "ID du film: "
+      end
+      configure :horaire do
+        label "Date et heure: "
       end
       configure :village do
         label "ID du lieu: "
@@ -184,7 +186,6 @@ RailsAdmin.config do |config|
       end
       import do
         mapping_key :import_id
-        mapping_key_list [:id, :village_id, :film_id]
         default_excluded_fields [:created_at, :updated_at]
         configure :horaire, :date do
           strftime_format '%d/%m/%Y %H:%M'
@@ -284,7 +285,7 @@ end
 
 RailsAdminImport.config do |config|
 
-      config.line_item_limit = 4000
+      config.line_item_limit = 5000
       config.update_if_exists = true
       config.rollback_on_error = true
 
@@ -297,6 +298,7 @@ RailsAdminImport.config do |config|
       config.model 'Seance: ' do
         label :seance
       end
+
 
       config.model 'Classification: ' do
         label :classification

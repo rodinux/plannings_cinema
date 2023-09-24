@@ -2,6 +2,7 @@ require 'i18n'
 I18n.default_locale = :fr
 
 RailsAdmin.config do |config|
+  config.asset_source = :sprockets
 
   config.main_app_name = ["Calendriers Ecran Village", "Gestion avancée"]
   # or something more dynamic
@@ -285,7 +286,7 @@ end
 
 RailsAdminImport.config do |config|
 
-      config.line_item_limit = 5000
+      config.line_item_limit = 8000
       config.update_if_exists = true
       config.rollback_on_error = true
 
